@@ -2,12 +2,12 @@
 
 #define WIN32_LEAN_AND_MEAN
 
-#include "Game.h"
+#include "Scene.h"
 #include "image.h"
 #include "Zombie.h"
 #include "ImageManager_Play.h"
 
-class Scene_Play : public Game
+class Scene_Play : public Scene
 {
 private:
 	Zombie * m_pzombie;
@@ -20,7 +20,7 @@ public:
 	virtual ~Scene_Play();
 
 	// Initialize the game
-	void initialize(HWND hwnd);
-	void update();     
-	void render();     
+	virtual void Initialize();
+	virtual void Update();     
+	virtual void Render();     
 };

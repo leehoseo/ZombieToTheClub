@@ -1,2 +1,6 @@
-﻿  Game.cpp
+﻿  main.cpp
+  Zombie.cpp
+  Scene_Play.cpp
+  Game.cpp
+  코드를 생성하고 있습니다...
   ZombieToTheClub.vcxproj -> D:\Programming\DirectX11\ZombieToTheClub\Debug\ZombieToTheClub.exe

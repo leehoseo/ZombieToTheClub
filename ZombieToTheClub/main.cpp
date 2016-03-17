@@ -22,15 +22,14 @@ Mouse * mouse = NULL;
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
-	game = new Scene_Play();		// 처음 시작할 Scene 동적할당
+	game = new Game();		// 처음 시작할 Scene 동적할당
+	
 	mouse = new Mouse();
 
 	MSG msg;
 	// Create the window
 	if (!CreateMainWindow(hwnd, hInstance, nCmdShow))
 		return 1;
-
-	
 
 	if (game == NULL)
 		MessageBoxA(hwnd, "game Class ERROR", NULL, NULL);
@@ -51,7 +50,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		game->run(hwnd);
+		game->run();
 	}
 	return msg.wParam;
 

@@ -12,12 +12,10 @@ Scene_Play::~Scene_Play()
 	SAFE_DELETE(m_pzombie2);
 }
 
-void Scene_Play::initialize(HWND hwnd)
+void Scene_Play::Initialize()
 {
 	m_pzombie = new Zombie();
 	m_pzombie2 = new Zombie();
-
-	Game::initialize(hwnd);
 
 	m_pzombie->initialize();
 	m_pzombie2->initialize();
@@ -25,12 +23,12 @@ void Scene_Play::initialize(HWND hwnd)
 	return;
 }
 
-void Scene_Play::update()
+void Scene_Play::Update()
 {
 	
 }
 
-void Scene_Play::render()
+void Scene_Play::Render()
 {
 	m_pzombie2->GetImage()->setX(m_pzombie2->GetImage()->getX() + 1);
 	m_pzombie->GetImage()->draw();

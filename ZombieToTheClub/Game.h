@@ -6,6 +6,7 @@
 #include <Mmsystem.h>
 #include "graphics.h"
 #include "Resource.h"
+#include "Scene.h"
 
 class Game
 {
@@ -15,12 +16,13 @@ protected:
 	HWND    hwnd;             
 	HRESULT hr;
 
-	int m_frameCount;
+	Scene* m_pscene;
        
 	DWORD m_startTime;
 	DWORD m_currentTime;
 
 	bool    initialized;
+	
 
 public:
 	Game();
@@ -28,11 +30,9 @@ public:
 
 	LRESULT messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-	virtual void initialize(HWND hwnd);
+	void initialize(HWND hwnd);
 
-	virtual void run(HWND);
+	void run();
 
-	virtual void renderGame();
-	virtual void update() = 0;
-	virtual void render() = 0;
+	void renderGame();
 };

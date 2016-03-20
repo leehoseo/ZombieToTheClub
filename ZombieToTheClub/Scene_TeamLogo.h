@@ -8,6 +8,10 @@ class Scene_TeamLogo : public Scene
 {
 private:
 	Image m_logo;
+	int m_ibrightness;
+
+	bool m_bfadeIn;
+
 public:
 	Scene_TeamLogo();
 	~Scene_TeamLogo();

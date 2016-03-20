@@ -36,7 +36,6 @@ bool Time::Timer(int _timer)
 
 	if (m_time > timer)
 	{
-		printf("test\n");
 		m_btimerOn = false;
 		return true;
 	}

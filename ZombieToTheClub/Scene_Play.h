@@ -6,7 +6,6 @@
 #include "image.h"
 #include "Zombie.h"
 #include "UI.h"
-#include "ImageManager_Play.h"
 
 class Scene_Play : public Scene
 {

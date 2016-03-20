@@ -1,5 +1,5 @@
 #include "Scene_Play.h"
-#include <stdio.h>
+
 Scene_Play::Scene_Play()
 {
 	Initialize();
@@ -18,11 +18,11 @@ void Scene_Play::Initialize()
 
 void Scene_Play::Update(Game* _game)
 {
-	m_zombie2.GetImage()->setX(m_zombie2.GetImage()->getX() + 1);
+	m_zombie2.SetX(m_zombie2.GetX() + 1);
 }
 
 void Scene_Play::Render()
 {
-	m_zombie.GetImage()->draw();
-	m_zombie2.GetImage()->draw();
+	m_zombie.Render();
+	m_zombie2.Render();
 }

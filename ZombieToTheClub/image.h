@@ -13,14 +13,8 @@ protected:
 									// spriteData contains the data required to draw the image by Graphics::drawSprite()
 	SpriteData spriteData;  // SpriteData is defined in "graphics.h"
 	COLOR_ARGB colorFilter; // applied as a color filter (use WHITE for no change)
-	int     cols;           // number of cols (1 to n) in multi-frame sprite
-	int     startFrame;     // first frame of current animation
-	int     endFrame;       // end frame of current animation
-	int     currentFrame;   // current frame of animation
-	float   frameDelay;     // how long between frames of animation
-	float   animTimer;      // animation timer
+	
 	HRESULT hr;             // standard return type
-	bool    loop;           // true to loop frames
 	bool    visible;        // true when visible
 	bool    initialized;    // true when successfully initialized
 	bool    animComplete;   // true when loop is false and endFrame has finished displaying
@@ -42,10 +36,10 @@ public:
 	virtual bool  getVisible() { return visible; }
 
 	// Return X position.
-	virtual float getX() { return spriteData.x; }
+	virtual float getX() const{ return spriteData.x; }
 
 	// Return Y position.
-	virtual float getY() { return spriteData.y; }
+	virtual float getY() const{ return spriteData.y; }
 
 	// Return scale factor.
 	virtual float getScale() { return spriteData.scale; }
@@ -67,18 +61,6 @@ public:
 
 	// Return rotation angle in radians.
 	virtual float getRadians() { return spriteData.angle; }
-
-	// Return delay between frames of animation.
-	virtual float getFrameDelay() { return frameDelay; }
-
-	// Return number of starting frame.
-	virtual int   getStartFrame() { return startFrame; }
-
-	// Return number of ending frame.
-	virtual int   getEndFrame() { return endFrame; }
-
-	// Return number of current frame.
-	virtual int   getCurrentFrame() { return currentFrame; }
 
 	// Return RECT structure of Image.
 	virtual RECT  getSpriteDataRect() { return spriteData.rect; }
@@ -108,23 +90,9 @@ public:
 	// Set visible.
 	virtual void setVisible(bool v) { visible = v; }
 
-	// Set delay between frames of animation.
-	virtual void setFrameDelay(float d) { frameDelay = d; }
-
-	// Set starting and ending frames of animation.
-	virtual void setFrames(int s, int e) { startFrame = s; endFrame = e; }
-
-	// Set current frame of animation.
-	virtual void setCurrentFrame(int c);
-
-	// Set spriteData.rect to draw currentFrame
-	virtual void setRect();
-
+	
 	// Set spriteData.rect to r.
 	virtual void setSpriteDataRect(RECT r) { spriteData.rect = r; }
-
-	// Set animation loop. lp = true to loop.
-	virtual void setLoop(bool lp) { loop = lp; }
 
 	// Set animation complete Boolean.
 	virtual void setAnimationComplete(bool a) { animComplete = a; };
@@ -134,8 +102,7 @@ public:
 
 
 
-	virtual bool Image::initialize(Graphics* g, int width, int height, int x, int y,
-		int ncols, const char* file);
+	virtual bool Image::initialize(Graphics* g, int x, int y, const char* file);
 
 	// ÁÂ¿ì ¹ÝÀü
 	virtual void flipHorizontal(bool flip) { spriteData.flipHorizontal = flip; }
@@ -146,5 +113,5 @@ public:
 	
 	virtual void draw(COLOR_ARGB color = graphicsNS::WHITE);
 
-	virtual void update(float frameTime);
+	virtual void update();
 };

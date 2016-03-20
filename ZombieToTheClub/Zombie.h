@@ -13,7 +13,13 @@ public:
 	Zombie();
 	~Zombie();
 
-	void initialize();
-	Image* GetImage();
+	void initialize(int _x = 0 , int _y = 0);
+	void Render();
+	void Update();
+
+	void SetX(int _x);
+	void SetY(int _y);
+	int GetX() const;
+	int GetY() const;
 };
 

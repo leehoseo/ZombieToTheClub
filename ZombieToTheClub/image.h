@@ -134,7 +134,7 @@ public:
 
 
 
-	virtual bool Image::initialize(Graphics* g, int width, int height,
+	virtual bool Image::initialize(Graphics* g, int width, int height, int x, int y,
 		int ncols, const char* file);
 
 	// ÁÂ¿ì ¹ÝÀü

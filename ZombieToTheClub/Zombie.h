@@ -7,7 +7,7 @@
 class Zombie
 {
 private:
-	Image m_image_Zombi;
+	Image m_image;
 
 public:
 	Zombie();

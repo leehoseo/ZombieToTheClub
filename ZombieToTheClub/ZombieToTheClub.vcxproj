@@ -161,7 +161,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Scene_Main.cpp" />
     <ClCompile Include="Scene_Play.cpp" />
+    <ClCompile Include="Scene_TeamLogo.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UI_Main_Start.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -172,8 +177,16 @@
     <ClInclude Include="mouse.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Scene_Main.h" />
     <ClInclude Include="Scene_Play.h" />
+    <ClInclude Include="Scene_TeamLogo.h" />
+    <ClInclude Include="Time.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="UI_Main_Start.h" />
     <ClInclude Include="Zombie.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

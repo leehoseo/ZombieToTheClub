@@ -9,10 +9,9 @@
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 
-const char GAME_NAME[] = "Zombie Club";
-const char Zombi1_IMAGE[] = "Resource\\Zombie1.png";
-const int GAME_WIDTH = 900;
-const int GAME_HEIGHT = 600;
+const char GAME_NAME[] = "Zombie To The Club";
+const int GAME_WIDTH = 1024;
+const int GAME_HEIGHT = 768;
 
 const double PI = 3.14159265;					// ø¯¡÷¿≤
 

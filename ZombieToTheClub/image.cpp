@@ -34,7 +34,7 @@ Image::Image()
 Image::~Image()
 {}
 
-bool Image::initialize(Graphics* g, int width, int height, int ncols,
+bool Image::initialize(Graphics* g, int width, int height, int x , int y , int ncols,
 	const char* file)
 {
 		graphics = g;                          
@@ -60,8 +60,11 @@ bool Image::initialize(Graphics* g, int width, int height, int ncols,
 		// bottom edge + 1
 		spriteData.rect.bottom = spriteData.rect.top + spriteData.height;
 
-	initialized = true;                                // successfully initialized
-	return true;
+		spriteData.x = x;
+		spriteData.y = y;
+
+		initialized = true;                                // successfully initialized
+		return true;
 }
 
 

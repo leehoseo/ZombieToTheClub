@@ -7,6 +7,7 @@
 #include "graphics.h"
 #include "Resource.h"
 #include "Scene.h"
+#include "mouse.h"
 
 class Game
 {
@@ -17,12 +18,13 @@ protected:
 	HRESULT hr;
 
 	Scene* m_pscene;
-       
+
 	DWORD m_startTime;
 	DWORD m_currentTime;
 
+	DWORD m_renderTime;
+
 	bool    initialized;
-	
 
 public:
 	Game();
@@ -35,4 +37,8 @@ public:
 	void run();
 
 	void renderGame();
+
+	void ChangeScene(Scene* _newScene);
+
+	DWORD GetRenderTime() const;
 };

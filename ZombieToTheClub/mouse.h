@@ -1,17 +1,25 @@
 #pragma once
 #include <Windows.h>
 #include <WindowsX.h>
+#
 class Mouse
 {
 private:
 	POINT m_mouse;
-public:
+	bool m_bbuttonClick;
+
 	Mouse();
+public:
 	~Mouse();
 
-	void SetMouseXY();
+	static Mouse* Instance();
 
-	int GetMouseX()	const;
-	int GetMouseY()	const;
+	void SetCoordiNate(LPARAM _lParam);
+
+	int GetX()	const;
+	int GetY()	const;
+
+	void SetButtonClick(bool _check);
+	bool GetButtonClick();
 };
 

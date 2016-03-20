@@ -1,5 +1,3 @@
-
-
 #define WIN32_LEAN_AND_MEAN
 
 #include <Windows.h>
@@ -15,7 +13,6 @@ LRESULT WINAPI WinProc(HWND, UINT, WPARAM, LPARAM);
 
 HWND hwnd = NULL;
 Game * game = NULL;
-Mouse * mouse = NULL;
 //=============================================================================
 // Starting point for a Windows application
 //=============================================================================
@@ -23,8 +20,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
 	game = new Game();		// 처음 시작할 Scene 동적할당
-	
-	mouse = new Mouse();
 
 	MSG msg;
 	// Create the window
@@ -55,7 +50,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	return msg.wParam;
 
 	SAFE_DELETE(game);
-	SAFE_DELETE(mouse);
 
 	DestroyWindow(hwnd);
 
@@ -79,11 +73,16 @@ LRESULT WINAPI WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)		// 키
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
+	case WM_MOUSEMOVE:
+		Mouse::Instance()->SetCoordiNate(lParam);
+		return 0;
 	case WM_LBUTTONDOWN:
-		MESSAGEBOX("LBOTTON DOWN");
+		Mouse::Instance()->SetButtonClick(true);
+		return 0;
+	case WM_LBUTTONUP:
+		Mouse::Instance()->SetButtonClick(false);
 		return 0;
 	}
-	mouse->SetMouseXY();
 
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }

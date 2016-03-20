@@ -5,22 +5,22 @@
 #include "Scene.h"
 #include "image.h"
 #include "Zombie.h"
+#include "UI.h"
 #include "ImageManager_Play.h"
 
 class Scene_Play : public Scene
 {
 private:
-	Zombie * m_pzombie;
-	Zombie * m_pzombie2;
+	Zombie	 m_zombie;
+	Zombie	 m_zombie2;
 public:
-	// Constructor
+
 	Scene_Play();
 
-	// Destructor
 	virtual ~Scene_Play();
 
-	// Initialize the game
+
+	virtual void Update(Game* _game = 0);
+	virtual void Render();  
 	virtual void Initialize();
-	virtual void Update();     
-	virtual void Render();     
 };

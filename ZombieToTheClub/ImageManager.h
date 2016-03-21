@@ -13,12 +13,16 @@ private:
 
 	// Main 배경
 	Image m_main;
-	Image m_title[2];
+	Image m_title;
 	// Main UI 모음
 	Image m_ui_main_start;
 	Image m_ui_main_save;
 	Image m_ui_main_option;
 	Image m_ui_main_exit;
+
+
+	// Player
+	Image m_player;
 
 	ImageManager();
 
@@ -37,11 +41,14 @@ public:
 	Image TeamLogo() const;
 	Image Main() const;
 
-	Image * ImageManager::Title();
+	Image Title() const;
 
 	Image UI_Main_Start() const;
 	Image UI_Main_Save() const;
 	Image UI_Main_Option() const;
 	Image UI_Main_Exit() const;
+
+	//Player
+	Image Player() const;
 };
 

@@ -10,10 +10,10 @@ class Image		// 부모클래스로 이후 다양한 오브젝트들이 생기면 상속하여 사용
 protected:
 	Graphics *graphics;     // pointer to graphics
 	LPDIRECT3DTEXTURE9 m_ptexture; // pointer to texture manager
-									// spriteData contains the data required to draw the image by Graphics::drawSprite()
+								   // spriteData contains the data required to draw the image by Graphics::drawSprite()
 	SpriteData spriteData;  // SpriteData is defined in "graphics.h"
 	COLOR_ARGB colorFilter; // applied as a color filter (use WHITE for no change)
-	
+
 	HRESULT hr;             // standard return type
 	bool    visible;        // true when visible
 	bool    initialized;    // true when successfully initialized
@@ -36,10 +36,10 @@ public:
 	virtual bool  getVisible() { return visible; }
 
 	// Return X position.
-	virtual float getX() const{ return spriteData.x; }
+	virtual float getX() const { return spriteData.x; }
 
 	// Return Y position.
-	virtual float getY() const{ return spriteData.y; }
+	virtual float getY() const { return spriteData.y; }
 
 	// Return scale factor.
 	virtual float getScale() { return spriteData.scale; }
@@ -90,7 +90,7 @@ public:
 	// Set visible.
 	virtual void setVisible(bool v) { visible = v; }
 
-	
+
 	// Set spriteData.rect to r.
 	virtual void setSpriteDataRect(RECT r) { spriteData.rect = r; }
 
@@ -102,7 +102,7 @@ public:
 
 
 
-	virtual bool Image::initialize(Graphics* g, int x, int y, const char* file);
+	virtual bool Image::initialize(Graphics* g, int x, int y,  int frame , const char* file , ...);
 
 	// 좌우 반전
 	virtual void flipHorizontal(bool flip) { spriteData.flipHorizontal = flip; }
@@ -110,7 +110,7 @@ public:
 	// 상하 반전
 	virtual void flipVertical(bool flip) { spriteData.flipVertical = flip; }
 
-	
+
 	virtual void draw(COLOR_ARGB color = graphicsNS::WHITE);
 
 	virtual void update();

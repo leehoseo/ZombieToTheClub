@@ -11,7 +11,7 @@ private:
 
 	Zombie m_zombie;
 	Image m_main;
-	Image m_title[2];
+	Image m_title;
 	UI m_start;
 	UI m_save;
 	UI m_option;

@@ -41,3 +41,8 @@ bool Time::Timer(int _timer)
 	}
 	return false;
 }
+
+DWORD Time::GetTime() const
+{
+	return m_time;
+}

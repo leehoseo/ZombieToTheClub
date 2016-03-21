@@ -17,5 +17,7 @@ public:
 	void SetTime();
 
 	bool Timer(int _timer);
+
+	DWORD GetTime() const;
 };
 

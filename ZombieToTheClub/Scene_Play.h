@@ -11,7 +11,6 @@ class Scene_Play : public Scene
 {
 private:
 	Zombie	 m_zombie;
-	Zombie	 m_zombie2;
 public:
 
 	Scene_Play();

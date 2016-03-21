@@ -26,8 +26,8 @@ void Scene_Main::Initialize()
 	m_save.Initialize(ImageManager::Instance()->UI_Main_Save());
 	m_option.Initialize(ImageManager::Instance()->UI_Main_Option());
 	m_exit.Initialize(ImageManager::Instance()->UI_Main_Exit());
-	m_title[0] = ImageManager::Instance()->Title()[0];
-	m_title[1] = ImageManager::Instance()->Title()[1];
+	m_title = ImageManager::Instance()->Title();
+
 }
 
 void Scene_Main::Update(Game * _game)
@@ -45,12 +45,5 @@ void Scene_Main::Render()
 	m_save.Render();
 	m_option.Render();
 	m_exit.Render();
-}
-
-void Scene_Main::Patrol()
-{
-	if (m_bpatrol == false)
-	{
-
-	}
+	m_title.draw();
 }

@@ -6,6 +6,7 @@
 #include "Scene_Play.h"
 #include "mouse.h"
 #include <stdio.h>
+#include "Input.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int);
 bool CreateMainWindow(HWND &, HINSTANCE, int);
@@ -31,6 +32,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	
 
 	game->initialize(hwnd);
+	CInput::Instance()->Initialize(hInstance, hwnd);
 
 	int done = 0;
 	while (!done)
@@ -45,6 +47,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+		CInput::Instance()->Update();
 		game->run();
 	}
 	return msg.wParam;
@@ -68,23 +71,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 LRESULT WINAPI WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)		// Å°ÀÔ·Â
 {
-	switch (msg)
-	{
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		return 0;
-	case WM_MOUSEMOVE:
-		Mouse::Instance()->SetCoordiNate(lParam);
-		return 0;
-	case WM_LBUTTONDOWN:
-		Mouse::Instance()->SetButtonClick(true);
-		return 0;
-	case WM_LBUTTONUP:
-		Mouse::Instance()->SetButtonClick(false);
-		return 0;
-	}
-
-	return DefWindowProc(hwnd, msg, wParam, lParam);
+	return game->messageHandler(hwnd, msg, wParam, lParam);
 }
 
 //=============================================================================

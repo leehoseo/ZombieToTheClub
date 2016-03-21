@@ -4,6 +4,7 @@
 #include "Scene_Play.h"
 #include "Scene_TeamLogo.h"
 #include "Time.h"
+#include "Player.h"
 
 Game::Game()
 {            
@@ -26,12 +27,25 @@ LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (initialized)
 	{
+		
 		switch (msg)
 		{
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			return 0;
+		case WM_MOUSEMOVE:
+			Mouse::Instance()->SetCoordiNate(lParam);
+			return 0;
+		case WM_LBUTTONDOWN:
+			Mouse::Instance()->SetButtonClick(true);
+			return 0;
+		case WM_LBUTTONUP:
+			Mouse::Instance()->SetButtonClick(false);
+			return 0;
+		case WM_KEYDOWN:
+			return 0;
 		}
+
 	}
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }

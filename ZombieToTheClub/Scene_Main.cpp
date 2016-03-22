@@ -36,6 +36,8 @@ void Scene_Main::Update(Game * _game)
 	{
 		_game->ChangeScene(new Scene_Play());
 	}
+
+	m_title.update();
 }
 
 void Scene_Main::Render()

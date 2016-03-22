@@ -21,26 +21,26 @@ ImageManager* ImageManager::Instance()
 
 void ImageManager::initialize(Graphics * g)
 {
-	m_title.initialize(g, 112, 50 ,2, "Resource\\Title1.png");
+	m_title.initialize(g,800,240,112, 50 ,2, 500, "Resource\\Title.png");
 
-	m_zombie_1.initialize(g, 0, 0, 0, "Resource\\Zombie.png");
+	m_zombie_1.initialize(g, 0,0,0, 0, 0,0, "Resource\\Zombie.png");
 
 	// Logo 이미지
-	m_teamlogo.initialize(g, 387 , 262 , 0, "Resource\\TeamLogo.png");
+	m_teamlogo.initialize(g, 0,0, 387 , 262 , 0, 0,"Resource\\TeamLogo.png");
 
 
 	// Main 이미지
-	m_main.initialize(g, 0, 0, 0, "Resource\\main.png");
-	m_ui_main_start.initialize(g, 337, 300, 0, "Resource\\Start.png");
-	m_ui_main_save.initialize(g, 337, 420, 0, "Resource\\Save.png");
-	m_ui_main_option.initialize(g, 337, 540, 0, "Resource\\Option.png");
-	m_ui_main_exit.initialize(g, 337, 660, 0, "Resource\\Exit.png");
+	m_main.initialize(g,0,0, 0, 0, 0,0, "Resource\\main.png");
+	m_ui_main_start.initialize(g,0,0 ,337, 300, 0, 0,"Resource\\Start.png");
+	m_ui_main_save.initialize(g,0,0, 337, 420, 0,0, "Resource\\Save.png");
+	m_ui_main_option.initialize(g, 0,0,337, 540, 0,0, "Resource\\Option.png");
+	m_ui_main_exit.initialize(g,0,0, 337, 660, 0,0, "Resource\\Exit.png");
 
 	
 	
 	//Player
-	m_player.initialize(g, 0, 0, 0, "Resource\\Player.png");
-
+	m_player_move.initialize(g,128,128,0, 0, 9,200, "Resource\\Player_Move.png");
+	m_player_stay.initialize(g, 128, 128, 0, 0, 2, 200, "Resource\\Player_Stay.png");
 	m_binitialize = true;
 }
 
@@ -86,9 +86,14 @@ Image ImageManager::UI_Main_Exit() const
 	return m_ui_main_exit;
 }
 
-Image ImageManager::Player() const
+Image ImageManager::Player_Move() const
 {
-	return m_player;
+	return m_player_move;
+}
+
+Image ImageManager::Player_Stay() const
+{
+	return m_player_stay;
 }
 
 Image ImageManager::Title() const

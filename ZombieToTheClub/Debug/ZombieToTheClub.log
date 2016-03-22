@@ -1,16 +1,8 @@
-﻿  image.cpp
-d:\programming\directx11\zombietotheclub\zombietotheclub\image.cpp(47): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\image.cpp(48): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ImageManager.cpp
+﻿  State_Stay.cpp
+  c:\program files (x86)\microsoft directx sdk (february 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  State_Move.cpp
+  c:\program files (x86)\microsoft directx sdk (february 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
   코드를 생성하고 있습니다...
   건너뛰고 있습니다... (관련된 변경 내용 없음)
-  main.cpp
-  Zombie.cpp
-  UI.cpp
-  Scene_TeamLogo.cpp
-  Scene_Play.cpp
-  Scene_Main.cpp
-  Player.cpp
-  Input.cpp
-  Game.cpp
+  State.cpp
   ZombieToTheClub.vcxproj -> D:\Programming\DirectX11\ZombieToTheClub\Debug\ZombieToTheClub.exe

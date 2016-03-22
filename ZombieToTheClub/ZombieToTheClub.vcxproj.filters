@@ -99,6 +99,15 @@
     <ClCompile Include="Input.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Move.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Stay.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -145,6 +154,15 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Move.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Stay.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

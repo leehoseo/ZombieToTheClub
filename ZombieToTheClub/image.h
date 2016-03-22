@@ -13,6 +13,12 @@ protected:
 								   // spriteData contains the data required to draw the image by Graphics::drawSprite()
 	SpriteData spriteData;  // SpriteData is defined in "graphics.h"
 	COLOR_ARGB colorFilter; // applied as a color filter (use WHITE for no change)
+	int m_width;
+	int m_height;
+	int m_frame;
+	int m_frameDeley;
+	int m_currentFrame;
+	int m_endFrame;
 
 	HRESULT hr;             // standard return type
 	bool    visible;        // true when visible
@@ -102,7 +108,7 @@ public:
 
 
 
-	virtual bool Image::initialize(Graphics* g, int x, int y,  int frame , const char* file , ...);
+	virtual bool Image::initialize(Graphics* _g, int _width, int _height, int _x, int _y,  int _frame , int _frameDeley , const char* _file);
 
 	// ÁÂ¿ì ¹ÝÀü
 	virtual void flipHorizontal(bool flip) { spriteData.flipHorizontal = flip; }

@@ -22,7 +22,8 @@ private:
 
 
 	// Player
-	Image m_player;
+	Image m_player_move;
+	Image m_player_stay;
 
 	ImageManager();
 
@@ -49,6 +50,7 @@ public:
 	Image UI_Main_Exit() const;
 
 	//Player
-	Image Player() const;
+	Image Player_Move() const;
+	Image Player_Stay() const;
 };
 

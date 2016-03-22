@@ -211,3 +211,12 @@ int CInput::KeyBoardPressed()
 
 	return 0;
 }
+
+bool CInput::KetPressedCheck(int _key)
+{
+	if (m_keyboardState[_key])
+	{
+		return true;
+	}
+	return false;
+}

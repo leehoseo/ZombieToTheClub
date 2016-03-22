@@ -25,5 +25,6 @@ public:
 	bool ReadMouse();
 	bool ReadKeyboard();
 	int KeyBoardPressed();
+	bool KetPressedCheck(int _key);
 };
 

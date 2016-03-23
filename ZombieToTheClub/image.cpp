@@ -10,6 +10,8 @@ Image::Image()
 	spriteData.y = 0.0;
 	spriteData.scale = 1.0;
 	spriteData.angle = 0.0;
+	spriteData.pixelX = 0;
+	spriteData.pixelY = 0;
 	spriteData.rect.left = 0;
 	spriteData.rect.top = 0;
 	spriteData.rect.right = spriteData.width;
@@ -25,7 +27,8 @@ Image::Image()
 	m_frame = 0;
 	m_frameDeley = 0;
 	m_currentFrame = 0;
-	m_endFrame = 0;
+	m_startTime = Time::Instance()->GetTime();
+	m_currentTime = 0;
 	colorFilter = graphicsNS::WHITE;
 }
 
@@ -63,9 +66,9 @@ bool Image::initialize(Graphics* _g , int _width , int _height, int _x, int _y, 
 	m_width = _width;
 	m_height = _height;
 	m_frame = _frame;
-	m_endFrame = _frame;
 	m_frameDeley = _frameDeley;
-
+	spriteData.pixelX = m_width;
+	spriteData.pixelY = m_height;
 	
 	initialized = true;                                // successfully initialized
 	return true;
@@ -83,13 +86,13 @@ void Image::draw(COLOR_ARGB color)
 		graphics->drawSprite(spriteData, color);
 }
 
-void Image::update()		// 애니메이션 관련 함수
+void Image::update(int _deley)		// 애니메이션 관련 함수
 { 
-	if (m_endFrame != 0)// 애니메이션이 있으면
+	if (m_frame != 0)// 애니메이션이 있으면
 	{
-		static DWORD deleyCheck = Time::Instance()->GetTime() + m_frameDeley;
+		m_currentTime = Time::Instance()->GetTime() - m_startTime;
 
-		if (Time::Instance()->GetTime() > deleyCheck)	// 시간이 지나면
+		if (m_currentTime > _deley)	// 시간이 지나면
 		{
 			spriteData.rect.left = (spriteData.width / m_frame) * m_currentFrame;	// 설정한 개인 프레임 width 값 x 현재 frame 번호
 			spriteData.rect.right = (spriteData.width / m_frame) * (m_currentFrame + 1);
@@ -98,11 +101,12 @@ void Image::update()		// 애니메이션 관련 함수
 			spriteData.rect.top = 0;
 			spriteData.rect.bottom = spriteData.height;
 
-			deleyCheck += m_frameDeley;
-		}
+			m_startTime = Time::Instance()->GetTime();
 
-		++m_currentFrame;
-		if (m_currentFrame == m_endFrame)
-			m_currentFrame = 0;
+			++m_currentFrame;
+
+			if (m_currentFrame == m_frame)
+				m_currentFrame = 0;
+		}
 	}
 }

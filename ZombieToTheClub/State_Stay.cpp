@@ -14,10 +14,6 @@ State_Stay::~State_Stay()
 }
 
 
-void State_Stay::Render()
-{
-}
-
 void State_Stay::Update()
 {
 	if (MoveCheck())

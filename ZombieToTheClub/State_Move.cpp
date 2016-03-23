@@ -13,10 +13,6 @@ State_Move::~State_Move()
 {
 }
 
-void State_Move::Render()
-{
-}
-
 void State_Move::Update()
 {
 	if (!MoveCheck())// 안움직이면

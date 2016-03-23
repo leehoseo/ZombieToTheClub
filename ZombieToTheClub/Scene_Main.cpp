@@ -20,7 +20,6 @@ Scene_Main::~Scene_Main()
 
 void Scene_Main::Initialize()
 {
-	m_zombie.initialize();
 	m_main = ImageManager::Instance()->Main();
 	m_start.Initialize(ImageManager::Instance()->UI_Main_Start());
 	m_save.Initialize(ImageManager::Instance()->UI_Main_Save());
@@ -37,7 +36,7 @@ void Scene_Main::Update(Game * _game)
 		_game->ChangeScene(new Scene_Play());
 	}
 
-	m_title.update();
+	m_title.update(200);
 }
 
 void Scene_Main::Render()

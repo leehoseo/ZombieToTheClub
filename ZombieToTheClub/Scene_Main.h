@@ -9,7 +9,6 @@ class Scene_Main	:	public Scene
 {
 private:
 
-	Zombie m_zombie;
 	Image m_main;
 	Image m_title;
 	UI m_start;
@@ -25,7 +24,5 @@ public:
 	virtual void Initialize();
 	virtual void Update(Game* _game = 0);
 	virtual void Render();
-
-	void Patrol();
 };
 

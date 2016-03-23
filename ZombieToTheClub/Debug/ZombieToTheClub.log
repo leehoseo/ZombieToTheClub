@@ -1,8 +1,9 @@
-﻿  State_Stay.cpp
-  c:\program files (x86)\microsoft directx sdk (february 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  State_Move.cpp
-  c:\program files (x86)\microsoft directx sdk (february 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  코드를 생성하고 있습니다...
-  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  State.cpp
+﻿  Zombie.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(8): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(46): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(51): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(56): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(88): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(90): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ZombieToTheClub.vcxproj -> D:\Programming\DirectX11\ZombieToTheClub\Debug\ZombieToTheClub.exe

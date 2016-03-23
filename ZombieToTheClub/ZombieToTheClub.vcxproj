@@ -171,6 +171,7 @@
     <ClCompile Include="State_Stay.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Boy_Zombie.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,11 +192,13 @@
     <ClInclude Include="State_Stay.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="Boy_Zombie.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

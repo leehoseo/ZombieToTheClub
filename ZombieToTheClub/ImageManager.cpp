@@ -21,9 +21,9 @@ ImageManager* ImageManager::Instance()
 
 void ImageManager::initialize(Graphics * g)
 {
-	m_title.initialize(g,800,240,112, 50 ,2, 500, "Resource\\Title.png");
+	m_title.initialize(g,800,240,112, 50 ,2, 0, "Resource\\Title.png");
 
-	m_zombie_1.initialize(g, 0,0,0, 0, 0,0, "Resource\\Zombie.png");
+	
 
 	// Logo ¿ÃπÃ¡ˆ
 	m_teamlogo.initialize(g, 0,0, 387 , 262 , 0, 0,"Resource\\TeamLogo.png");
@@ -39,8 +39,11 @@ void ImageManager::initialize(Graphics * g)
 	
 	
 	//Player
-	m_player_move.initialize(g,128,128,0, 0, 9,200, "Resource\\Player_Move.png");
-	m_player_stay.initialize(g, 128, 128, 0, 0, 2, 200, "Resource\\Player_Stay.png");
+	m_player_move.initialize(g,128,128,0, 0, 9, 0, "Resource\\Player_Move.png");
+	//m_player_move.initialize(g, 0, 0, 0, 0, 0, 0, "Resource\\Player_Move.png");
+	m_player_stay.initialize(g, 128, 128, 0, 0, 2, 0, "Resource\\Player_Stay.png");
+
+	m_zombie_1.initialize(g, 128, 128, 0, 0, 2,0, "Resource\\Boy_Zombie.png");
 	m_binitialize = true;
 }
 

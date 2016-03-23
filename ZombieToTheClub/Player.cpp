@@ -28,6 +28,11 @@ void Player::Initialize()
 
 void Player::MoveX(float _x)
 {
+	if (_x < 0)
+		m_image.flipHorizontal(true);
+	else
+		m_image.flipHorizontal(false);
+
 	m_image.setX(m_image.getX() + _x);
 }
 
@@ -58,12 +63,11 @@ void Player::Move()
 void Player::Update()
 {
 	m_pstate->Update();
-	m_image.update();
+	m_image.update(200);
 }
 
 void Player::Render()
 {
-	m_pstate->Render();
 	m_image.draw();
 }
 

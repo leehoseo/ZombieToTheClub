@@ -4,13 +4,13 @@
 
 #include "Scene.h"
 #include "image.h"
-#include "Zombie.h"
+#include "Boy_Zombie.h"
 #include "UI.h"
 
 class Scene_Play : public Scene
 {
 private:
-	Zombie	 m_zombie;
+	Boy_Zombie	 m_pzombie[MAX_ZOMBIE];
 public:
 
 	Scene_Play();

@@ -18,8 +18,9 @@ protected:
 	int m_frame;
 	int m_frameDeley;
 	int m_currentFrame;
-	int m_endFrame;
 
+	int m_startTime;
+	int m_currentTime;
 	HRESULT hr;             // standard return type
 	bool    visible;        // true when visible
 	bool    initialized;    // true when successfully initialized
@@ -56,6 +57,9 @@ public:
 	// Return height.
 	virtual int   getHeight() { return spriteData.height; }
 
+	virtual int	  getPixelX() { return spriteData.pixelX; }
+
+	virtual int	  getPixelY() { return spriteData.pixelY; }
 	// Return center X.
 	virtual float getCenterX() { return spriteData.x + spriteData.width / 2 * getScale(); }
 
@@ -85,8 +89,6 @@ public:
 	// Set scale.
 	virtual void setScale(float s) { spriteData.scale = s; }
 
-	// Set rotation angle in degrees.
-	// 0 degrees is up. Angles progress clockwise.
 	virtual void setDegrees(float deg) { spriteData.angle = deg*((float)PI / 180.0f); }
 
 	// Set rotation angle in radians.
@@ -107,7 +109,6 @@ public:
 	virtual void setColorFilter(COLOR_ARGB color) { colorFilter = color; }
 
 
-
 	virtual bool Image::initialize(Graphics* _g, int _width, int _height, int _x, int _y,  int _frame , int _frameDeley , const char* _file);
 
 	// 좌우 반전
@@ -116,8 +117,7 @@ public:
 	// 상하 반전
 	virtual void flipVertical(bool flip) { spriteData.flipVertical = flip; }
 
-
 	virtual void draw(COLOR_ARGB color = graphicsNS::WHITE);
 
-	virtual void update();
+	virtual void update(int _deley);
 };

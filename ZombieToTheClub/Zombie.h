@@ -1,30 +1,27 @@
 #pragma once
-
 #include "image.h"
-#include "Resource.h"
-#include "graphics.h"
 
 class Zombie
 {
-private:
+protected:
 	Image m_image;
-	bool m_bMove;
 
+	int m_directionX;
+	int m_directionY;
 
-
+	bool m_isarrive;
 public:
 	Zombie();
 	~Zombie();
 
-	void initialize(float _x = 0 , float _y = 0);
-	void Render();
-	void Update();
-
-	void SetX(int _x);
-	void SetY(int _y);
-	int GetX();
-	int GetY();
-
-	void Patrol();
+	virtual void initialize(float _x , float _y , Image _image);
+	virtual void Render();
+	virtual void Update();
+	virtual void SetX(int _x);
+	virtual void SetY(int _y);
+	virtual int GetX();
+	virtual int GetY();
+	virtual void Move();
+	virtual void SetDirection();
 };
 

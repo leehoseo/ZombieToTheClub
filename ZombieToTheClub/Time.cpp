@@ -37,6 +37,7 @@ bool Time::Timer(int _timer)
 	if (m_time > timer)
 	{
 		m_btimerOn = false;
+		timer = 0;
 		return true;
 	}
 	return false;

@@ -45,6 +45,8 @@ struct SpriteData
 {
 	int					 width;      // width of sprite in pixels
 	int					 height;     // height of sprite in pixels
+	int					 pixelX;
+	int					 pixelY;
 	float				 x;          // screen location (top left corner of sprite)
 	float				 y;
 	float				 scale;      // <1 smaller, >1 bigger

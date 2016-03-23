@@ -164,10 +164,10 @@ void Graphics::drawSprite(const SpriteData &spriteData, COLOR_ARGB color)
 	{
 		scaling.x *= -1;            // negative X scale to flip
 									// Get center of flipped image.
-		spriteCenter.x -= (float)(spriteData.width*spriteData.scale);
+		//spriteCenter.x -= (float)(spriteData.width*spriteData.scale);
 		// Flip occurs around left edge, translate right to put
 		// Flipped image in same location as original.
-		translate.x += (float)(spriteData.width*spriteData.scale);
+		translate.x = spriteData.x + spriteData.pixelX;
 	}
 	if (spriteData.flipVertical)    // if flip vertical
 	{

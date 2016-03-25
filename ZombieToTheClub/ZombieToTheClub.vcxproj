@@ -154,6 +154,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AI_State.cpp" />
+    <ClCompile Include="AI_State_Hit.cpp" />
+    <ClCompile Include="AI_State_Move.cpp" />
+    <ClCompile Include="AI_State_Stay.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="image.cpp" />
@@ -167,6 +171,7 @@
     <ClCompile Include="Scene_Play.cpp" />
     <ClCompile Include="Scene_TeamLogo.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="State_Attack.cpp" />
     <ClCompile Include="State_Move.cpp" />
     <ClCompile Include="State_Stay.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -175,6 +180,10 @@
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI_State.h" />
+    <ClInclude Include="AI_State_Hit.h" />
+    <ClInclude Include="AI_State_Move.h" />
+    <ClInclude Include="AI_State_Stay.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="image.h" />
@@ -188,6 +197,7 @@
     <ClInclude Include="Scene_Play.h" />
     <ClInclude Include="Scene_TeamLogo.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="State_Attack.h" />
     <ClInclude Include="State_Move.h" />
     <ClInclude Include="State_Stay.h" />
     <ClInclude Include="Time.h" />

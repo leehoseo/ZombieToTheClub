@@ -1,15 +1,24 @@
 #pragma once
 #include "image.h"
+#include "AI_State.h"
+
 
 class Zombie
 {
 protected:
 	Image m_image;
 
+	AI_State * m_pstate;
 	int m_directionX;
 	int m_directionY;
-
 	bool m_isarrive;
+
+	int m_hp;
+	int m_atk;
+	float m_moveSpeed;
+	float atdSpeed;
+	int m_experience;
+	int m_score;
 public:
 	Zombie();
 	~Zombie();
@@ -23,5 +32,7 @@ public:
 	virtual int GetY();
 	virtual void Move();
 	virtual void SetDirection();
+
+	virtual bool Hit();
 };
 

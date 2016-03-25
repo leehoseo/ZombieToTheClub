@@ -1,9 +1,52 @@
 ﻿  Zombie.cpp
-d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(8): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(46): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(51): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(56): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(88): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(90): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ZombieToTheClub.vcxproj -> D:\Programming\DirectX11\ZombieToTheClub\Debug\ZombieToTheClub.exe
+d:\programming\directx11\zombietotheclub\zombietotheclub\ai_state.h(9): error C2061: 구문 오류: 식별자 'Zombie'
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(9): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(24): error C2259: 'AI_State_Move': 추상 클래스를 인스턴스화할 수 없습니다.
+  d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(24): note: 다음 멤버가 원인입니다.
+  d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(24): note: 'void AI_State::Update(void)': abstract입니다.
+  d:\programming\directx11\zombietotheclub\zombietotheclub\ai_state.h(9): note: 'AI_State::Update' 선언을 참조하십시오.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(46): error C2660: 'AI_State::Update': 함수는 1개의 매개 변수를 사용하지 않습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(56): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(61): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(66): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(98): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.cpp(100): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  AI_State_Move.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.h(11): error C2143: 구문 오류: ';'이(가) '*' 앞에 없습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.h(11): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.h(11): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
+  AI_State.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.h(11): error C2143: 구문 오류: ';'이(가) '*' 앞에 없습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.h(11): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\zombie.h(11): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Boy_Zombie.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\ai_state.h(9): error C2061: 구문 오류: 식별자 'Zombie'
+d:\programming\directx11\zombietotheclub\zombietotheclub\boy_zombie.cpp(8): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Game.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\ai_state.h(9): error C2061: 구문 오류: 식별자 'Zombie'
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Scene_Main.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\ai_state.h(9): error C2061: 구문 오류: 식별자 'Zombie'
+d:\programming\directx11\zombietotheclub\zombietotheclub\scene_main.cpp(13): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Scene_Play.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\ai_state.h(9): error C2061: 구문 오류: 식별자 'Zombie'
+d:\programming\directx11\zombietotheclub\zombietotheclub\scene_play.cpp(9): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\scene_play.cpp(20): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Scene_TeamLogo.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\ai_state.h(9): error C2061: 구문 오류: 식별자 'Zombie'
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  main.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\ai_state.h(9): error C2061: 구문 오류: 식별자 'Zombie'
+  c:\program files (x86)\microsoft directx sdk (february 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  코드를 생성하고 있습니다...

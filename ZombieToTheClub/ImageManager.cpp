@@ -39,7 +39,7 @@ void ImageManager::initialize(Graphics * g)
 	
 	
 	//Player
-	m_player_move.initialize(g,128,128,0, 0, 9, 0, "Resource\\Player_Move.png");
+	m_player_move.initialize(g,128,150,0, 0, 10, 0, "Resource\\Player_Move.png");
 	//m_player_move.initialize(g, 0, 0, 0, 0, 0, 0, "Resource\\Player_Move.png");
 	m_player_stay.initialize(g, 128, 128, 0, 0, 2, 0, "Resource\\Player_Stay.png");
 

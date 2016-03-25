@@ -24,6 +24,14 @@ void Player::Initialize()
 {
 	m_pstate = new State_Stay();
 	m_image = ImageManager::Instance()->Player_Stay();
+	m_code = eCODE::STAY;
+
+	m_atk = 10;
+	m_hp = 100;
+	m_moveSpeed = 0.1;
+	m_atkSpeed = 0.5;
+	m_gold = 0;
+	m_experience = 0;
 }
 
 void Player::MoveX(float _x)
@@ -43,6 +51,30 @@ void Player::MoveY(float _y)
 
 void Player::Move()
 {
+	if (CInput::Instance()->KetPressedCheck(DIK_LEFT) && CInput::Instance()->KetPressedCheck(DIK_UP))
+	{
+		MoveX(-1);
+		MoveY(-1);
+		return;
+	}
+	else if (CInput::Instance()->KetPressedCheck(DIK_LEFT) && CInput::Instance()->KetPressedCheck(DIK_DOWN))
+	{
+		MoveX(-1);
+		MoveY(+1);
+		return;
+	}
+	else if (CInput::Instance()->KetPressedCheck(DIK_RIGHT) && CInput::Instance()->KetPressedCheck(DIK_UP))
+	{
+		MoveX(+1);
+		MoveY(-1);
+		return;
+	}
+	else if (CInput::Instance()->KetPressedCheck(DIK_RIGHT) && CInput::Instance()->KetPressedCheck(DIK_DOWN))
+	{
+		MoveX(+1);
+		MoveY(+1);
+		return;
+	}
 	switch (CInput::Instance()->KeyBoardPressed())
 	{
 	case DIK_LEFT:
@@ -97,4 +129,24 @@ int Player::GetX() const
 int Player::GetY() const
 {
 	return m_image.getY();
+}
+
+int Player::GetCurrentFrame() const
+{
+	return m_image.GetCurrentFrame();
+}
+
+int Player::GetFrame() const
+{
+	return m_image.GetFrame();
+}
+
+int Player::GetCode() const
+{
+	return m_code;
+}
+
+void Player::SetCode(eCODE _code)
+{
+	m_code = _code;
 }

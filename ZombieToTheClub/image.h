@@ -51,7 +51,9 @@ public:
 	// Return scale factor.
 	virtual float getScale() { return spriteData.scale; }
 
-	// Return width.
+	virtual int GetCurrentFrame() const { return m_currentFrame; }
+	virtual int GetFrame() const { return m_frame; }
+
 	virtual int   getWidth() { return spriteData.width; }
 
 	// Return height.

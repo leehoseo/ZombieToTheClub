@@ -67,6 +67,9 @@
     <Filter Include="소스 파일\Zombie\Boy_Zombie">
       <UniqueIdentifier>{2678ddf8-aa0d-42cf-8252-4a20749a10ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Player\State\Attack">
+      <UniqueIdentifier>{716e3b63-5d06-4d95-8598-191c5d5b1aca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -126,6 +129,21 @@
     <ClCompile Include="Zombie.cpp">
       <Filter>소스 파일\Zombie</Filter>
     </ClCompile>
+    <ClCompile Include="State_Attack.cpp">
+      <Filter>소스 파일\Player\State\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_State.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_State_Move.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_State_Stay.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_State_Hit.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -184,6 +202,21 @@
     </ClInclude>
     <ClInclude Include="Zombie.h">
       <Filter>소스 파일\Zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Attack.h">
+      <Filter>소스 파일\Player\State\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State_Move.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State_Stay.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State_Hit.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

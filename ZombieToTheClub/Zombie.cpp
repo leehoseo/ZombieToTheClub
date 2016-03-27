@@ -3,11 +3,12 @@
 #include <time.h>
 #include <math.h>
 #include "Player.h"
-#include "AI_State_Move.h"
 #include "CrashCheck.h"
 #include <stdio.h>
 #include "ImageManager.h"
 #include "Resource.h"
+#include "State_Stay.h"
+#include "State_Move.h"
 
 Zombie::Zombie()
 {
@@ -23,6 +24,8 @@ void Zombie::initialize(float _x, float _y, Image _image)
 {
 	m_image = _image;
 	m_test = ImageManager::Instance()->Test();
+	m_pstate = State_Move<Zombie>::Instance();
+
 	m_image.setX(_x);
 	m_image.setY(_y);
 
@@ -36,6 +39,7 @@ void Zombie::initialize(float _x, float _y, Image _image)
 	atdSpeed = 2;
 	m_experience = 5;
 	m_score = 1;
+	m_type = eTYPE::BZ;
 }
 
 void Zombie::Render()
@@ -48,19 +52,23 @@ void Zombie::Update()
 {
 	m_test.setX(m_image.getCenterX() - 20);
 	m_test.setY(m_image.getCenterY());
-	Hit();
-	//Move();
+	m_pstate->Update(this);
 	m_image.update((rand() % 10 + 5) * 100);
 }
 
-void Zombie::SetX(int _x)
+void Zombie::SetX(float _x)
 {
-	m_image.setX(_x);
+	if (_x < 0)
+		m_image.flipHorizontal(false);
+	else if (_x > 0)
+		m_image.flipHorizontal(true);
+
+	m_image.setX(m_image.getX() + _x);
 }
 
-void Zombie::SetY(int _y)
+void Zombie::SetY(float _y)
 {
-	m_image.setY(_y);
+	m_image.setY(m_image.getY() + _y);
 }
 
 int Zombie::GetX()
@@ -78,15 +86,15 @@ void Zombie::Move()
 	if (m_isarrive)
 	{
 		if (m_image.getX() > m_directionX)	//	목적지가 왼쪽에있다면
-			m_image.setX(m_image.getX() - 1 * m_moveSpeed);
+			SetX(- 1 * m_moveSpeed);
 		else
-			m_image.setX(m_image.getX() + 1 * m_moveSpeed);
+			SetX(1 * m_moveSpeed);
 
 
 		if (m_image.getY() > m_directionY)	//	목적지가 위쪽
-			m_image.setY(m_image.getY() - 1 * m_moveSpeed);
+			SetY(- 1 * m_moveSpeed);
 		else
-			m_image.setY(m_image.getY() + 1 * m_moveSpeed);
+			SetY(+ 1 * m_moveSpeed);
 
 
 		if (0 > m_image.getX() || m_image.getX() > GAME_WIDTH - 128
@@ -117,7 +125,7 @@ bool Zombie::Hit()
 	double y = Player::Instance()->GetCenterY() - this->GetCenterY();
 
 	printf("%d \n", m_hp);
-	if(CrashCheck::Instance()->Circle_Circle(50 , 50 , _hypot(fabs(x) , fabs(y))) && Player::Instance()->GetCode() == eCODE::ATTACK)
+	if(CrashCheck::Instance()->Circle_Circle(50 , 50 , _hypot(fabs(x) , fabs(y))) && Player::Instance()->GetCode() == eSTATE::ATTACK)
 	{
 		m_hp -= Player::Instance()->GetAtk();
 		return true;
@@ -139,4 +147,39 @@ float Zombie::GetCenterX() const
 float Zombie::GetCenterY() const
 {
 	return m_image.getCenterY();
+}
+
+int Zombie::GetCode() const
+{
+	return m_code;
+}
+
+void Zombie::SetCode(eSTATE _code)
+{
+	m_code = _code;
+}
+
+void Zombie::ChangeState(State<Zombie>* _newState)
+{
+	m_pstate = _newState;
+}
+
+void Zombie::ChangeImage(Image _image)
+{
+	m_image = _image;
+}
+
+int Zombie::GetCurrentFrame() const
+{
+	return m_image.GetCurrentFrame();
+}
+
+int Zombie::GetFrame() const
+{
+	return m_image.GetFrame();
+}
+
+int Zombie::GetType() const
+{
+	return m_type;
 }

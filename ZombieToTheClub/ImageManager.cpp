@@ -43,7 +43,8 @@ void ImageManager::initialize(Graphics * g)
 	m_player_stay.initialize(g, 128, 128, 0, 0, 2,  "Resource\\Player_Stay.png");
 	m_player_attack.initialize(g, 128, 128, 0, 0, 3,  "Resource\\Player_Attack.png");
 
-	m_zombie_1.initialize(g, 128, 128, 0, 0, 2, "Resource\\Boy_Zombie.png");
+	m_bz_stay.initialize(g, 128, 128, 0, 0, 2, "Resource\\BZ_Stay.png");
+	m_bz_move.initialize(g, 128, 128, 0, 0, 4, "Resource\\BZ_Move.png");
 	m_binitialize = true;
 }
 
@@ -52,9 +53,14 @@ bool ImageManager::IsInitialized()
 	return m_binitialize;
 }
 
-Image ImageManager::Zombie_1() const
+Image ImageManager::BZ_Stay() const
 {
-	return m_zombie_1;
+	return m_bz_stay;
+}
+
+Image ImageManager::BZ_Move() const
+{
+	return m_bz_move;
 }
 
 Image ImageManager::TeamLogo() const 

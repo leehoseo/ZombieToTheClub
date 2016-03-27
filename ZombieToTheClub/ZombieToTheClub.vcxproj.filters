@@ -55,23 +55,20 @@
     <Filter Include="소스 파일\Input">
       <UniqueIdentifier>{9fa3e56f-51e2-4510-89cd-791b6886c153}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Player\State">
-      <UniqueIdentifier>{772d2507-361d-4aa5-bde8-49abe92fab2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Player\State\Move">
-      <UniqueIdentifier>{718cdd79-5b41-4d2e-b311-d187b0c80651}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Player\State\Stay">
-      <UniqueIdentifier>{1458c094-4b66-42d3-b7e5-dd38bc013921}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Zombie\Boy_Zombie">
       <UniqueIdentifier>{2678ddf8-aa0d-42cf-8252-4a20749a10ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Player\State\Attack">
-      <UniqueIdentifier>{716e3b63-5d06-4d95-8598-191c5d5b1aca}</UniqueIdentifier>
+    <Filter Include="소스 파일\State">
+      <UniqueIdentifier>{772d2507-361d-4aa5-bde8-49abe92fab2c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\AI">
-      <UniqueIdentifier>{b5dfe9fe-c07a-4d62-8e68-7127e0f1c617}</UniqueIdentifier>
+    <Filter Include="소스 파일\State\Move">
+      <UniqueIdentifier>{718cdd79-5b41-4d2e-b311-d187b0c80651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\State\Stay">
+      <UniqueIdentifier>{1458c094-4b66-42d3-b7e5-dd38bc013921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\State\Attack">
+      <UniqueIdentifier>{716e3b63-5d06-4d95-8598-191c5d5b1aca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,13 +112,10 @@
       <Filter>소스 파일\Player</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
-      <Filter>소스 파일\Player\State</Filter>
+      <Filter>소스 파일\State</Filter>
     </ClCompile>
     <ClCompile Include="State_Move.cpp">
-      <Filter>소스 파일\Player\State\Move</Filter>
-    </ClCompile>
-    <ClCompile Include="State_Stay.cpp">
-      <Filter>소스 파일\Player\State\Stay</Filter>
+      <Filter>소스 파일\State\Move</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>소스 파일\Input</Filter>
@@ -133,22 +127,13 @@
       <Filter>소스 파일\Zombie</Filter>
     </ClCompile>
     <ClCompile Include="State_Attack.cpp">
-      <Filter>소스 파일\Player\State\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_State.cpp">
-      <Filter>소스 파일\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_State_Stay.cpp">
-      <Filter>소스 파일\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_State_Move.cpp">
-      <Filter>소스 파일\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_State_Hit.cpp">
-      <Filter>소스 파일\AI</Filter>
+      <Filter>소스 파일\State\Attack</Filter>
     </ClCompile>
     <ClCompile Include="CrashCheck.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Stay.hpp">
+      <Filter>소스 파일\State\Stay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,13 +177,13 @@
       <Filter>소스 파일\Player</Filter>
     </ClInclude>
     <ClInclude Include="State.h">
-      <Filter>소스 파일\Player\State</Filter>
+      <Filter>소스 파일\State</Filter>
     </ClInclude>
     <ClInclude Include="State_Move.h">
-      <Filter>소스 파일\Player\State\Move</Filter>
+      <Filter>소스 파일\State\Move</Filter>
     </ClInclude>
     <ClInclude Include="State_Stay.h">
-      <Filter>소스 파일\Player\State\Stay</Filter>
+      <Filter>소스 파일\State\Stay</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>소스 파일\Input</Filter>
@@ -210,19 +195,7 @@
       <Filter>소스 파일\Zombie</Filter>
     </ClInclude>
     <ClInclude Include="State_Attack.h">
-      <Filter>소스 파일\Player\State\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_State.h">
-      <Filter>소스 파일\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_State_Hit.h">
-      <Filter>소스 파일\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_State_Move.h">
-      <Filter>소스 파일\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_State_Stay.h">
-      <Filter>소스 파일\AI</Filter>
+      <Filter>소스 파일\State\Attack</Filter>
     </ClInclude>
     <ClInclude Include="CrashCheck.h">
       <Filter>헤더 파일</Filter>

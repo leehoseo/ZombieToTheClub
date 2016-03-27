@@ -1,10 +1,12 @@
 #pragma once
+
+template<typename T>
 class State
 {
 public:
-	State();
-	~State();
+	State() {}
+	~State() {}
 
-	virtual void Update() = 0;
+	virtual void Update(T * _t) = 0;
 };
 

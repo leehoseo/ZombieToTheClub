@@ -8,9 +8,6 @@ private:
 
 	Image m_test;
 
-	Image m_zombie_1;
-	
-
 	// Logo ¿ÃπÃ¡ˆ
 	Image m_teamlogo;
 
@@ -29,6 +26,9 @@ private:
 	Image m_player_stay;
 	Image m_player_attack;
 
+	Image m_bz_stay;
+	Image m_bz_move;
+
 	ImageManager();
 
 	bool m_binitialize;
@@ -42,7 +42,8 @@ public:
 
 	bool IsInitialized();
 
-	Image Zombie_1() const;
+	Image Test() const;
+
 	Image TeamLogo() const;
 	Image Main() const;
 
@@ -58,6 +59,8 @@ public:
 	Image Player_Stay() const;
 	Image Player_Attack() const;
 
-	Image Test() const;
+	Image BZ_Stay() const;
+	Image BZ_Move() const;
+	
 };
 

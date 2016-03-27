@@ -7,6 +7,8 @@
 
 class Boy_Zombie	:	public Zombie
 {
+private:
+	
 public:
 	Boy_Zombie();
 	~Boy_Zombie();

@@ -6,6 +6,6 @@ public:
 	AI_State();
 	~AI_State();
 
-	virtual void Update(Zombie * _zombie) = 0;
+	virtual void Update(Zombie * _zombie);
 };
 

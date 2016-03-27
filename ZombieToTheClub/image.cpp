@@ -38,7 +38,7 @@ Image::~Image()
 
 // spriteData.width, spriteData.height : 텍스쳐 전체 크기
 // m_width , m_heigth : 설정한 텍스쳐 크기(애니메이션 사용에 필요)
-bool Image::initialize(Graphics* _g , int _width , int _height, int _x, int _y, int _frame , int _frameDeley , const char* _file)
+bool Image::initialize(Graphics* _g , int _width , int _height, int _x, int _y, int _frame , const char* _file)
 {
 	graphics = _g;
 	if (FAILED(graphics->loadTexture(_file, TRANSCOLOR, spriteData.width, spriteData.height, this->m_ptexture))) // m_ptexture에 데이터 입력
@@ -66,7 +66,6 @@ bool Image::initialize(Graphics* _g , int _width , int _height, int _x, int _y, 
 	m_width = _width;
 	m_height = _height;
 	m_frame = _frame;
-	m_frameDeley = _frameDeley;
 	spriteData.pixelX = m_width;
 	spriteData.pixelY = m_height;
 	
@@ -94,6 +93,9 @@ void Image::update(int _deley)		// 애니메이션 관련 함수
 
 		if (m_currentTime > _deley)	// 시간이 지나면
 		{
+			if (m_currentFrame == m_frame)
+				m_currentFrame = 0;
+
 			spriteData.rect.left = (spriteData.width / m_frame) * m_currentFrame;	// 설정한 개인 프레임 width 값 x 현재 frame 번호
 			spriteData.rect.right = (spriteData.width / m_frame) * (m_currentFrame + 1);
 
@@ -104,9 +106,6 @@ void Image::update(int _deley)		// 애니메이션 관련 함수
 			m_startTime = Time::Instance()->GetTime();
 
 			++m_currentFrame;
-
-			if (m_currentFrame == m_frame)
-				m_currentFrame = 0;
 		}
 	}
 }

@@ -11,9 +11,8 @@ AI_State_Move::~AI_State_Move()
 {
 }
 
-void AI_State_Move::Update(Zombie * _zombie)
+void AI_State_Move::Update()
 {
-	_zombie->SetDirection();
-	_zombie->Move();
+	//_zombie->Move();
 }
 

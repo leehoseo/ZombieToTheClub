@@ -158,6 +158,7 @@
     <ClCompile Include="AI_State_Hit.cpp" />
     <ClCompile Include="AI_State_Move.cpp" />
     <ClCompile Include="AI_State_Stay.cpp" />
+    <ClCompile Include="CrashCheck.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="image.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="AI_State_Hit.h" />
     <ClInclude Include="AI_State_Move.h" />
     <ClInclude Include="AI_State_Stay.h" />
+    <ClInclude Include="CrashCheck.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="image.h" />

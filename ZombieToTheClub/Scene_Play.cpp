@@ -16,8 +16,10 @@ Scene_Play::~Scene_Play()
 
 void Scene_Play::Initialize()
 {
-	for (int index = 0; index < MAX_ZOMBIE; ++index)
-		m_pzombie[index].initialize(rand() % (GAME_WIDTH - 128), rand() % (GAME_HEIGHT - 128), ImageManager::Instance()->Zombie_1());
+	/*for (int index = 0; index < MAX_ZOMBIE; ++index)
+		m_pzombie[index].initialize(rand() % (GAME_WIDTH - 128), rand() % (GAME_HEIGHT - 128), ImageManager::Instance()->Zombie_1());*/
+
+	m_pzombie[0].initialize(100, 100, ImageManager::Instance()->Zombie_1());
 	
 }
 

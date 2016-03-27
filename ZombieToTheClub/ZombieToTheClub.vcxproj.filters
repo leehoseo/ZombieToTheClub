@@ -70,6 +70,9 @@
     <Filter Include="소스 파일\Player\State\Attack">
       <UniqueIdentifier>{716e3b63-5d06-4d95-8598-191c5d5b1aca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\AI">
+      <UniqueIdentifier>{b5dfe9fe-c07a-4d62-8e68-7127e0f1c617}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -133,15 +136,18 @@
       <Filter>소스 파일\Player\State\Attack</Filter>
     </ClCompile>
     <ClCompile Include="AI_State.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_State_Move.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\AI</Filter>
     </ClCompile>
     <ClCompile Include="AI_State_Stay.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_State_Move.cpp">
+      <Filter>소스 파일\AI</Filter>
     </ClCompile>
     <ClCompile Include="AI_State_Hit.cpp">
+      <Filter>소스 파일\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="CrashCheck.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -207,15 +213,18 @@
       <Filter>소스 파일\Player\State\Attack</Filter>
     </ClInclude>
     <ClInclude Include="AI_State.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_State_Move.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_State_Stay.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\AI</Filter>
     </ClInclude>
     <ClInclude Include="AI_State_Hit.h">
+      <Filter>소스 파일\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State_Move.h">
+      <Filter>소스 파일\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State_Stay.h">
+      <Filter>소스 파일\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="CrashCheck.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

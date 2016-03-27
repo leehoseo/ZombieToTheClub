@@ -2,7 +2,7 @@
 #include "ImageManager.h"
 #include "Input.h"
 #include "State_Stay.h"
-
+#include <stdio.h>
 Player::Player()
 {
 	Initialize();
@@ -24,6 +24,7 @@ void Player::Initialize()
 {
 	m_pstate = new State_Stay();
 	m_image = ImageManager::Instance()->Player_Stay();
+	m_test = ImageManager::Instance()->Test();
 	m_code = eCODE::STAY;
 
 	m_atk = 10;
@@ -38,7 +39,7 @@ void Player::MoveX(float _x)
 {
 	if (_x < 0)
 		m_image.flipHorizontal(true);
-	else
+	else if(_x > 0)
 		m_image.flipHorizontal(false);
 
 	m_image.setX(m_image.getX() + _x);
@@ -75,6 +76,7 @@ void Player::Move()
 		MoveY(+1);
 		return;
 	}
+
 	switch (CInput::Instance()->KeyBoardPressed())
 	{
 	case DIK_LEFT:
@@ -94,13 +96,16 @@ void Player::Move()
 
 void Player::Update()
 {
+	m_test.setX(m_image.getCenterX() - 20);
+	m_test.setY(m_image.getCenterY());
 	m_pstate->Update();
-	m_image.update(200);
+	m_image.update(100);
 }
 
 void Player::Render()
 {
 	m_image.draw();
+	m_test.draw();
 }
 
 void Player::ChangeState(State * _newState)
@@ -149,4 +154,24 @@ int Player::GetCode() const
 void Player::SetCode(eCODE _code)
 {
 	m_code = _code;
+}
+
+float Player::GetRadius() const
+{
+	return m_image.getRadius();
+}
+
+float Player::GetCenterX() const
+{
+	return m_image.getCenterX();
+}
+
+float Player::GetCenterY() const
+{
+	return m_image.getCenterY();;
+}
+
+int Player::GetAtk() const
+{
+	return m_atk;
 }

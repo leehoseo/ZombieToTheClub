@@ -5,9 +5,10 @@
 #include "State_Attack.h"
 #include "ImageManager.h"
 #include "Player.h"
-
+#include "Resource.h"
 State_Move::State_Move()
 {
+	//Player::Instance()->SetCode(eCODE::MOVE);
 }
 
 
@@ -19,13 +20,15 @@ void State_Move::Update()
 {
 	if (!MoveCheck())// 안움직이면
 	{
+		Player::Instance()->SetCode(eCODE::STAY);
 		Player::Instance()->ChangeImage(ImageManager::Instance()->Player_Stay());
 		Player::Instance()->ChangeState(new State_Stay());
 	}
 
 	if (CInput::Instance()->KetPressedCheck(DIK_A))
 	{
-		Player::Instance()->ChangeImage(ImageManager::Instance()->Title());
+		Player::Instance()->SetCode(eCODE::ATTACK);
+		Player::Instance()->ChangeImage(ImageManager::Instance()->Player_Attack());
 		Player::Instance()->ChangeState(new State_Attack());
 	}
 	Move();

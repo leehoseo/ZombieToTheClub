@@ -3,6 +3,7 @@
 
 #include "Resource.h"
 #include "graphics.h"
+#include <math.h>
 
 class Image		// 부모클래스로 이후 다양한 오브젝트들이 생기면 상속하여 사용
 {
@@ -49,7 +50,7 @@ public:
 	virtual float getY() const { return spriteData.y; }
 
 	// Return scale factor.
-	virtual float getScale() { return spriteData.scale; }
+	virtual float getScale() const { return spriteData.scale; }
 
 	virtual int GetCurrentFrame() const { return m_currentFrame; }
 	virtual int GetFrame() const { return m_frame; }
@@ -63,11 +64,12 @@ public:
 
 	virtual int	  getPixelY() { return spriteData.pixelY; }
 	// Return center X.
-	virtual float getCenterX() { return spriteData.x + spriteData.width / 2 * getScale(); }
+	virtual float getCenterX() const { return spriteData.x + spriteData.pixelX / 2 * getScale(); }
 
 	// Return center Y.
-	virtual float getCenterY() { return spriteData.y + spriteData.height / 2 * getScale(); }
+	virtual float getCenterY() const { return spriteData.y + spriteData.pixelY / 2 * getScale(); }
 
+	virtual float getRadius() const { return _hypot(spriteData.pixelX / 2, spriteData.pixelY / 2);  }
 	// Return rotation angle in degrees.
 	virtual float getDegrees() { return spriteData.angle*(180.0f / (float)PI); }
 
@@ -111,7 +113,7 @@ public:
 	virtual void setColorFilter(COLOR_ARGB color) { colorFilter = color; }
 
 
-	virtual bool Image::initialize(Graphics* _g, int _width, int _height, int _x, int _y,  int _frame , int _frameDeley , const char* _file);
+	virtual bool Image::initialize(Graphics* _g, int _width, int _height, int _x, int _y,  int _frame , const char* _file);
 
 	// 좌우 반전
 	virtual void flipHorizontal(bool flip) { spriteData.flipHorizontal = flip; }

@@ -8,6 +8,6 @@ public:
 	AI_State_Move();
 	~AI_State_Move();
 
-	virtual void Update(Zombie * _zombie);
+	virtual void Update();
 };
 

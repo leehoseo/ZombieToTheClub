@@ -4,6 +4,11 @@
 #include <math.h>
 #include "Player.h"
 #include "AI_State_Move.h"
+#include "CrashCheck.h"
+#include <stdio.h>
+#include "ImageManager.h"
+#include "Resource.h"
+
 Zombie::Zombie()
 {
 	srand(time(NULL));
@@ -12,16 +17,14 @@ Zombie::Zombie()
 
 Zombie::~Zombie()
 {
-	SAFE_DELETE(m_pstate);
 }
 
 void Zombie::initialize(float _x, float _y, Image _image)
 {
 	m_image = _image;
+	m_test = ImageManager::Instance()->Test();
 	m_image.setX(_x);
 	m_image.setY(_y);
-
-	m_pstate = new AI_State_Move();
 
 	m_directionX = 0;
 	m_directionY = 0;
@@ -38,12 +41,16 @@ void Zombie::initialize(float _x, float _y, Image _image)
 void Zombie::Render()
 {
 	m_image.draw();
+	m_test.draw();
 }
 
 void Zombie::Update()
 {
+	m_test.setX(m_image.getCenterX() - 20);
+	m_test.setY(m_image.getCenterY());
+	Hit();
+	//Move();
 	m_image.update((rand() % 10 + 5) * 100);
-	m_pstate->Update(this);
 }
 
 void Zombie::SetX(int _x)
@@ -89,23 +96,47 @@ void Zombie::Move()
 		if (m_image.getX() == m_directionX || m_image.getY() == m_directionY)
 			m_isarrive = false;
 	}
+	else
+	{
+		SetDirection();
+	}
 }
 
 void Zombie::SetDirection()
 {
-	if (m_isarrive == false)
-	{
-		m_directionX = (rand() % m_image.getWidth() * 4) + (m_image.getX() - (m_image.getWidth() * 2));
-		
-		m_directionY = (rand() % m_image.getHeight() * 4) + (m_image.getY() - (m_image.getHeight() * 2));
+	m_directionX = (rand() % m_image.getWidth() * 4) + (m_image.getX() - (m_image.getWidth() * 2));
 
-		m_isarrive = true;
-	}
+	m_directionY = (rand() % m_image.getHeight() * 4) + (m_image.getY() - (m_image.getHeight() * 2));
+
+	m_isarrive = true;
 }
 
 bool Zombie::Hit()
 {
-	/*if(m_image.getSpriteDataRect().)
-	return false;*/
-	return true;
+	double x = Player::Instance()->GetCenterX() - this->GetCenterX();
+	double y = Player::Instance()->GetCenterY() - this->GetCenterY();
+
+	printf("%d \n", m_hp);
+	if(CrashCheck::Instance()->Circle_Circle(50 , 50 , _hypot(fabs(x) , fabs(y))) && Player::Instance()->GetCode() == eCODE::ATTACK)
+	{
+		m_hp -= Player::Instance()->GetAtk();
+		return true;
+	}
+	else
+		return false;
+}
+
+float Zombie::GetRadius() const
+{
+	return m_image.getRadius();
+}
+
+float Zombie::GetCenterX() const
+{
+	return m_image.getCenterX();
+}
+
+float Zombie::GetCenterY() const
+{
+	return m_image.getCenterY();
 }

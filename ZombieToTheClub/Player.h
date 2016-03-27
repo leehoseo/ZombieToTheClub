@@ -6,10 +6,9 @@ class Player
 {
 private:
 
-	enum eCODE { STAY = 1, MOVE = 2 , ATTACK = 3 };
-
 	Player();
 	Image m_image;
+	Image m_test;
 	State * m_pstate;
 	eCODE m_code;
 
@@ -17,9 +16,9 @@ private:
 	int m_hp;
 	float m_moveSpeed;
 	float m_atkSpeed;
-
 	int m_gold;
 	int m_experience;
+
 public:
 	
 	static Player * Instance();
@@ -46,5 +45,12 @@ public:
 	int GetCode() const;
 
 	void SetCode(eCODE _code);
+
+	float GetRadius() const;
+
+	float GetCenterX() const;
+	float GetCenterY() const;
+
+	int GetAtk() const;
 };
 

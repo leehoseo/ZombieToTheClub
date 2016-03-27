@@ -5,6 +5,9 @@
 class ImageManager
 {
 private:
+
+	Image m_test;
+
 	Image m_zombie_1;
 	
 
@@ -24,6 +27,7 @@ private:
 	// Player
 	Image m_player_move;
 	Image m_player_stay;
+	Image m_player_attack;
 
 	ImageManager();
 
@@ -52,5 +56,8 @@ public:
 	//Player
 	Image Player_Move() const;
 	Image Player_Stay() const;
+	Image Player_Attack() const;
+
+	Image Test() const;
 };
 

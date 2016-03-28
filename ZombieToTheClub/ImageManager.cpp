@@ -45,6 +45,7 @@ void ImageManager::initialize(Graphics * g)
 
 	m_bz_stay.initialize(g, 128, 128, 0, 0, 2, "Resource\\BZ_Stay.png");
 	m_bz_move.initialize(g, 128, 128, 0, 0, 4, "Resource\\BZ_Move.png");
+	m_bz_hit.initialize(g, 128, 128, 9, 9, 3, "Resource\\BZ_Hit.png");
 	m_binitialize = true;
 }
 
@@ -62,6 +63,12 @@ Image ImageManager::BZ_Move() const
 {
 	return m_bz_move;
 }
+
+Image ImageManager::BZ_Hit() const
+{
+	return m_bz_hit;
+}
+
 
 Image ImageManager::TeamLogo() const 
 {

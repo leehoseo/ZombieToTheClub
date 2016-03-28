@@ -8,8 +8,7 @@
 
 Game::Game()
 {            
-	m_startTime = timeGetTime();
-
+	m_time.SetStartTime();
 	m_pscene = new Scene_TeamLogo();
 
 	m_pgraphics = NULL;
@@ -86,26 +85,19 @@ void Game::ChangeScene(Scene * _newScene)
 	m_pscene = _newScene;
 }
 
-DWORD Game::GetRenderTime() const
-{
-	return m_renderTime;
-}
-
 void Game::run()
 {
 	if (m_pgraphics == NULL)
 		return;
 
-	Time::Instance()->SetTime();
-
-	m_renderTime = timeGetTime();
-	m_currentTime = timeGetTime() - m_startTime;
 	
+	m_time.SetTime();
+
 	// 1/60초가 지나면 update()와 render 실행
-	if (m_currentTime > 16)			// 1000 : 1 = x : 1/60 공식으로 1/60초는 16.6666 
+	if (m_time.GetTime() > 16)			// 1000 : 1 = x : 1/60 공식으로 1/60초는 16.6666 
 	{
 		renderGame();
 
-		m_startTime = timeGetTime();
+		m_time.SetStartTime();
 	}
 }

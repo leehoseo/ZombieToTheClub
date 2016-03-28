@@ -28,6 +28,7 @@ private:
 
 	Image m_bz_stay;
 	Image m_bz_move;
+	Image m_bz_hit;
 
 	ImageManager();
 
@@ -61,6 +62,6 @@ public:
 
 	Image BZ_Stay() const;
 	Image BZ_Move() const;
-	
+	Image BZ_Hit() const;
 };
 

@@ -1,7 +1,6 @@
 #pragma once
 #include "image.h"
 #include "State.h"
-#include "State_Stay.h"
 
 class Player
 {
@@ -10,7 +9,7 @@ private:
 	Player();
 	Image m_image;
 	Image m_test;
-	State<Player> * m_pstate;
+	State * m_pstate;
 	eSTATE m_code;
 	eTYPE m_type;
 
@@ -22,7 +21,7 @@ private:
 	int m_experience;
 
 public:
-	
+
 	static Player * Instance();
 	~Player();
 
@@ -35,7 +34,7 @@ public:
 	void Update();
 	void Render();
 
-	void ChangeState(State<Player> * _newState);
+	void ChangeState(State * _newState);
 	void ChangeImage(Image _image);
 
 	int GetX() const;
@@ -45,8 +44,8 @@ public:
 	int GetFrame() const;
 
 	int GetCode() const;
-
 	void SetCode(eSTATE _code);
+	int GetType() const;
 
 	float GetRadius() const;
 
@@ -54,7 +53,4 @@ public:
 	float GetCenterY() const;
 
 	int GetAtk() const;
-
-	int GetType() const;
 };
-

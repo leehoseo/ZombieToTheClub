@@ -1,7 +1,7 @@
 #pragma once
 #include "image.h"
-#include "State.h"
 #include "Resource.h"
+#include "AI_State.h"
 
 class Zombie
 {
@@ -12,10 +12,9 @@ protected:
 	eSTATE m_code;
 	eTYPE m_type;
 
-	State<Zombie> * m_pstate;
+	AI_State * m_pstate;
 
-	int m_directionX;
-	int m_directionY;
+	
 	bool m_isarrive;
 
 	int m_hp;
@@ -29,7 +28,7 @@ public:
 	Zombie();
 	~Zombie();
 	
-	virtual void initialize(float _x , float _y , Image _image);
+	virtual void initialize(float _x , float _y , Image _image, AI_State *_state);
 	virtual void Render();
 	virtual void Update();
 	virtual void SetX(float _x);
@@ -50,12 +49,14 @@ public:
 
 	void SetCode(eSTATE _code);
 
-	void ChangeState(State<Zombie> * _newState);
+	void ChangeState(AI_State * _newState);
 	void ChangeImage(Image _image);
 
 	int GetCurrentFrame() const;
 	int GetFrame() const;
 
 	int GetType() const;
+
+	Image GetImage() const;
 };
 

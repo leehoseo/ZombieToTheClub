@@ -17,30 +17,29 @@ Player * Player::Instance()
 
 Player::~Player()
 {
+	SAFE_DELETE(m_pstate);
 }
 
 void Player::Initialize()
 {
-	m_pstate = State_Stay<Player>::Instance();
+	m_pstate = new State_Stay();
 	m_image = ImageManager::Instance()->Player_Stay();
 	m_test = ImageManager::Instance()->Test();
 	m_code = eSTATE::STAY;
-
+	m_type = eTYPE::PLAYER;
 	m_atk = 10;
 	m_hp = 100;
 	m_moveSpeed = 0.1;
 	m_atkSpeed = 0.5;
 	m_gold = 0;
 	m_experience = 0;
-	m_type = eTYPE::PLAYER;
-
 }
 
 void Player::MoveX(float _x)
 {
 	if (_x < 0)
 		m_image.flipHorizontal(true);
-	else if(_x > 0)
+	else if (_x > 0)
 		m_image.flipHorizontal(false);
 
 	m_image.setX(m_image.getX() + _x);
@@ -99,7 +98,7 @@ void Player::Update()
 {
 	m_test.setX(m_image.getCenterX() - 20);
 	m_test.setY(m_image.getCenterY());
-	m_pstate->Update(Player::Instance());
+	m_pstate->Update();
 	m_image.update(200);
 }
 
@@ -109,20 +108,24 @@ void Player::Render()
 	m_test.draw();
 }
 
-void Player::ChangeState(State<Player> * _newState)
+void Player::ChangeState(State * _newState)
 {
+	delete m_pstate;
 	m_pstate = _newState;
+	return;
 }
 
 void Player::ChangeImage(Image _image)
 {
 	int tempX = m_image.getX();
 	int tempY = m_image.getY();
+	bool tempH = m_image.GetHorizontal();
 
 	m_image = _image;
 
 	m_image.setX(tempX);
 	m_image.setY(tempY);
+	m_image.flipHorizontal(tempH);
 }
 
 int Player::GetX() const
@@ -155,6 +158,11 @@ void Player::SetCode(eSTATE _code)
 	m_code = _code;
 }
 
+int Player::GetType() const
+{
+	return m_type;
+}
+
 float Player::GetRadius() const
 {
 	return m_image.getRadius();
@@ -173,9 +181,4 @@ float Player::GetCenterY() const
 int Player::GetAtk() const
 {
 	return m_atk;
-}
-
-int Player::GetType() const
-{
-	return m_type;
 }

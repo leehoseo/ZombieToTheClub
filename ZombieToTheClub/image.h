@@ -3,7 +3,7 @@
 
 #include "Resource.h"
 #include "graphics.h"
-#include <math.h>
+#include "Time.h"
 
 class Image		// 부모클래스로 이후 다양한 오브젝트들이 생기면 상속하여 사용
 {
@@ -26,6 +26,8 @@ protected:
 	bool    visible;        // true when visible
 	bool    initialized;    // true when successfully initialized
 	bool    animComplete;   // true when loop is false and endFrame has finished displaying
+
+	Time m_time;
 
 public:
 	// Constructor
@@ -115,7 +117,7 @@ public:
 
 	virtual bool Image::initialize(Graphics* _g, int _width, int _height, int _x, int _y,  int _frame , const char* _file);
 
-	// 좌우 반전
+	virtual bool GetHorizontal() const { return spriteData.flipHorizontal; }
 	virtual void flipHorizontal(bool flip) { spriteData.flipHorizontal = flip; }
 
 	// 상하 반전

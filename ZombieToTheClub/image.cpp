@@ -26,10 +26,11 @@ Image::Image()
 	m_height = 0;
 	m_frame = 0;
 	m_frameDeley = 0;
-	m_currentFrame = 0;
-	m_startTime = Time::Instance()->GetTime();
-	m_currentTime = 0;
 	colorFilter = graphicsNS::WHITE;
+
+	m_time.SetStartTime();
+
+
 }
 
 
@@ -89,9 +90,10 @@ void Image::update(int _deley)		// 애니메이션 관련 함수
 { 
 	if (m_frame != 0)// 애니메이션이 있으면
 	{
-		m_currentTime = Time::Instance()->GetTime() - m_startTime;
 
-		if (m_currentTime > _deley)	// 시간이 지나면
+		m_time.SetTime();
+
+		if (m_time.GetTime() > _deley)	// 시간이 지나면
 		{
 			if (m_currentFrame == m_frame)
 				m_currentFrame = 0;
@@ -103,8 +105,7 @@ void Image::update(int _deley)		// 애니메이션 관련 함수
 			spriteData.rect.top = 0;
 			spriteData.rect.bottom = spriteData.height;
 
-			m_startTime = Time::Instance()->GetTime();
-
+			m_time.SetStartTime();
 			++m_currentFrame;
 		}
 	}

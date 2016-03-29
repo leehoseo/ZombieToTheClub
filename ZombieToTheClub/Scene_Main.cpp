@@ -9,8 +9,6 @@ Scene_Main::Scene_Main()
 	: m_bpatrol( false )
 {
 	Initialize();
-
-	srand(time(NULL));
 }
 
 

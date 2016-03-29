@@ -19,14 +19,14 @@ void State_Attack::Update()
 	Attack();
 	if (!AttackCheck())
 	{
-		m_time.SetTime();
+		/*m_time.SetTime();
 		if (m_time.GetTime() > 600)
-		{
+		{*/
 			Player::Instance()->SetCode(eSTATE::STAY);
 			Player::Instance()->ChangeImage(ImageManager::Instance()->Player_Stay());
 			Player::Instance()->ChangeState(new State_Stay());
-			m_time.SetStartTime();
-		}
+			/*m_time.SetStartTime();
+		}*/
 	}
 }
 

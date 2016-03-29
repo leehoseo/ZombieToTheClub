@@ -7,7 +7,7 @@ class Zombie
 {
 protected:
 	Image m_image;
-	Image m_test;
+	Image m_collisionBox;
 
 	eSTATE m_code;
 	eTYPE m_type;
@@ -23,7 +23,7 @@ protected:
 	float atdSpeed;
 	int m_experience;
 	int m_score;
-
+	int m_aniSpeed;
 public:
 	Zombie();
 	~Zombie();
@@ -37,7 +37,7 @@ public:
 	virtual int GetY();
 	virtual void Move();
 	virtual void SetDirection();
-
+	virtual bool IsDie();
 	virtual bool Hit();
 
 	virtual float GetRadius() const;
@@ -56,7 +56,8 @@ public:
 	int GetFrame() const;
 
 	int GetType() const;
-
+	void SetAniSpeed(int _speed);
 	Image GetImage() const;
+	Image GetCollisionBox() const;
 };
 

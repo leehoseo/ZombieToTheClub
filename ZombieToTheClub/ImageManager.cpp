@@ -36,14 +36,13 @@ void ImageManager::initialize(Graphics * g)
 	m_ui_main_option.initialize(g, 0,0,337, 540, 0, "Resource\\Option.png");
 	m_ui_main_exit.initialize(g,0,0, 337, 660, 0, "Resource\\Exit.png");
 
-	
-	
+
 	//Player
-	m_player_move.initialize(g,128,150,0, 0, 10,  "Resource\\Player_Move.png");
+	m_player_move.initialize(g,128,128,0, 0, 10,  "Resource\\Player_Move.png");
 	m_player_stay.initialize(g, 128, 128, 0, 0, 2,  "Resource\\Player_Stay.png");
 	m_player_attack.initialize(g, 128, 128, 0, 0, 3,  "Resource\\Player_Attack.png");
 
-	m_bz_stay.initialize(g, 128, 128, 0, 0, 2, "Resource\\BZ_Stay.png");
+	m_bz_stay.initialize(g, 128, 128, 0, 0, 6, "Resource\\bz1_stand.png");
 	m_bz_move.initialize(g, 128, 128, 0, 0, 4, "Resource\\BZ_Move.png");
 	m_bz_hit.initialize(g, 128, 128, 9, 9, 3, "Resource\\BZ_Hit.png");
 	m_binitialize = true;

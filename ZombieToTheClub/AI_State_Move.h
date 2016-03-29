@@ -1,6 +1,6 @@
-
 #pragma once
 #include "AI_State.h"
+#include "Time.h"
 
 class Zombie;
 
@@ -15,6 +15,8 @@ private:
 	int m_directionY;
 
 	bool m_isarrive;
+
+	Time m_time;
 public:
 	
 	static AI_State_Move * Instance();

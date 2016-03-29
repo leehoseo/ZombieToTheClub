@@ -16,5 +16,7 @@ public:
 	~AI_State_Stay();
 
 	virtual void Update(Zombie * _zombie);
+
+	void SetAniDelayTime();
 };
 

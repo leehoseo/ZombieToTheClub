@@ -24,7 +24,7 @@ void Player::Initialize()
 {
 	m_pstate = new State_Stay();
 	m_image = ImageManager::Instance()->Player_Stay();
-	m_test = ImageManager::Instance()->Test();
+	m_collisionBox = ImageManager::Instance()->Test();
 	m_code = eSTATE::STAY;
 	m_type = eTYPE::PLAYER;
 	m_atk = 10;
@@ -54,58 +54,58 @@ void Player::Move()
 {
 	if (CInput::Instance()->KetPressedCheck(DIK_LEFT) && CInput::Instance()->KetPressedCheck(DIK_UP))
 	{
-		MoveX(-1);
-		MoveY(-1);
+		MoveX(-5);
+		MoveY(-5);
 		return;
 	}
 	else if (CInput::Instance()->KetPressedCheck(DIK_LEFT) && CInput::Instance()->KetPressedCheck(DIK_DOWN))
 	{
-		MoveX(-1);
-		MoveY(+1);
+		MoveX(-5);
+		MoveY(+5);
 		return;
 	}
 	else if (CInput::Instance()->KetPressedCheck(DIK_RIGHT) && CInput::Instance()->KetPressedCheck(DIK_UP))
 	{
-		MoveX(+1);
-		MoveY(-1);
+		MoveX(+5);
+		MoveY(-5);
 		return;
 	}
 	else if (CInput::Instance()->KetPressedCheck(DIK_RIGHT) && CInput::Instance()->KetPressedCheck(DIK_DOWN))
 	{
-		MoveX(+1);
-		MoveY(+1);
+		MoveX(+5);
+		MoveY(+5);
 		return;
 	}
 
 	switch (CInput::Instance()->KeyBoardPressed())
 	{
 	case DIK_LEFT:
-		MoveX(-1);
+		MoveX(-5);
 		return;
 	case DIK_RIGHT:
-		MoveX(+1);
+		MoveX(+5);
 		return;
 	case DIK_UP:
-		MoveY(-1);
+		MoveY(-5);
 		return;
 	case DIK_DOWN:
-		MoveY(+1);
+		MoveY(+5);
 		return;
 	}
 }
 
 void Player::Update()
 {
-	m_test.setX(m_image.getCenterX() - 20);
-	m_test.setY(m_image.getCenterY());
+	m_collisionBox.setX(m_image.getCenterX());
+	m_collisionBox.setY(m_image.getCenterY());
 	m_pstate->Update();
-	m_image.update(200);
+	m_image.update(100);
 }
 
 void Player::Render()
 {
 	m_image.draw();
-	m_test.draw();
+	m_collisionBox.draw();
 }
 
 void Player::ChangeState(State * _newState)
@@ -181,4 +181,14 @@ float Player::GetCenterY() const
 int Player::GetAtk() const
 {
 	return m_atk;
+}
+
+Image Player::GetImage() const
+{
+	return m_image;
+}
+
+Image Player::GetCollisionBox() const
+{
+	return m_collisionBox;
 }

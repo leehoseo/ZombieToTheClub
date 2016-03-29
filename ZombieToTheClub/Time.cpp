@@ -12,7 +12,6 @@ Time::~Time()
 
 void Time::SetTime()
 {
-
 	m_time = timeGetTime() - m_startTime;
 }
 

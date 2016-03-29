@@ -6,6 +6,7 @@
 
 AI_State_Hit::AI_State_Hit()
 {
+	m_time.SetStartTime();
 }
 
 
@@ -21,16 +22,14 @@ AI_State_Hit::~AI_State_Hit()
 
 void AI_State_Hit::Update(Zombie * _zombie)
 {
-	if (!HitCheck(_zombie))
+	m_time.SetTime();
+	if ( !HitCheck(_zombie))
 	{
-		m_time.SetTime();
-		if (m_time.GetTime() > 600)
-		{
-			_zombie->SetCode(eSTATE::STAY);
-			_zombie->ChangeImage(ImageManager::Instance()->BZ_Stay());
-			_zombie->ChangeState(AI_State_Stay::Instance());
-			m_time.SetStartTime();
-		}
+		_zombie->SetCode(eSTATE::STAY);
+		_zombie->ChangeImage(ImageManager::Instance()->BZ_Stay());
+		_zombie->ChangeState(AI_State_Stay::Instance());
+		AI_State_Stay::Instance()->SetAniDelayTime();
+		m_time.SetStartTime();
 	}
 }
 
@@ -41,4 +40,9 @@ bool AI_State_Hit::HitCheck(Zombie * _zombie)
 		return false;
 	}
 	return true;
+}
+
+void AI_State_Hit::SetAniDelayTime()
+{
+	m_time.SetStartTime();
 }

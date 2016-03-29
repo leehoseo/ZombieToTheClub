@@ -1,5 +1,7 @@
 #include "Game.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <windows.h>
 #include "Scene_Play.h"
 #include "Scene_TeamLogo.h"
@@ -13,6 +15,7 @@ Game::Game()
 
 	m_pgraphics = NULL;
 	initialized = false;
+	srand(time(NULL));
 }
 
 Game::~Game()

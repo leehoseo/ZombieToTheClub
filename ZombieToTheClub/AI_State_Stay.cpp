@@ -28,14 +28,20 @@ void AI_State_Stay::Update(Zombie * _zombie)
 		_zombie->SetCode(eSTATE::HIT);
 		_zombie->ChangeImage(ImageManager::Instance()->BZ_Hit());
 		_zombie->ChangeState(AI_State_Hit::Instance());
+		AI_State_Hit::Instance()->SetAniDelayTime();
 	}
 
 	m_time.SetTime();
-	if (m_time.GetTime() > 5000)
+	if (m_time.GetTime() > 500)
 	{
 		_zombie->SetCode(eSTATE::MOVE);
 		_zombie->ChangeImage(ImageManager::Instance()->BZ_Move());
 		_zombie->ChangeState(AI_State_Move::Instance());
 		m_time.SetStartTime();
 	}
+}
+
+void AI_State_Stay::SetAniDelayTime()
+{
+	m_time.SetStartTime();
 }

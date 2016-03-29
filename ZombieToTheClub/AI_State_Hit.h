@@ -19,5 +19,7 @@ public:
 	virtual void Update(Zombie * _zombie);
 
 	bool HitCheck(Zombie * _zombie);
+
+	void SetAniDelayTime();
 };
 

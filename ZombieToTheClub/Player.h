@@ -8,7 +8,7 @@ private:
 
 	Player();
 	Image m_image;
-	Image m_test;
+	Image m_collisionBox;
 	State * m_pstate;
 	eSTATE m_code;
 	eTYPE m_type;
@@ -53,4 +53,6 @@ public:
 	float GetCenterY() const;
 
 	int GetAtk() const;
+	Image GetImage() const;
+	Image GetCollisionBox() const;
 };

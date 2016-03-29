@@ -12,7 +12,6 @@
 
 Zombie::Zombie()
 {
-	srand(time(NULL));
 }
 
 
@@ -23,7 +22,7 @@ Zombie::~Zombie()
 void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 {
 	m_image = _image;
-	m_test = ImageManager::Instance()->Test();
+	m_collisionBox = ImageManager::Instance()->Test();
 
 	m_image.setX(_x);
 	m_image.setY(_y);
@@ -36,22 +35,21 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_score = 1;
 	m_type = eTYPE::BZ;
 	m_pstate = _state;
+	m_aniSpeed = 200;
 }
 
 void Zombie::Render()
 {
 	m_image.draw();
-	m_test.draw();
+	m_collisionBox.draw();
 }
 
 void Zombie::Update()
 {
-	/*m_test.setX(m_image.getCenterX() - 20);
-	m_test.setY(m_image.getCenterY());
-	Hit();*/
-	printf("HP : %d\n", m_hp);
-	m_image.update((rand() % 10 + 5) * 100);
-	m_pstate->Update(this);	
+	m_collisionBox.setX(m_image.getCenterX());
+	m_collisionBox.setY(m_image.getCenterY());
+	m_pstate->Update(this);
+	m_image.update(m_aniSpeed);
 }
 
 void Zombie::SetX(float _x)
@@ -117,13 +115,17 @@ void Zombie::SetDirection()
 	m_isarrive = true;*/
 }
 
+bool Zombie::IsDie()
+{
+	if (m_hp < 0)
+		return true;
+	else
+		return false;
+}
+
 bool Zombie::Hit()
 {
-	double x = Player::Instance()->GetCenterX() - this->GetCenterX();
-	double y = Player::Instance()->GetCenterY() - this->GetCenterY();
-
-	//printf("%d \n", m_hp);
-	if(CrashCheck::Instance()->Circle_Circle(50 , 50 , _hypot(fabs(x) , fabs(y))) && Player::Instance()->GetCode() == eSTATE::ATTACK)
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetCollisionBox(), this->GetCollisionBox()) && Player::Instance()->GetCode() == eSTATE::ATTACK)
 	{
 		m_hp -= Player::Instance()->GetAtk();
 		return true;
@@ -190,7 +192,17 @@ int Zombie::GetType() const
 	return m_type;
 }
 
+void Zombie::SetAniSpeed(int _speed)
+{
+	m_aniSpeed = _speed;
+}
+
 Image Zombie::GetImage() const
 {
 	return m_image;
+}
+
+Image Zombie::GetCollisionBox() const
+{
+	return m_collisionBox;
 }

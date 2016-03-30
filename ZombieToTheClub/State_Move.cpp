@@ -18,6 +18,7 @@ State_Move::~State_Move()
 
 void State_Move::Update()
 {
+	Move();
 	if (!MoveCheck())
 	{
 		Player::Instance()->SetCode(eSTATE::STAY);
@@ -31,7 +32,6 @@ void State_Move::Update()
 		Player::Instance()->ChangeImage(ImageManager::Instance()->Player_Attack());
 		Player::Instance()->ChangeState(new State_Attack());
 	}
-	Move();
 }
 
 void State_Move::Move()

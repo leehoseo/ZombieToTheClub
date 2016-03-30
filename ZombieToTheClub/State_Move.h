@@ -12,5 +12,4 @@ public:
 
 	void Move();
 	bool MoveCheck();
-
 };

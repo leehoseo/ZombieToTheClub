@@ -33,6 +33,7 @@ void Player::Initialize()
 	m_atkSpeed = 0.5;
 	m_gold = 0;
 	m_experience = 0;
+	ResetDirection();
 }
 
 void Player::MoveX(float _x)
@@ -52,43 +53,65 @@ void Player::MoveY(float _y)
 
 void Player::Move()
 {
+	//Move
 	if (CInput::Instance()->KetPressedCheck(DIK_LEFT) && CInput::Instance()->KetPressedCheck(DIK_UP))
 	{
+		if (CInput::Instance()->KetPressedCheck(DIK_A))
+			m_attackDirection.m_direction[eDIRECTION::LEFT_UP] = true;
+
 		MoveX(-5);
 		MoveY(-5);
 		return;
 	}
 	else if (CInput::Instance()->KetPressedCheck(DIK_LEFT) && CInput::Instance()->KetPressedCheck(DIK_DOWN))
 	{
+		if (CInput::Instance()->KetPressedCheck(DIK_A))
+			m_attackDirection.m_direction[eDIRECTION::LEFT_DOWN] = true;
+
 		MoveX(-5);
 		MoveY(+5);
 		return;
 	}
 	else if (CInput::Instance()->KetPressedCheck(DIK_RIGHT) && CInput::Instance()->KetPressedCheck(DIK_UP))
 	{
+		if (CInput::Instance()->KetPressedCheck(DIK_A))
+			m_attackDirection.m_direction[eDIRECTION::RIGHT_UP] = true;
+
 		MoveX(+5);
 		MoveY(-5);
 		return;
 	}
 	else if (CInput::Instance()->KetPressedCheck(DIK_RIGHT) && CInput::Instance()->KetPressedCheck(DIK_DOWN))
 	{
+		if (CInput::Instance()->KetPressedCheck(DIK_A))
+			m_attackDirection.m_direction[eDIRECTION::RIGHT_DOWN] = true;
+
 		MoveX(+5);
 		MoveY(+5);
 		return;
 	}
 
+
 	switch (CInput::Instance()->KeyBoardPressed())
 	{
 	case DIK_LEFT:
+		if (CInput::Instance()->KetPressedCheck(DIK_A))
+			m_attackDirection.m_direction[eDIRECTION::LEFT] = true;
 		MoveX(-5);
 		return;
 	case DIK_RIGHT:
+		if (CInput::Instance()->KetPressedCheck(DIK_A))
+			m_attackDirection.m_direction[eDIRECTION::RIGHT] = true;
 		MoveX(+5);
 		return;
 	case DIK_UP:
+		if (CInput::Instance()->KetPressedCheck(DIK_A))
+			m_attackDirection.m_direction[eDIRECTION::UP] = true;
 		MoveY(-5);
 		return;
 	case DIK_DOWN:
+		if (CInput::Instance()->KetPressedCheck(DIK_A))
+			m_attackDirection.m_direction[eDIRECTION::DOWN] = true;
 		MoveY(+5);
 		return;
 	}
@@ -96,6 +119,8 @@ void Player::Move()
 
 void Player::Update()
 {
+
+	m_collisionBox.setDegrees(++m_gold);
 	m_collisionBox.setX(m_image.getCenterX());
 	m_collisionBox.setY(m_image.getCenterY());
 	m_pstate->Update();
@@ -191,4 +216,15 @@ Image Player::GetImage() const
 Image Player::GetCollisionBox() const
 {
 	return m_collisionBox;
+}
+
+AttackDirection Player::GetAttackDirection() const
+{
+	return m_attackDirection;
+}
+
+void Player::ResetDirection()
+{
+	for (int index = 0; index < 8; ++index)
+		m_attackDirection.m_direction[index] = false;
 }

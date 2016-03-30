@@ -2,6 +2,13 @@
 #include "image.h"
 #include "State.h"
 
+
+
+struct AttackDirection
+{
+	bool m_direction[8];
+};
+
 class Player
 {
 private:
@@ -12,6 +19,7 @@ private:
 	State * m_pstate;
 	eSTATE m_code;
 	eTYPE m_type;
+	AttackDirection m_attackDirection;
 
 	int m_atk;
 	int m_hp;
@@ -55,4 +63,7 @@ public:
 	int GetAtk() const;
 	Image GetImage() const;
 	Image GetCollisionBox() const;
+
+	AttackDirection GetAttackDirection() const;
+	void ResetDirection();
 };

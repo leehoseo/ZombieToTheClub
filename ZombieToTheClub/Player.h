@@ -1,8 +1,8 @@
 #pragma once
 #include "image.h"
 #include "State.h"
-
-
+#include "Zombie.h"
+#include "CrashCheck.h"
 
 struct AttackDirection
 {
@@ -42,7 +42,7 @@ public:
 	void Update();
 	void Render();
 
-	void ChangeState(State * _newState);
+	void ChangeState(eSTATE _state);
 	void ChangeImage(Image _image);
 
 	int GetX() const;
@@ -66,4 +66,8 @@ public:
 
 	AttackDirection GetAttackDirection() const;
 	void ResetDirection();
+
+	bool Hit(Zombie _zombie);
+
+	bool IsDie();
 };

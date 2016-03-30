@@ -15,7 +15,7 @@ Boy_Zombie::~Boy_Zombie()
 void Boy_Zombie::initialize(float _x, float _y, Image _image, AI_State * _state)
 {
 	m_image = _image;
-	m_collisionBox = ImageManager::Instance()->Test();
+	m_collisionBox = ImageManager::Instance()->CollisionBox();
 
 	m_image.setX(_x);
 	m_image.setY(_y);

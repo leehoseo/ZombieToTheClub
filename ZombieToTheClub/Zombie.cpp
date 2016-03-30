@@ -9,6 +9,8 @@
 #include "Resource.h"
 #include "AI_State_Move.h"
 #include "AI_State_Stay.h"
+#include "AI_State_Attack.h"
+#include "AI_State_Hit.h"
 
 Zombie::Zombie()
 {
@@ -22,7 +24,7 @@ Zombie::~Zombie()
 void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 {
 	m_image = _image;
-	m_collisionBox = ImageManager::Instance()->Test();
+	m_collisionBox = ImageManager::Instance()->CollisionBox();
 
 	m_image.setX(_x);
 	m_image.setY(_y);
@@ -36,6 +38,10 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_type = eTYPE::BZ;
 	m_pstate = _state;
 	m_aniSpeed = 200;
+	m_directionX = 0;
+	m_directionY = 0;
+	m_bAtk = false;
+	m_time.SetStartTime();
 }
 
 void Zombie::Render()
@@ -50,19 +56,26 @@ void Zombie::Update()
 	m_collisionBox.setY(m_image.getCenterY());
 	m_pstate->Update(this);
 	m_image.update(m_aniSpeed);
+	IsAtk();
 }
 
-void Zombie::SetX(float _x)
+void Zombie::MoveX(float _x)
 {
 	if (_x < 0)
+	{
 		m_image.flipHorizontal(false);
+		m_collisionBox.flipHorizontal(true);
+	}
 	else if (_x > 0)
+	{
 		m_image.flipHorizontal(true);
+		m_collisionBox.flipHorizontal(false);
+	}
 
 	m_image.setX(m_image.getX() + _x);
 }
 
-void Zombie::SetY(float _y)
+void Zombie::MoveY(float _y)
 {
 	m_image.setY(m_image.getY() + _y);
 }
@@ -79,40 +92,44 @@ int Zombie::GetY()
 
 void Zombie::Move()
 {
-	//if (m_isarrive)
-	//{
-	//	if (m_image.getX() > m_directionX)	//	목적지가 왼쪽에있다면
-	//		SetX(- 1 * m_moveSpeed);
-	//	else
-	//		SetX(1 * m_moveSpeed);
+	if (m_isarrive)
+	{
+		if (GetX() > m_directionX)	//	목적지가 왼쪽에있다면
+			MoveX(-3);
+		else
+			MoveX(+3);
+
+		if (GetY() > m_directionY)	//	목적지가 위쪽
+			MoveY(-3);
+		else
+			MoveY(+3);
 
 
-	//	if (m_image.getY() > m_directionY)	//	목적지가 위쪽
-	//		SetY(- 1 * m_moveSpeed);
-	//	else
-	//		SetY(+ 1 * m_moveSpeed);
+		if (0 > GetX() || GetX() > GAME_WIDTH - 128
+			|| 0 > GetY() || GetY() > GAME_HEIGHT - 128)
+			m_isarrive = false;
 
-
-	//	if (0 > m_image.getX() || m_image.getX() > GAME_WIDTH - 128
-	//		|| 0 > m_image.getY() || m_image.getY() > GAME_HEIGHT - 128)
-	//		m_isarrive = false;
-
-	//	if (m_image.getX() == m_directionX || m_image.getY() == m_directionY)
-	//		m_isarrive = false;
-	//}
-	//else
-	//{
-	//	SetDirection();
-	//}
+		if (m_directionX - 20 < GetX() && GetX() < m_directionX + 20
+			|| m_directionY - 20 < GetY() && GetX() < m_directionY + 20)
+			m_isarrive = false;
+	}
+	else
+	{
+		SetDirection();
+	}
 }
 
 void Zombie::SetDirection()
 {
-	/*m_directionX = (rand() % m_image.getWidth() * 4) + (m_image.getX() - (m_image.getWidth() * 2));
+	m_directionX = rand() % 800 + (GetCenterX() - 400);
+	m_directionY = rand() % 800 + (GetCenterY() - 400);
 
-	m_directionY = (rand() % m_image.getHeight() * 4) + (m_image.getY() - (m_image.getHeight() * 2));
+	if (0 > m_directionX || m_directionX > GAME_WIDTH - 300
+		|| 0 > m_directionY || m_directionY > GAME_HEIGHT - 300)
+		return;
 
-	m_isarrive = true;*/
+	m_isarrive = true;
+	
 }
 
 bool Zombie::IsDie()
@@ -159,9 +176,29 @@ void Zombie::SetCode(eSTATE _code)
 	m_code = _code;
 }
 
-void Zombie::ChangeState(AI_State * _newState)
+void Zombie::ChangeState(eSTATE _state)
 {
-	m_pstate = _newState;
+	SetCode(_state);
+
+	switch (_state)
+	{
+	case eSTATE::ATTACK:
+		ChangeImage(ImageManager::Instance()->BZ_Attack());
+		m_pstate = AI_State_Attack::Instance();
+		return;
+	case eSTATE::HIT:
+		ChangeImage(ImageManager::Instance()->BZ_Hit());
+		m_pstate = AI_State_Hit::Instance();
+		return;
+	case eSTATE::MOVE:
+		ChangeImage(ImageManager::Instance()->BZ_Move());
+		m_pstate = AI_State_Move::Instance();
+		return;
+	case eSTATE::STAY:
+		ChangeImage(ImageManager::Instance()->BZ_Stay());
+		m_pstate = AI_State_Stay::Instance();
+		return;
+	}
 }
 
 void Zombie::ChangeImage(Image _image)
@@ -197,6 +234,11 @@ void Zombie::SetAniSpeed(int _speed)
 	m_aniSpeed = _speed;
 }
 
+int Zombie::GetAtk() const
+{
+	return m_atk;
+}
+
 Image Zombie::GetImage() const
 {
 	return m_image;
@@ -205,4 +247,30 @@ Image Zombie::GetImage() const
 Image Zombie::GetCollisionBox() const
 {
 	return m_collisionBox;
+}
+
+bool Zombie::IsAtk()
+{
+	if (m_bAtk == false)
+	{
+		m_time.SetTime();
+
+		if (m_time.GetTime() > 2000)
+		{
+			printf("ggg\n");
+			m_bAtk = true;
+			m_time.SetStartTime();
+		}
+	}
+	return true;
+}
+
+void Zombie::SetIsAtk(bool _isAtk)
+{
+	m_bAtk = _isAtk;
+}
+
+bool Zombie::GetIsAtk() const
+{
+	return m_bAtk;
 }

@@ -19,16 +19,12 @@ void State_Stay::Update()
 {
 	if (MoveCheck())
 	{
-		Player::Instance()->SetCode(eSTATE::MOVE);
-		Player::Instance()->ChangeImage(ImageManager::Instance()->Player_Move());
-		Player::Instance()->ChangeState(new State_Move());
+		Player::Instance()->ChangeState(eSTATE::MOVE);
 	}
 
 	if (CInput::Instance()->KetPressedCheck(DIK_A))
 	{
-		Player::Instance()->SetCode(eSTATE::ATTACK);
-		Player::Instance()->ChangeImage(ImageManager::Instance()->Player_Attack());
-		Player::Instance()->ChangeState(new State_Attack());
+		Player::Instance()->ChangeState(eSTATE::ATTACK);
 	}
 }
 

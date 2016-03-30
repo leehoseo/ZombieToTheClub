@@ -19,10 +19,7 @@ void State_Attack::Update()
 	Attack();
 	if (!AttackCheck())
 	{
-		Player::Instance()->ResetDirection();
-		Player::Instance()->SetCode(eSTATE::STAY);
-		Player::Instance()->ChangeImage(ImageManager::Instance()->Player_Stay());
-		Player::Instance()->ChangeState(new State_Stay());
+		Player::Instance()->ChangeState(eSTATE::STAY);
 	}
 }
 

@@ -3,9 +3,9 @@
 #include "ImageManager.h"
 #include "AI_State_Hit.h"
 #include "AI_State_Move.h"
-
+#include "CrashCheck.h"
+#include "Player.h"
 AI_State_Stay::AI_State_Stay()
-	:m_rest(false)
 {
 	m_time.SetStartTime();
 }
@@ -25,23 +25,21 @@ void AI_State_Stay::Update(Zombie * _zombie)
 {
 	if (_zombie->Hit())
 	{
-		_zombie->SetCode(eSTATE::HIT);
-		_zombie->ChangeImage(ImageManager::Instance()->BZ_Hit());
-		_zombie->ChangeState(AI_State_Hit::Instance());
-		AI_State_Hit::Instance()->SetAniDelayTime();
+		_zombie->ChangeState(eSTATE::HIT);
 	}
 
 	m_time.SetTime();
-	if (m_time.GetTime() > 500)
+	if (m_time.GetTime() > 2000)
 	{
-		_zombie->SetCode(eSTATE::MOVE);
-		_zombie->ChangeImage(ImageManager::Instance()->BZ_Move());
-		_zombie->ChangeState(AI_State_Move::Instance());
+		_zombie->ChangeState(eSTATE::MOVE);
 		m_time.SetStartTime();
 	}
-}
 
-void AI_State_Stay::SetAniDelayTime()
-{
-	m_time.SetStartTime();
+	if (_zombie->GetCode() != eSTATE::HIT &&
+		CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetCollisionBox(), _zombie->GetCollisionBox()) &&
+		_zombie->GetIsAtk() == true)
+	{
+		_zombie->ChangeState(eSTATE::ATTACK);
+	}
+
 }

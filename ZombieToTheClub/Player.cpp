@@ -2,10 +2,12 @@
 #include "ImageManager.h"
 #include "Input.h"
 #include "State_Stay.h"
+#include "State_Attack.h"
+#include "State_Move.h"
+#include "State_Hit.h"
 #include <stdio.h>
 Player::Player()
 {
-	Initialize();
 }
 
 
@@ -24,7 +26,7 @@ void Player::Initialize()
 {
 	m_pstate = new State_Stay();
 	m_image = ImageManager::Instance()->Player_Stay();
-	m_collisionBox = ImageManager::Instance()->Test();
+	m_collisionBox = ImageManager::Instance()->CollisionBox();
 	m_code = eSTATE::STAY;
 	m_type = eTYPE::PLAYER;
 	m_atk = 10;
@@ -39,9 +41,15 @@ void Player::Initialize()
 void Player::MoveX(float _x)
 {
 	if (_x < 0)
+	{
 		m_image.flipHorizontal(true);
+		m_collisionBox.flipHorizontal(true);
+	}
 	else if (_x > 0)
+	{
 		m_image.flipHorizontal(false);
+		m_collisionBox.flipHorizontal(false);
+	}
 
 	m_image.setX(m_image.getX() + _x);
 }
@@ -119,8 +127,7 @@ void Player::Move()
 
 void Player::Update()
 {
-
-	m_collisionBox.setDegrees(++m_gold);
+	printf("%d\n", m_hp);
 	m_collisionBox.setX(m_image.getCenterX());
 	m_collisionBox.setY(m_image.getCenterY());
 	m_pstate->Update();
@@ -133,11 +140,37 @@ void Player::Render()
 	m_collisionBox.draw();
 }
 
-void Player::ChangeState(State * _newState)
+void Player::ChangeState(eSTATE _state)
 {
-	delete m_pstate;
-	m_pstate = _newState;
-	return;
+	SetCode(_state);
+	switch (_state)
+	{
+	case eSTATE::ATTACK: 
+		ChangeImage(ImageManager::Instance()->Player_Attack());
+		ResetDirection();
+
+		delete m_pstate;
+		m_pstate = new State_Attack();
+		return;
+	case eSTATE::HIT:
+		ChangeImage(ImageManager::Instance()->Player_Hit());
+
+		delete m_pstate;
+		m_pstate = new State_Hit();
+		return;
+	case eSTATE::MOVE:
+		ChangeImage(ImageManager::Instance()->Player_Move());
+
+		delete m_pstate;
+		m_pstate = new State_Move();
+		return;
+	case eSTATE::STAY:
+		ChangeImage(ImageManager::Instance()->Player_Stay());
+
+		delete m_pstate;
+		m_pstate = new State_Stay();
+		return;
+	}
 }
 
 void Player::ChangeImage(Image _image)
@@ -227,4 +260,22 @@ void Player::ResetDirection()
 {
 	for (int index = 0; index < 8; ++index)
 		m_attackDirection.m_direction[index] = false;
+}
+
+bool Player::Hit(Zombie _zombie)
+{
+	if (CrashCheck::Instance()->Rect_Rect(GetCollisionBox(), _zombie.GetCollisionBox()) && _zombie.GetCode() == eSTATE::ATTACK)
+	{
+		m_hp -= _zombie.GetAtk();
+		return true;
+	}
+	return false;
+}
+
+bool Player::IsDie()
+{
+	if (m_hp < 0)
+		return true;
+	else
+		return false;
 }

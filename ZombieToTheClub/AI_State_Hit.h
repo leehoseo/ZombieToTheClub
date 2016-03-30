@@ -8,8 +8,6 @@ class AI_State_Hit	:	public AI_State
 {
 private:
 	AI_State_Hit();
-
-	Time m_time;
 public:
 	
 	static AI_State_Hit * Instance();
@@ -19,7 +17,5 @@ public:
 	virtual void Update(Zombie * _zombie);
 
 	bool HitCheck(Zombie * _zombie);
-
-	void SetAniDelayTime();
 };
 

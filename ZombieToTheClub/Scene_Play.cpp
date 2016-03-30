@@ -7,9 +7,16 @@
 #include "AI_State_Stay.h"
 #include "ImageManager.h"
 #include "Boy_Zombie.h"
+#include "CrashCheck.h"
+#include "AI_State_Attack.h"
+#include "Game.h"
+#include "Scene_Main.h"
+
 Scene_Play::Scene_Play()
 {
 	Initialize();
+	m_time.SetStartTime();
+	Player::Instance()->Initialize();
 }
 
 Scene_Play::~Scene_Play()
@@ -39,6 +46,7 @@ void Scene_Play::Update(Game* _game)
 {	
 	Player::Instance()->Update();
 
+	m_time.SetTime();
 	for (int index = 0; index < MAX_ZOMBIE; ++index)
 	{
 		if (m_pzombie[index] == NULL)
@@ -46,14 +54,21 @@ void Scene_Play::Update(Game* _game)
 
 		m_pzombie[index]->Update();
 
+		// 플레이어 맞음
+		if (Player::Instance()->Hit(*m_pzombie[index]) && Player::Instance()->GetCode() != eSTATE::HIT && m_pzombie[index]->GetCode() != eSTATE::ATTACK )
+		{
+			Player::Instance()->ChangeState(eSTATE::HIT);
+		}
+
 		if (m_pzombie[index]->IsDie())
 		{
 			m_pzombie[index] = NULL;
 			SAFE_DELETE(m_pzombie[index]);
 		}
-	}
 
-	
+	}
+		if(Player::Instance()->IsDie())
+			_game->ChangeScene(new Scene_Main());
 }
 
 void Scene_Play::Render()

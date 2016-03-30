@@ -23,7 +23,7 @@ void ImageManager::initialize(Graphics * g)
 {
 	m_title.initialize(g,800,240,112, 50 ,2, "Resource\\Title.png");
 
-	m_test.initialize(g, 0, 0, 0, 0, 0, "Resource\\test.png");
+	m_collisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Player_CollisionBox.png");
 
 	// Logo ¿ÃπÃ¡ˆ
 	m_teamlogo.initialize(g, 0,0, 387 , 262 , 0,"Resource\\TeamLogo.png");
@@ -41,10 +41,12 @@ void ImageManager::initialize(Graphics * g)
 	m_player_move.initialize(g,128,128,0, 0, 10,  "Resource\\Player_Move.png");
 	m_player_stay.initialize(g, 128, 128, 0, 0, 2,  "Resource\\Player_Stay.png");
 	m_player_attack.initialize(g, 128, 128, 0, 0, 3,  "Resource\\Player_Attack.png");
+	m_player_hit.initialize(g, 128, 128, 0, 0, 3, "Resource\\Player_Down.png");
 
 	m_bz_stay.initialize(g, 128, 128, 0, 0, 6, "Resource\\bz1_stand.png");
 	m_bz_move.initialize(g, 128, 128, 0, 0, 4, "Resource\\BZ_Move.png");
-	m_bz_hit.initialize(g, 128, 128, 9, 9, 3, "Resource\\BZ_Hit.png");
+	m_bz_hit.initialize(g, 128, 128, 0, 0, 3, "Resource\\BZ_Hit.png");
+	m_bz_attack.initialize(g, 128, 128, 0, 0, 4, "Resource\\BZ_Attack.png");
 	m_binitialize = true;
 }
 
@@ -66,6 +68,11 @@ Image ImageManager::BZ_Move() const
 Image ImageManager::BZ_Hit() const
 {
 	return m_bz_hit;
+}
+
+Image ImageManager::BZ_Attack() const
+{
+	return m_bz_attack;
 }
 
 
@@ -116,9 +123,14 @@ Image ImageManager::Player_Attack() const
 	return m_player_attack;
 }
 
-Image ImageManager::Test() const
+Image ImageManager::Player_Hit() const
 {
-	return m_test;
+	return m_player_hit;
+}
+
+Image ImageManager::CollisionBox() const
+{
+	return m_collisionBox;
 }
 
 Image ImageManager::Title() const

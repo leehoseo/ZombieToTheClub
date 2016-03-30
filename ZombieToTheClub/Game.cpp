@@ -29,7 +29,6 @@ LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (initialized)
 	{
-		
 		switch (msg)
 		{
 		case WM_DESTROY:

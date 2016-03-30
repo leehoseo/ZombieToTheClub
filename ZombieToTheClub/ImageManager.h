@@ -6,7 +6,7 @@ class ImageManager
 {
 private:
 
-	Image m_test;
+	Image m_collisionBox;
 
 	// Logo ¿ÃπÃ¡ˆ
 	Image m_teamlogo;
@@ -25,11 +25,12 @@ private:
 	Image m_player_move;
 	Image m_player_stay;
 	Image m_player_attack;
+	Image m_player_hit;
 
 	Image m_bz_stay;
 	Image m_bz_move;
 	Image m_bz_hit;
-
+	Image m_bz_attack;
 	ImageManager();
 
 	bool m_binitialize;
@@ -43,7 +44,7 @@ public:
 
 	bool IsInitialized();
 
-	Image Test() const;
+	Image CollisionBox() const;
 
 	Image TeamLogo() const;
 	Image Main() const;
@@ -59,9 +60,11 @@ public:
 	Image Player_Move() const;
 	Image Player_Stay() const;
 	Image Player_Attack() const;
+	Image Player_Hit() const;
 
 	Image BZ_Stay() const;
 	Image BZ_Move() const;
 	Image BZ_Hit() const;
+	Image BZ_Attack() const;
 };
 

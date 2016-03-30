@@ -70,6 +70,24 @@
     <Filter Include="소스 파일\Player\State\Attack">
       <UniqueIdentifier>{716e3b63-5d06-4d95-8598-191c5d5b1aca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Zombie\AI_State">
+      <UniqueIdentifier>{d1b2ac6e-6b76-43a1-8bae-f0ebfa3b2c3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Zombie\AI_State\AI_Attack">
+      <UniqueIdentifier>{4ade13f8-19db-4cf0-a29e-1f6800e5ac25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Zombie\AI_State\AI_Move">
+      <UniqueIdentifier>{f6f29cac-f6b4-46e0-afc2-b28155cde697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Zombie\AI_State\AI_Stay">
+      <UniqueIdentifier>{642882e2-f6d2-4303-9ef5-00af4dd1093c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Zombie\AI_State\AI_Hit">
+      <UniqueIdentifier>{2607aaa3-8572-4fa0-9803-ba141c25e052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\CrashCheck">
+      <UniqueIdentifier>{e41a71d9-dda3-4e22-99b2-115506ad4cb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -129,25 +147,28 @@
     <ClCompile Include="State_Attack.cpp">
       <Filter>소스 파일\Player\State\Attack</Filter>
     </ClCompile>
-    <ClCompile Include="CrashCheck.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="State_Stay.cpp">
       <Filter>소스 파일\Player\State\Stay</Filter>
     </ClCompile>
     <ClCompile Include="AI_State.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_State_Move.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_State_Stay.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_State_Hit.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Zombie\AI_State</Filter>
     </ClCompile>
     <ClCompile Include="AI_State_Attack.cpp">
+      <Filter>소스 파일\Zombie\AI_State\AI_Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_State_Hit.cpp">
+      <Filter>소스 파일\Zombie\AI_State\AI_Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_State_Move.cpp">
+      <Filter>소스 파일\Zombie\AI_State\AI_Move</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_State_Stay.cpp">
+      <Filter>소스 파일\Zombie\AI_State\AI_Stay</Filter>
+    </ClCompile>
+    <ClCompile Include="CrashCheck.cpp">
+      <Filter>소스 파일\CrashCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Hit.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -212,22 +233,25 @@
     <ClInclude Include="State_Attack.h">
       <Filter>소스 파일\Player\State\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="CrashCheck.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="AI_State.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_State_Move.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_State_Stay.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_State_Hit.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\Zombie\AI_State</Filter>
     </ClInclude>
     <ClInclude Include="AI_State_Attack.h">
+      <Filter>소스 파일\Zombie\AI_State\AI_Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State_Hit.h">
+      <Filter>소스 파일\Zombie\AI_State\AI_Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State_Move.h">
+      <Filter>소스 파일\Zombie\AI_State\AI_Move</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_State_Stay.h">
+      <Filter>소스 파일\Zombie\AI_State\AI_Stay</Filter>
+    </ClInclude>
+    <ClInclude Include="CrashCheck.h">
+      <Filter>소스 파일\CrashCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Hit.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

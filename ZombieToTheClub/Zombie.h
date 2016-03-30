@@ -2,12 +2,17 @@
 #include "image.h"
 #include "Resource.h"
 #include "AI_State.h"
-
+#include "Time.h"
 class Zombie
 {
 protected:
 	Image m_image;
 	Image m_collisionBox;
+
+	Time m_time;
+
+	int m_directionX;
+	int m_directionY;
 
 	eSTATE m_code;
 	eTYPE m_type;
@@ -24,6 +29,8 @@ protected:
 	int m_experience;
 	int m_score;
 	int m_aniSpeed;
+
+	bool m_bAtk;
 public:
 	Zombie();
 	~Zombie();
@@ -31,8 +38,8 @@ public:
 	virtual void initialize(float _x , float _y , Image _image, AI_State *_state);
 	virtual void Render();
 	virtual void Update();
-	virtual void SetX(float _x);
-	virtual void SetY(float _y);
+	virtual void MoveX(float _x);
+	virtual void MoveY(float _y);
 	virtual int GetX();
 	virtual int GetY();
 	virtual void Move();
@@ -49,7 +56,7 @@ public:
 
 	void SetCode(eSTATE _code);
 
-	void ChangeState(AI_State * _newState);
+	void ChangeState(eSTATE _state);
 	void ChangeImage(Image _image);
 
 	int GetCurrentFrame() const;
@@ -57,7 +64,13 @@ public:
 
 	int GetType() const;
 	void SetAniSpeed(int _speed);
+	int GetAtk() const;
 	Image GetImage() const;
 	Image GetCollisionBox() const;
+
+	bool IsAtk();
+
+	void SetIsAtk(bool _isAtk);
+	bool GetIsAtk() const;
 };
 

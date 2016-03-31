@@ -171,6 +171,9 @@
     <ClCompile Include="State_Hit.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -252,6 +255,9 @@
       <Filter>소스 파일\CrashCheck</Filter>
     </ClInclude>
     <ClInclude Include="State_Hit.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

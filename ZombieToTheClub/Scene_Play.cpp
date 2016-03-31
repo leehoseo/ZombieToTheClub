@@ -11,12 +11,15 @@
 #include "AI_State_Attack.h"
 #include "Game.h"
 #include "Scene_Main.h"
+#include "Text.h"
+#include <stdio.h>
 
 Scene_Play::Scene_Play()
 {
 	Initialize();
 	m_time.SetStartTime();
 	Player::Instance()->Initialize();
+	m_score = 0;
 }
 
 Scene_Play::~Scene_Play()
@@ -46,27 +49,35 @@ void Scene_Play::Update(Game* _game)
 {	
 	Player::Instance()->Update();
 
-	m_time.SetTime();
+	char buffer[20];
+	sprintf_s(buffer, "score : %d", m_score);
+	LPCSTR p = buffer;
+
+	Text::Instaance()->Print(p, GAME_WIDTH - 200, 0);
+
 	for (int index = 0; index < MAX_ZOMBIE; ++index)
 	{
 		if (m_pzombie[index] == NULL)
 			continue;
+	
+		// 플레이어 맞음
+		if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), m_pzombie[index]->GetAttackCollisionBox()) && m_pzombie[index]->GetCode() != eSTATE::ATTACK)
+		{
+			
+			m_pzombie[index]->SetCode(eSTATE::ATTACK);
+		}
 
 		m_pzombie[index]->Update();
 
-		// 플레이어 맞음
-		if (Player::Instance()->Hit(*m_pzombie[index]) && Player::Instance()->GetCode() != eSTATE::HIT && m_pzombie[index]->GetCode() != eSTATE::ATTACK )
-		{
-			Player::Instance()->ChangeState(eSTATE::HIT);
-		}
-
 		if (m_pzombie[index]->IsDie())
 		{
+			m_score += 100;
 			m_pzombie[index] = NULL;
 			SAFE_DELETE(m_pzombie[index]);
 		}
 
 	}
+	++m_score;
 		if(Player::Instance()->IsDie())
 			_game->ChangeScene(new Scene_Main());
 }
@@ -77,7 +88,6 @@ void Scene_Play::Render()
 	{
 		if (m_pzombie[index] != NULL)
 			m_pzombie[index]->Render();
-
 	}
 	Player::Instance()->Render();
 }

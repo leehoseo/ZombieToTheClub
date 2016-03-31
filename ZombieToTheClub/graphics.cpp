@@ -1,5 +1,6 @@
 #include "graphics.h"
 #include "Resource.h"
+#include "Text.h"
 
 Graphics::Graphics()
 {
@@ -69,6 +70,8 @@ void Graphics::initialize(HWND hw, int w, int h, bool full)
 		behavior,
 		&d3dpp,
 		&device3d);
+
+	Text::Instaance()->Initialize(device3d);
 
 	if (FAILED(result))
 		PostQuitMessage(0);

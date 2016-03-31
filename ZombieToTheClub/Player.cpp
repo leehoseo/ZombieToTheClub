@@ -26,7 +26,8 @@ void Player::Initialize()
 {
 	m_pstate = new State_Stay();
 	m_image = ImageManager::Instance()->Player_Stay();
-	m_collisionBox = ImageManager::Instance()->CollisionBox();
+	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
+	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 	m_code = eSTATE::STAY;
 	m_type = eTYPE::PLAYER;
 	m_atk = 10;
@@ -43,12 +44,14 @@ void Player::MoveX(float _x)
 	if (_x < 0)
 	{
 		m_image.flipHorizontal(true);
-		m_collisionBox.flipHorizontal(true);
+		m_hitCollisionBox.setX(m_image.getX() + 50);
+		m_attackCollisionBox.setX(m_image.getCenterX() - 70);
 	}
 	else if (_x > 0)
 	{
 		m_image.flipHorizontal(false);
-		m_collisionBox.flipHorizontal(false);
+		m_hitCollisionBox.setX(m_image.getX() + 30);
+		m_attackCollisionBox.setX(m_image.getCenterX());
 	}
 
 	m_image.setX(m_image.getX() + _x);
@@ -127,17 +130,20 @@ void Player::Move()
 
 void Player::Update()
 {
-	printf("%d\n", m_hp);
-	m_collisionBox.setX(m_image.getCenterX());
-	m_collisionBox.setY(m_image.getCenterY());
+	m_attackCollisionBox.setY(m_image.getCenterY()-40);
+
+	//m_hitCollisionBox.setX(m_image.getX()+20);
+	m_hitCollisionBox.setY(m_image.getY());
+
 	m_pstate->Update();
-	m_image.update(100);
+	m_image.update(200);
 }
 
 void Player::Render()
 {
+	//m_attackCollisionBox.draw();
+	//m_hitCollisionBox.draw();
 	m_image.draw();
-	m_collisionBox.draw();
 }
 
 void Player::ChangeState(eSTATE _state)
@@ -147,30 +153,30 @@ void Player::ChangeState(eSTATE _state)
 	{
 	case eSTATE::ATTACK: 
 		ChangeImage(ImageManager::Instance()->Player_Attack());
-		ResetDirection();
-
 		delete m_pstate;
 		m_pstate = new State_Attack();
 		return;
 	case eSTATE::HIT:
-		ChangeImage(ImageManager::Instance()->Player_Hit());
 
+		ChangeImage(ImageManager::Instance()->Player_Hit());
+		ResetDirection();
 		delete m_pstate;
 		m_pstate = new State_Hit();
 		return;
 	case eSTATE::MOVE:
 		ChangeImage(ImageManager::Instance()->Player_Move());
-
+		ResetDirection();
 		delete m_pstate;
 		m_pstate = new State_Move();
 		return;
 	case eSTATE::STAY:
 		ChangeImage(ImageManager::Instance()->Player_Stay());
-
+		ResetDirection();
 		delete m_pstate;
 		m_pstate = new State_Stay();
 		return;
 	}
+	
 }
 
 void Player::ChangeImage(Image _image)
@@ -246,9 +252,14 @@ Image Player::GetImage() const
 	return m_image;
 }
 
-Image Player::GetCollisionBox() const
+Image Player::GetAttackCollisionBox() const
 {
-	return m_collisionBox;
+	return m_attackCollisionBox;
+}
+
+Image Player::GetHitCollisionBox() const
+{
+	return m_hitCollisionBox;
 }
 
 AttackDirection Player::GetAttackDirection() const
@@ -262,14 +273,9 @@ void Player::ResetDirection()
 		m_attackDirection.m_direction[index] = false;
 }
 
-bool Player::Hit(Zombie _zombie)
+void Player::Hit(Zombie _zombie)
 {
-	if (CrashCheck::Instance()->Rect_Rect(GetCollisionBox(), _zombie.GetCollisionBox()) && _zombie.GetCode() == eSTATE::ATTACK)
-	{
-		m_hp -= _zombie.GetAtk();
-		return true;
-	}
-	return false;
+	m_hp -= _zombie.GetAtk();
 }
 
 bool Player::IsDie()

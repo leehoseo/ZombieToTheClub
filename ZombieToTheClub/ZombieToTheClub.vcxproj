@@ -177,6 +177,7 @@
     <ClCompile Include="State_Hit.cpp" />
     <ClCompile Include="State_Move.cpp" />
     <ClCompile Include="State_Stay.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Boy_Zombie.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="State_Hit.h" />
     <ClInclude Include="State_Move.h" />
     <ClInclude Include="State_Stay.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Boy_Zombie.h" />

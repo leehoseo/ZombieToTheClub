@@ -6,8 +6,8 @@ class ImageManager
 {
 private:
 
-	Image m_collisionBox;
-
+	Image m_attackCollisionBox;
+	Image m_hitCollisionBox;
 	// Logo ¿ÃπÃ¡ˆ
 	Image m_teamlogo;
 
@@ -44,8 +44,8 @@ public:
 
 	bool IsInitialized();
 
-	Image CollisionBox() const;
-
+	Image AttackCollisionBox() const;
+	Image HitCollisionBox() const;
 	Image TeamLogo() const;
 	Image Main() const;
 

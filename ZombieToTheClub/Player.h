@@ -15,7 +15,8 @@ private:
 
 	Player();
 	Image m_image;
-	Image m_collisionBox;
+	Image m_attackCollisionBox;
+	Image m_hitCollisionBox;
 	State * m_pstate;
 	eSTATE m_code;
 	eTYPE m_type;
@@ -62,12 +63,12 @@ public:
 
 	int GetAtk() const;
 	Image GetImage() const;
-	Image GetCollisionBox() const;
-
+	Image GetAttackCollisionBox() const;
+	Image GetHitCollisionBox() const;
 	AttackDirection GetAttackDirection() const;
 	void ResetDirection();
 
-	bool Hit(Zombie _zombie);
+	void Hit(Zombie _zombie);
 
 	bool IsDie();
 };

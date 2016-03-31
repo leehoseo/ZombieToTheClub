@@ -2,7 +2,7 @@
 #include "AI_State_Stay.h"
 #include "Zombie.h"
 #include "ImageManager.h"
-
+#include "Player.h"
 AI_State_Attack::AI_State_Attack()
 {
 }
@@ -20,8 +20,18 @@ AI_State_Attack * AI_State_Attack::Instance()
 
 void AI_State_Attack::Update(Zombie * _zombie)
 {
+	if (_zombie->Hit())
+	{
+		_zombie->ChangeState(eSTATE::HIT);
+	}
+
 	if (!AttackCheck(_zombie))
 	{
+		if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), _zombie->GetAttackCollisionBox()) && Player::Instance()->GetCode() != eSTATE::HIT)
+		{
+			Player::Instance()->Hit(*_zombie);
+			Player::Instance()->ChangeState(eSTATE::HIT);
+		}
 		_zombie->SetIsAtk(false);
 		_zombie->ChangeState(eSTATE::STAY);
 	}

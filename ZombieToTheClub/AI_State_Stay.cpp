@@ -28,18 +28,25 @@ void AI_State_Stay::Update(Zombie * _zombie)
 		_zombie->ChangeState(eSTATE::HIT);
 	}
 
-	m_time.SetTime();
-	if (m_time.GetTime() > 2000)
+	if (!StayCheck(_zombie))
 	{
 		_zombie->ChangeState(eSTATE::MOVE);
-		m_time.SetStartTime();
 	}
 
 	if (_zombie->GetCode() != eSTATE::HIT &&
-		CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetCollisionBox(), _zombie->GetCollisionBox()) &&
+		CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), _zombie->GetAttackCollisionBox()) &&
 		_zombie->GetIsAtk() == true)
 	{
 		_zombie->ChangeState(eSTATE::ATTACK);
 	}
 
+}
+
+bool AI_State_Stay::StayCheck(Zombie * _zombie)
+{
+	if (_zombie->GetCurrentFrame() == _zombie->GetFrame())
+	{
+		return false;
+	}
+	return true;
 }

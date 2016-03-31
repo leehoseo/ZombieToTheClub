@@ -14,7 +14,7 @@
 const char GAME_NAME[] = "Zombie To The Club";
 const int GAME_WIDTH = 1024;
 const int GAME_HEIGHT = 768;
-const int MAX_ZOMBIE = 1;
+const int MAX_ZOMBIE = 20;
 const double PI = 3.14159265;					// ø¯¡÷¿≤
 
 enum eSTATE { STAY = 1, MOVE = 2, ATTACK = 3 , HIT = 4};

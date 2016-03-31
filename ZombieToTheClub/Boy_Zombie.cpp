@@ -15,10 +15,11 @@ Boy_Zombie::~Boy_Zombie()
 void Boy_Zombie::initialize(float _x, float _y, Image _image, AI_State * _state)
 {
 	m_image = _image;
-	m_collisionBox = ImageManager::Instance()->CollisionBox();
-
 	m_image.setX(_x);
 	m_image.setY(_y);
+
+	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
+	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 
 	m_hp = 35;
 	m_atk = 8;

@@ -24,7 +24,8 @@ Zombie::~Zombie()
 void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 {
 	m_image = _image;
-	m_collisionBox = ImageManager::Instance()->CollisionBox();
+	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
+	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 
 	m_image.setX(_x);
 	m_image.setY(_y);
@@ -46,16 +47,18 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 
 void Zombie::Render()
 {
+	//m_attackCollisionBox.draw();
+	//m_hitCollisionBox.draw();
 	m_image.draw();
-	m_collisionBox.draw();
 }
 
 void Zombie::Update()
 {
-	m_collisionBox.setX(m_image.getCenterX());
-	m_collisionBox.setY(m_image.getCenterY());
+	m_hitCollisionBox.setY(m_image.getY());
+
+	m_attackCollisionBox.setY(m_image.getCenterY()-40);
 	m_pstate->Update(this);
-	m_image.update(m_aniSpeed);
+	m_image.update(200);
 	IsAtk();
 }
 
@@ -64,12 +67,14 @@ void Zombie::MoveX(float _x)
 	if (_x < 0)
 	{
 		m_image.flipHorizontal(false);
-		m_collisionBox.flipHorizontal(true);
+		m_hitCollisionBox.setX(m_image.getX() + 50);
+		m_attackCollisionBox.setX(m_image.getCenterX() - 70);
 	}
 	else if (_x > 0)
 	{
 		m_image.flipHorizontal(true);
-		m_collisionBox.flipHorizontal(false);
+		m_hitCollisionBox.setX(m_image.getX() + 30);
+		m_attackCollisionBox.setX(m_image.getCenterX());
 	}
 
 	m_image.setX(m_image.getX() + _x);
@@ -92,44 +97,38 @@ int Zombie::GetY()
 
 void Zombie::Move()
 {
-	if (m_isarrive)
-	{
-		if (GetX() > m_directionX)	//	목적지가 왼쪽에있다면
-			MoveX(-3);
-		else
-			MoveX(+3);
+	//if (m_isarrive == false)
+	//{
+	//	if (GetX() > m_directionX)	//	목적지가 왼쪽에있다면
+	//		MoveX(-3);
+	//	else
+	//		MoveX(+3);
 
-		if (GetY() > m_directionY)	//	목적지가 위쪽
-			MoveY(-3);
-		else
-			MoveY(+3);
+	//	if (GetY() > m_directionY)	//	목적지가 위쪽
+	//		MoveY(-3);
+	//	else
+	//		MoveY(+3);
 
-
-		if (0 > GetX() || GetX() > GAME_WIDTH - 128
-			|| 0 > GetY() || GetY() > GAME_HEIGHT - 128)
-			m_isarrive = false;
-
-		if (m_directionX - 20 < GetX() && GetX() < m_directionX + 20
-			|| m_directionY - 20 < GetY() && GetX() < m_directionY + 20)
-			m_isarrive = false;
-	}
-	else
-	{
-		SetDirection();
-	}
+	//	if (m_directionX - 20 < GetX() && GetX() < m_directionX + 20
+	//		|| m_directionY - 20 < GetY() && GetX() < m_directionY + 20)
+	//		m_isarrive = true;
+	//}
+	//else
+	//{
+	//	SetDirection();
+	//}
 }
 
 void Zombie::SetDirection()
 {
-	m_directionX = rand() % 800 + (GetCenterX() - 400);
+	/*m_directionX = rand() % 800 + (GetCenterX() - 400);
 	m_directionY = rand() % 800 + (GetCenterY() - 400);
 
-	if (0 > m_directionX || m_directionX > GAME_WIDTH - 300
-		|| 0 > m_directionY || m_directionY > GAME_HEIGHT - 300)
-		return;
+	if (0 > m_directionX || m_directionX > GAME_WIDTH - 200
+		|| 0 > m_directionY || m_directionY > GAME_HEIGHT - 200)
+		SetDirection();
 
-	m_isarrive = true;
-	
+	m_isarrive = false;*/
 }
 
 bool Zombie::IsDie()
@@ -142,7 +141,7 @@ bool Zombie::IsDie()
 
 bool Zombie::Hit()
 {
-	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetCollisionBox(), this->GetCollisionBox()) && Player::Instance()->GetCode() == eSTATE::ATTACK)
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetAttackCollisionBox(), this->GetHitCollisionBox()) && Player::Instance()->GetCode() == eSTATE::ATTACK)
 	{
 		m_hp -= Player::Instance()->GetAtk();
 		return true;
@@ -183,6 +182,8 @@ void Zombie::ChangeState(eSTATE _state)
 	switch (_state)
 	{
 	case eSTATE::ATTACK:
+		if (GetIsAtk() == false)
+			return;
 		ChangeImage(ImageManager::Instance()->BZ_Attack());
 		m_pstate = AI_State_Attack::Instance();
 		return;
@@ -244,9 +245,14 @@ Image Zombie::GetImage() const
 	return m_image;
 }
 
-Image Zombie::GetCollisionBox() const
+Image Zombie::GetAttackCollisionBox() const
 {
-	return m_collisionBox;
+	return m_attackCollisionBox;
+}
+
+Image Zombie::GetHitCollisionBox() const
+{
+	return m_hitCollisionBox;
 }
 
 bool Zombie::IsAtk()
@@ -257,7 +263,6 @@ bool Zombie::IsAtk()
 
 		if (m_time.GetTime() > 2000)
 		{
-			printf("ggg\n");
 			m_bAtk = true;
 			m_time.SetStartTime();
 		}

@@ -7,8 +7,8 @@ class Zombie
 {
 protected:
 	Image m_image;
-	Image m_collisionBox;
-
+	Image m_attackCollisionBox;
+	Image m_hitCollisionBox;
 	Time m_time;
 
 	int m_directionX;
@@ -66,8 +66,8 @@ public:
 	void SetAniSpeed(int _speed);
 	int GetAtk() const;
 	Image GetImage() const;
-	Image GetCollisionBox() const;
-
+	Image GetAttackCollisionBox() const;
+	Image GetHitCollisionBox() const;
 	bool IsAtk();
 
 	void SetIsAtk(bool _isAtk);

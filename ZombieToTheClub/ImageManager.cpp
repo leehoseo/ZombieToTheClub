@@ -23,8 +23,8 @@ void ImageManager::initialize(Graphics * g)
 {
 	m_title.initialize(g,800,240,112, 50 ,2, "Resource\\Title.png");
 
-	m_collisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Player_CollisionBox.png");
-
+	m_attackCollisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Attack_CollisionBox.png");
+	m_hitCollisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Hit_CollisionBox.png");
 	// Logo ¿ÃπÃ¡ˆ
 	m_teamlogo.initialize(g, 0,0, 387 , 262 , 0,"Resource\\TeamLogo.png");
 
@@ -128,9 +128,14 @@ Image ImageManager::Player_Hit() const
 	return m_player_hit;
 }
 
-Image ImageManager::CollisionBox() const
+Image ImageManager::AttackCollisionBox() const
 {
-	return m_collisionBox;
+	return m_attackCollisionBox;
+}
+
+Image ImageManager::HitCollisionBox() const
+{
+	return m_hitCollisionBox;
 }
 
 Image ImageManager::Title() const

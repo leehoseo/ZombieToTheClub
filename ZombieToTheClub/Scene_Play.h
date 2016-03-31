@@ -14,6 +14,7 @@ class Scene_Play : public Scene
 private:
 	Zombie * m_pzombie[MAX_ZOMBIE];
 	Time m_time;
+	int m_score;
 public:
 
 	Scene_Play();

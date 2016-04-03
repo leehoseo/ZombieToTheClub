@@ -42,7 +42,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			// look for quit message
 			if (msg.message == WM_QUIT)
 				done = 1;
-
 			// decode and pass messages on to WinProc
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);

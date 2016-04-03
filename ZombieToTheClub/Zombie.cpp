@@ -27,6 +27,7 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
 	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 	m_traceCollisionBox = ImageManager::Instance()->TraceCollsionBox();
+	m_gold = ImageManager::Instance()->Gold();
 	m_image.setX(_x);
 	m_image.setY(_y);
 

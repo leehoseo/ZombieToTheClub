@@ -3,8 +3,6 @@
 class Time
 {
 private:
-	
-
 	int m_time;
 	int m_startTime;
 	int m_gameTime;

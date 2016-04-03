@@ -17,6 +17,7 @@ protected:
 	Image m_attackCollisionBox;
 	Image m_hitCollisionBox;
 	Image m_traceCollisionBox;
+	Image m_gold;
 	Time m_time;
 
 	int m_directionX;

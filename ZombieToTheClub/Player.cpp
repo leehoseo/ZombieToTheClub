@@ -6,6 +6,7 @@
 #include "State_Move.h"
 #include "State_Hit.h"
 #include <stdio.h>
+#include "Sound.h"
 Player::Player()
 {
 }
@@ -152,6 +153,7 @@ void Player::ChangeState(eSTATE _state)
 	switch (_state)
 	{
 	case eSTATE::ATTACK: 
+		Sound::Instance()->PlayScratch();
 		ChangeImage(ImageManager::Instance()->Player_Attack());
 		delete m_pstate;
 		m_pstate = new State_Attack();

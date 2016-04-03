@@ -5,6 +5,7 @@
 class ImageManager
 {
 private:
+	ImageManager();
 
 	Image m_attackCollisionBox;
 	Image m_hitCollisionBox;
@@ -32,9 +33,10 @@ private:
 	Image m_bz_move;
 	Image m_bz_hit;
 	Image m_bz_attack;
-	ImageManager();
+	
+	Image m_scone_score;
 
-	bool m_binitialize;
+	Image m_gold;
 
 public:
 	static ImageManager* Instance();
@@ -42,8 +44,6 @@ public:
 	virtual void initialize(Graphics* g);
 	
 	virtual ~ImageManager();
-
-	bool IsInitialized();
 
 	Image AttackCollisionBox() const;
 	Image HitCollisionBox() const;
@@ -68,5 +68,9 @@ public:
 	Image BZ_Move() const;
 	Image BZ_Hit() const;
 	Image BZ_Attack() const;
+
+	Image Scone_Score() const;
+
+	Image Gold() const;
 };
 

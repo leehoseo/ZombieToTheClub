@@ -13,13 +13,16 @@
 #include "Scene_Main.h"
 #include "Text.h"
 #include <stdio.h>
+#include "Scene_Score.h"
 
 Scene_Play::Scene_Play()
 {
 	Initialize();
-	m_time.SetStartTime();
+
 	Player::Instance()->Initialize();
 	m_score = 0;
+	Sound::Instance()->PlayHiphop1();
+	//Sound::Instance()->PlayHiphop2();
 }
 
 Scene_Play::~Scene_Play()
@@ -32,23 +35,21 @@ Scene_Play::~Scene_Play()
 
 void Scene_Play::Initialize()
 {
-	int temp = 0;
 
 	for (int index = 0; index < MAX_ZOMBIE; ++index)
 	{
 		m_pzombie[index] = new Boy_Zombie();
-		temp = rand() % 2;
-		if (temp == 0)
-			m_pzombie[index]->initialize(rand() % (GAME_WIDTH - 300), rand() % (GAME_HEIGHT - 300), ImageManager::Instance()->BZ_Stay(), AI_State_Stay::Instance());
+
+		if (rand() % 2)
+			m_pzombie[index]->initialize(rand() % (GAME_WIDTH - 128), rand() % (GAME_HEIGHT - 128), ImageManager::Instance()->BZ_Stay(), AI_State_Stay::Instance());
 		else
-			m_pzombie[index]->initialize(rand() % (GAME_WIDTH - 300), rand() % (GAME_HEIGHT - 300), ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
+			m_pzombie[index]->initialize(rand() % (GAME_WIDTH - 128), rand() % (GAME_HEIGHT - 128), ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
 	}
 }
 
 void Scene_Play::Update(Game* _game)
 {	
 	Player::Instance()->Update();
-	static int index = 0;
 	char buffer[20];
 	sprintf_s(buffer, "score : %d", m_score);
 	LPCSTR p = buffer;
@@ -71,38 +72,15 @@ void Scene_Play::Update(Game* _game)
 
 		if (m_pzombie[index]->IsDie())
 		{
-			m_score += 100;
+			_game->SetScore(+100);
 			m_pzombie[index] = NULL;
-			SAFE_DELETE(m_pzombie[index]);
 		}
 
 	}
 
-	//if (m_pzombie[index] == NULL)
-	//	return;
-
-	//// 플레이어 맞음
-	//if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), m_pzombie[index]->GetAttackCollisionBox()) && m_pzombie[index]->GetCode() != eSTATE::ATTACK)
-	//{
-	//	m_pzombie[index]->SetCode(eSTATE::ATTACK);
-	//}
-
-	//m_pzombie[index]->Update();
-
-	//if (m_pzombie[index]->IsDie())
-	//{
-	//	m_score += 100;
-	//	m_pzombie[index] = NULL;
-	//	SAFE_DELETE(m_pzombie[index]);
-	//}
-
-	//++index;
-	//if (index > MAX_ZOMBIE-1)
-	//	index = 0;
-
-	++m_score;
+	_game->SetScore(+1);
 	if (Player::Instance()->IsDie())
-		_game->ChangeScene(new Scene_Main());
+		_game->ChangeScene(new Scene_Score());
 
 }
 

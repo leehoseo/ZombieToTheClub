@@ -1,11 +1,11 @@
 #include "Scene_TeamLogo.h"
 #include "ImageManager.h"
 #include "Scene_Main.h"
-#include "Time.h"
 
 Scene_TeamLogo::Scene_TeamLogo()
 	: m_ibrightness(0), m_bfadeIn(true)
 {
+	
 }
 
 
@@ -20,11 +20,6 @@ void Scene_TeamLogo::Initialize()
 
 void Scene_TeamLogo::Update(Game* _game)
 {
-	/*if (ImageManager::Instance()->IsInitialized() && Time::Instance()->Timer(3000))
-	{
-		_game->ChangeScene(new Scene_Main());
-	}*/
-
 	/*if (m_bfadeIn == true)
 		m_ibrightness += 2;
 	else
@@ -37,6 +32,7 @@ void Scene_TeamLogo::Update(Game* _game)
 
 	if (m_ibrightness > 255)
 		m_bfadeIn = false;*/
+
 	_game->ChangeScene(new Scene_Main());
 }
 

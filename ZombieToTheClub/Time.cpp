@@ -1,6 +1,6 @@
 #include "Time.h"
 #include <Windows.h>
-
+#include <mmsystem.h>
 
 Time::Time()
 {

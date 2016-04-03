@@ -11,9 +11,8 @@
 Game::Game()
 {            
 	m_time.SetStartTime();
-	m_pscene = new Scene_TeamLogo();
-
 	m_pgraphics = NULL;
+	m_sound = 0;
 	initialized = false;
 	srand(time(NULL));
 }
@@ -22,7 +21,26 @@ Game::~Game()
 {
 	SAFE_DELETE(m_pgraphics);
 	SAFE_DELETE(m_pscene);
+	SAFE_DELETE(m_sound);
 	initialized = false;             
+}
+
+bool Game::initialize(HWND hw)
+{
+	hwnd = hw;
+	bool result = false;
+	m_pgraphics = new Graphics();
+
+	m_pgraphics->initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, false);
+
+	ImageManager::Instance()->initialize(m_pgraphics);
+	m_pscene = new Scene_TeamLogo();
+	m_pscene->Initialize();
+
+	Sound::Instance()->Initialize(hwnd);
+
+	initialized = true;
+	return true;
 }
 
 LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -51,20 +69,7 @@ LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
-void Game::initialize(HWND hw)
-{
-	hwnd = hw;                                
 
-	m_pgraphics = new Graphics();
-
-	m_pgraphics->initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, false);
-
-	ImageManager::Instance()->initialize(m_pgraphics);
-
-	m_pscene->Initialize();
-
-	initialized = true;
-}
 
 void Game::renderGame()
 {
@@ -85,6 +90,17 @@ void Game::ChangeScene(Scene * _newScene)
 	delete m_pscene;
 	// m_pscene = new _newScene();
 	m_pscene = _newScene;
+}
+
+int Game::GetScore() const
+{
+	return m_score;
+}
+
+// Á¡¼ö 
+void Game::SetScore(int _score)
+{
+	m_score += _score;
 }
 
 void Game::run()

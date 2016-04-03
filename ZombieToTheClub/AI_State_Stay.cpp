@@ -23,12 +23,12 @@ AI_State_Stay::~AI_State_Stay()
 
 void AI_State_Stay::Update(Zombie * _zombie)
 {
-	if (_zombie->Hit())
+	if (!StayCheck(_zombie))
 	{
-		_zombie->ChangeState(eSTATE::HIT);
+		_zombie->ChangeState(eSTATE::MOVE);
 	}
 
-	if (!StayCheck(_zombie))
+	if (Targeting(_zombie))
 	{
 		_zombie->ChangeState(eSTATE::MOVE);
 	}

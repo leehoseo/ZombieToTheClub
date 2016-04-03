@@ -23,6 +23,7 @@ void AI_State_Hit::Update(Zombie * _zombie)
 {
 	if ( !HitCheck(_zombie))
 	{
+		_zombie->SetHp(-Player::Instance()->GetAtk());
 		_zombie->ChangeState(eSTATE::STAY);
 	}
 }

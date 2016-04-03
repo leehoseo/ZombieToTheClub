@@ -8,6 +8,7 @@ private:
 
 	Image m_attackCollisionBox;
 	Image m_hitCollisionBox;
+	Image m_traceCollisionBox;
 	// Logo ¿ÃπÃ¡ˆ
 	Image m_teamlogo;
 
@@ -46,6 +47,7 @@ public:
 
 	Image AttackCollisionBox() const;
 	Image HitCollisionBox() const;
+	Image TraceCollsionBox() const;
 	Image TeamLogo() const;
 	Image Main() const;
 

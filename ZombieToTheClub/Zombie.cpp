@@ -26,7 +26,7 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_image = _image;
 	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
 	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
-
+	m_traceCollisionBox = ImageManager::Instance()->TraceCollsionBox();
 	m_image.setX(_x);
 	m_image.setY(_y);
 
@@ -49,6 +49,7 @@ void Zombie::Render()
 {
 	//m_attackCollisionBox.draw();
 	//m_hitCollisionBox.draw();
+	//m_traceCollisionBox.draw();
 	m_image.draw();
 }
 
@@ -56,7 +57,19 @@ void Zombie::Update()
 {
 	m_hitCollisionBox.setY(m_image.getY());
 
-	m_attackCollisionBox.setY(m_image.getCenterY()-40);
+	m_traceCollisionBox.setX(m_image.getX() - 100);
+	m_traceCollisionBox.setY(m_image.getY() - 100);
+	
+	m_attackCollisionBox.setY(m_image.getCenterY() - 40);
+	
+	if (Hit())
+	{
+		ChangeState(eSTATE::HIT);
+	}
+
+	if (Targeting())
+		SetDirection(Player::Instance()->GetCenterX() - 50, Player::Instance()->GetCenterY() - 50);
+
 	m_pstate->Update(this);
 	m_image.update(200);
 	IsAtk();
@@ -97,38 +110,44 @@ int Zombie::GetY()
 
 void Zombie::Move()
 {
-	//if (m_isarrive == false)
-	//{
-	//	if (GetX() > m_directionX)	//	목적지가 왼쪽에있다면
-	//		MoveX(-3);
-	//	else
-	//		MoveX(+3);
+	if (m_isarrive == false)
+	{
+		if (GetX() > m_directionX)	//	목적지가 왼쪽에있다면
+			MoveX(-2);
+		else
+			MoveX(2);
 
-	//	if (GetY() > m_directionY)	//	목적지가 위쪽
-	//		MoveY(-3);
-	//	else
-	//		MoveY(+3);
+		if (GetY() > m_directionY)	//	목적지가 위쪽
+			MoveY(-2);
+		else
+			MoveY(2);
 
-	//	if (m_directionX - 20 < GetX() && GetX() < m_directionX + 20
-	//		|| m_directionY - 20 < GetY() && GetX() < m_directionY + 20)
-	//		m_isarrive = true;
-	//}
-	//else
-	//{
-	//	SetDirection();
-	//}
+		if (m_directionX - 10 <GetX() && GetX() < m_directionX + 10
+		|| m_directionY - 10 < GetY() && GetX() < m_directionY + 10)
+			m_isarrive = true;
+	}
+	else
+	{
+		SetDirection();
+		++m_PatrolCount;
+	}
 }
 
-void Zombie::SetDirection()
+void Zombie::SetDirection(int _x  , int _y )
 {
-	/*m_directionX = rand() % 800 + (GetCenterX() - 400);
-	m_directionY = rand() % 800 + (GetCenterY() - 400);
+	m_directionX = (rand() % 400) + (GetCenterX() - 200);
+	m_directionY = (rand() % 400) * (GetCenterY() - 200);
 
-	if (0 > m_directionX || m_directionX > GAME_WIDTH - 200
-		|| 0 > m_directionY || m_directionY > GAME_HEIGHT - 200)
+	if( 0 > m_directionX || m_directionX > GAME_WIDTH - 128 || 
+		0 > m_directionY || m_directionY > GAME_HEIGHT - 128 )
 		SetDirection();
 
-	m_isarrive = false;*/
+	if (_x != 0 && _y != 0)
+	{
+		m_directionX = _x;
+		m_directionY = _y;
+	}
+	m_isarrive = false;
 }
 
 bool Zombie::IsDie()
@@ -141,9 +160,10 @@ bool Zombie::IsDie()
 
 bool Zombie::Hit()
 {
-	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetAttackCollisionBox(), this->GetHitCollisionBox()) && Player::Instance()->GetCode() == eSTATE::ATTACK)
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetAttackCollisionBox(), this->GetHitCollisionBox()) && 
+		Player::Instance()->GetCode() == eSTATE::ATTACK &&
+		this->GetCode() != eSTATE::HIT )
 	{
-		m_hp -= Player::Instance()->GetAtk();
 		return true;
 	}
 	else
@@ -178,7 +198,7 @@ void Zombie::SetCode(eSTATE _code)
 void Zombie::ChangeState(eSTATE _state)
 {
 	SetCode(_state);
-
+	m_PatrolCount = 0;
 	switch (_state)
 	{
 	case eSTATE::ATTACK:
@@ -240,6 +260,11 @@ int Zombie::GetAtk() const
 	return m_atk;
 }
 
+void Zombie::SetHp(int _atk)
+{
+	m_hp += _atk;
+}
+
 Image Zombie::GetImage() const
 {
 	return m_image;
@@ -253,6 +278,11 @@ Image Zombie::GetAttackCollisionBox() const
 Image Zombie::GetHitCollisionBox() const
 {
 	return m_hitCollisionBox;
+}
+
+Image Zombie::GetTraceCollsionBox() const
+{
+	return m_traceCollisionBox;
 }
 
 bool Zombie::IsAtk()
@@ -278,4 +308,17 @@ void Zombie::SetIsAtk(bool _isAtk)
 bool Zombie::GetIsAtk() const
 {
 	return m_bAtk;
+}
+
+bool Zombie::Targeting()
+{
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetImage(), GetTraceCollsionBox()))
+		return true;
+	else
+		return false;
+}
+
+int Zombie::GetPatrolCount() const
+{
+	return m_PatrolCount;
 }

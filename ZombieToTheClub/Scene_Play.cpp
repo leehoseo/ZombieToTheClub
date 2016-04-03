@@ -48,7 +48,7 @@ void Scene_Play::Initialize()
 void Scene_Play::Update(Game* _game)
 {	
 	Player::Instance()->Update();
-
+	static int index = 0;
 	char buffer[20];
 	sprintf_s(buffer, "score : %d", m_score);
 	LPCSTR p = buffer;
@@ -77,9 +77,33 @@ void Scene_Play::Update(Game* _game)
 		}
 
 	}
+
+	//if (m_pzombie[index] == NULL)
+	//	return;
+
+	//// 플레이어 맞음
+	//if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), m_pzombie[index]->GetAttackCollisionBox()) && m_pzombie[index]->GetCode() != eSTATE::ATTACK)
+	//{
+	//	m_pzombie[index]->SetCode(eSTATE::ATTACK);
+	//}
+
+	//m_pzombie[index]->Update();
+
+	//if (m_pzombie[index]->IsDie())
+	//{
+	//	m_score += 100;
+	//	m_pzombie[index] = NULL;
+	//	SAFE_DELETE(m_pzombie[index]);
+	//}
+
+	//++index;
+	//if (index > MAX_ZOMBIE-1)
+	//	index = 0;
+
 	++m_score;
-		if(Player::Instance()->IsDie())
-			_game->ChangeScene(new Scene_Main());
+	if (Player::Instance()->IsDie())
+		_game->ChangeScene(new Scene_Main());
+
 }
 
 void Scene_Play::Render()

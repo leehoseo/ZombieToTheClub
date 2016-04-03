@@ -25,6 +25,7 @@ void ImageManager::initialize(Graphics * g)
 
 	m_attackCollisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Attack_CollisionBox.png");
 	m_hitCollisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Hit_CollisionBox.png");
+	m_traceCollisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Trace_CollisionBox.png");
 	// Logo ¿ÃπÃ¡ˆ
 	m_teamlogo.initialize(g, 0,0, 387 , 262 , 0,"Resource\\TeamLogo.png");
 
@@ -136,6 +137,11 @@ Image ImageManager::AttackCollisionBox() const
 Image ImageManager::HitCollisionBox() const
 {
 	return m_hitCollisionBox;
+}
+
+Image ImageManager::TraceCollsionBox() const
+{
+	return m_traceCollisionBox;
 }
 
 Image ImageManager::Title() const

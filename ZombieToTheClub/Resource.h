@@ -12,11 +12,12 @@
 #pragma comment(lib, "dxguid.lib")
 
 const char GAME_NAME[] = "Zombie To The Club";
-const int GAME_WIDTH = 1024;
-const int GAME_HEIGHT = 768;
-const int MAX_ZOMBIE = 20;
+const int GAME_WIDTH = 1600;
+const int GAME_HEIGHT = 1200;
+const int MAX_ZOMBIE = 10;
 const double PI = 3.14159265;					// ø¯¡÷¿≤
 
 enum eSTATE { STAY = 1, MOVE = 2, ATTACK = 3 , HIT = 4};
 enum eDIRECTION { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, LEFT_UP = 4, LEFT_DOWN = 5, RIGHT_UP = 6, RIGHT_DOWN = 7 };
 enum eTYPE { PLAYER = 1 , BZ = 2 };
+

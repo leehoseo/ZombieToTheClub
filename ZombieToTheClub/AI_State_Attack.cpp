@@ -20,11 +20,6 @@ AI_State_Attack * AI_State_Attack::Instance()
 
 void AI_State_Attack::Update(Zombie * _zombie)
 {
-	if (_zombie->Hit())
-	{
-		_zombie->ChangeState(eSTATE::HIT);
-	}
-
 	if (!AttackCheck(_zombie))
 	{
 		if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), _zombie->GetAttackCollisionBox()) && Player::Instance()->GetCode() != eSTATE::HIT)

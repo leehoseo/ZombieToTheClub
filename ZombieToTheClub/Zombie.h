@@ -3,16 +3,25 @@
 #include "Resource.h"
 #include "AI_State.h"
 #include "Time.h"
+
+struct ZombieCoordinate
+{
+	int x;
+	int y;
+};
+
 class Zombie
 {
 protected:
 	Image m_image;
 	Image m_attackCollisionBox;
 	Image m_hitCollisionBox;
+	Image m_traceCollisionBox;
 	Time m_time;
 
 	int m_directionX;
 	int m_directionY;
+	int m_PatrolCount;
 
 	eSTATE m_code;
 	eTYPE m_type;
@@ -43,7 +52,7 @@ public:
 	virtual int GetX();
 	virtual int GetY();
 	virtual void Move();
-	virtual void SetDirection();
+	virtual void SetDirection(int _x = 0 , int _y = 0 );
 	virtual bool IsDie();
 	virtual bool Hit();
 
@@ -65,12 +74,17 @@ public:
 	int GetType() const;
 	void SetAniSpeed(int _speed);
 	int GetAtk() const;
+	void SetHp(int _atk);
 	Image GetImage() const;
 	Image GetAttackCollisionBox() const;
 	Image GetHitCollisionBox() const;
+	Image GetTraceCollsionBox() const;
 	bool IsAtk();
 
 	void SetIsAtk(bool _isAtk);
 	bool GetIsAtk() const;
+	bool Targeting();
+	int GetPatrolCount() const;
+	
 };
 

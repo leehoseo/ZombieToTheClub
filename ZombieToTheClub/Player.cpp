@@ -27,6 +27,8 @@ void Player::Initialize()
 {
 	m_pstate = new State_Stay();
 	m_image = ImageManager::Instance()->Player_Stay();
+	m_image.setX(GAME_WIDTH/2 - 60);
+	m_image.setY(GAME_HEIGHT/2 - 60);
 	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
 	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 	m_code = eSTATE::STAY;
@@ -71,6 +73,21 @@ void Player::Move()
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::LEFT_UP] = true;
 
+		if (10 > this->GetX() && 10 > this->GetY())
+			return;
+
+		if (10 > this->GetX())
+		{
+			MoveY(-5);
+			return;
+		}
+		if (10 > this->GetY())
+		{
+			MoveX(-5);
+			return;
+		}
+
+
 		MoveX(-5);
 		MoveY(-5);
 		return;
@@ -80,6 +97,20 @@ void Player::Move()
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::LEFT_DOWN] = true;
 
+		if (10 > this->GetX() && GAME_HEIGHT - 160 < this->GetY())
+			return;
+
+		if (10 > this->GetX())
+		{
+			MoveY(+5);
+			return;
+		}
+		if (GAME_HEIGHT - 160 < this->GetY())
+		{
+			MoveX(-5);
+			return;
+		}
+		
 		MoveX(-5);
 		MoveY(+5);
 		return;
@@ -89,6 +120,20 @@ void Player::Move()
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::RIGHT_UP] = true;
 
+		if (GAME_WIDTH - 138 < this->GetX() && 10 > this->GetY())
+			return;
+
+		if (GAME_WIDTH - 138 < this->GetX())
+		{
+			MoveY(-5);
+			return;
+		}
+		if (10 > this->GetY())
+		{
+			MoveX(+5);
+			return;
+		}
+		
 		MoveX(+5);
 		MoveY(-5);
 		return;
@@ -97,6 +142,20 @@ void Player::Move()
 	{
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::RIGHT_DOWN] = true;
+
+		if (GAME_WIDTH - 138 < this->GetX() && GAME_HEIGHT - 160 < this->GetY())
+			return;
+
+		if (GAME_WIDTH - 138 < this->GetX())
+		{
+			MoveY(+5);
+			return;
+		}
+		if (GAME_HEIGHT - 160 < this->GetY())
+		{
+			MoveX(+5);
+			return;
+		}
 
 		MoveX(+5);
 		MoveY(+5);
@@ -109,21 +168,37 @@ void Player::Move()
 	case DIK_LEFT:
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::LEFT] = true;
+
+		if (10 > this->GetX())
+			return;
+
 		MoveX(-5);
 		return;
 	case DIK_RIGHT:
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::RIGHT] = true;
+
+		if (GAME_WIDTH - 138 < this->GetX())
+			return;
+
 		MoveX(+5);
 		return;
 	case DIK_UP:
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::UP] = true;
+
+		if (10 > this->GetY())
+			return;
+
 		MoveY(-5);
 		return;
 	case DIK_DOWN:
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::DOWN] = true;
+
+		if (GAME_HEIGHT - 160 < this->GetY())
+			return;
+
 		MoveY(+5);
 		return;
 	}
@@ -247,6 +322,11 @@ float Player::GetCenterY() const
 int Player::GetAtk() const
 {
 	return m_atk;
+}
+
+int Player::GetHp() const
+{
+	return m_hp;
 }
 
 Image Player::GetImage() const

@@ -62,6 +62,7 @@ public:
 	float GetCenterY() const;
 
 	int GetAtk() const;
+	int GetHp() const;
 	Image GetImage() const;
 	Image GetAttackCollisionBox() const;
 	Image GetHitCollisionBox() const;

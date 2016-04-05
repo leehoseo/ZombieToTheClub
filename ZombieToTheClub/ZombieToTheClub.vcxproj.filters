@@ -94,6 +94,9 @@
     <Filter Include="소스 파일\Text">
       <UniqueIdentifier>{6b803259-e555-4619-80c7-50a6ef764091}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Scene\Scene_Score">
+      <UniqueIdentifier>{cee12bbe-bfbb-48df-9fc0-dc2f602bce7b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -180,11 +183,11 @@
     <ClCompile Include="Text.cpp">
       <Filter>소스 파일\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Scene_Score.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Score.cpp">
+      <Filter>소스 파일\Scene\Scene_Score</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,11 +275,11 @@
     <ClInclude Include="Text.h">
       <Filter>소스 파일\Text</Filter>
     </ClInclude>
-    <ClInclude Include="Scene_Score.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Score.h">
+      <Filter>소스 파일\Scene\Scene_Score</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

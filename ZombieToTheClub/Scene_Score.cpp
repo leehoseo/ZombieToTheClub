@@ -21,7 +21,7 @@ Scene_Score::~Scene_Score()
 
 void Scene_Score::Render()
 {
-	m_score.draw();
+	//m_score.draw();
 }
 
 void Scene_Score::Update(Game * _game)

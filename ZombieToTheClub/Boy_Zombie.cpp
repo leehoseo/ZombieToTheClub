@@ -22,6 +22,7 @@ void Boy_Zombie::initialize(float _x, float _y, Image _image, AI_State * _state)
 	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 	m_traceCollisionBox = ImageManager::Instance()->TraceCollsionBox();
 	m_gold = ImageManager::Instance()->Gold();
+
 	m_hitCollisionBox.setY(m_image.getY());
 
 	m_traceCollisionBox.setX(m_image.getX() - 100);

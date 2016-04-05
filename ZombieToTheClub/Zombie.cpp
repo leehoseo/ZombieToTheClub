@@ -58,8 +58,8 @@ void Zombie::Update()
 {
 	m_hitCollisionBox.setY(m_image.getY());
 
-	m_traceCollisionBox.setX(m_image.getX() - 100);
-	m_traceCollisionBox.setY(m_image.getY() - 100);
+	m_traceCollisionBox.setX(m_image.getX() - 50);
+	m_traceCollisionBox.setY(m_image.getY() - 50);
 	
 	m_attackCollisionBox.setY(m_image.getCenterY() - 40);
 	
@@ -68,8 +68,13 @@ void Zombie::Update()
 		ChangeState(eSTATE::HIT);
 	}
 
-	if (Targeting())
+	if (Targeting() == true && m_isarrive == true)
 		SetDirection(Player::Instance()->GetCenterX() - 50, Player::Instance()->GetCenterY() - 50);
+
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), this->GetAttackCollisionBox()) && this->GetCode() != eSTATE::ATTACK)
+	{
+		this->SetCode(eSTATE::ATTACK);
+	}
 
 	m_pstate->Update(this);
 	m_image.update(200);
@@ -123,24 +128,25 @@ void Zombie::Move()
 		else
 			MoveY(2);
 
-		if (m_directionX - 10 <GetX() && GetX() < m_directionX + 10
-		|| m_directionY - 10 < GetY() && GetX() < m_directionY + 10)
+		if (m_directionX - 3 < GetX() && GetX() < m_directionX + 3
+			|| m_directionY - 3 < GetY() && GetX() < m_directionY + 3)
+		{
 			m_isarrive = true;
+		}
 	}
 	else
 	{
 		SetDirection();
-		++m_PatrolCount;
 	}
 }
 
 void Zombie::SetDirection(int _x  , int _y )
 {
-	m_directionX = (rand() % 400) + (GetCenterX() - 200);
-	m_directionY = (rand() % 400) * (GetCenterY() - 200);
+	m_directionX = (GetCenterX() - 200) + (rand() % 500);
+	m_directionY = (GetCenterY() - 200) + (rand() % 500);
 
-	if( 0 > m_directionX || m_directionX > GAME_WIDTH - 128 || 
-		0 > m_directionY || m_directionY > GAME_HEIGHT - 128 )
+	if( 10 > m_directionX || m_directionX > GAME_WIDTH - 138 || 
+		10 > m_directionY || m_directionY > GAME_HEIGHT - 138 )
 		SetDirection();
 
 	if (_x != 0 && _y != 0)
@@ -149,6 +155,7 @@ void Zombie::SetDirection(int _x  , int _y )
 		m_directionY = _y;
 	}
 	m_isarrive = false;
+	++m_PatrolCount;
 }
 
 bool Zombie::IsDie()
@@ -199,7 +206,7 @@ void Zombie::SetCode(eSTATE _code)
 void Zombie::ChangeState(eSTATE _state)
 {
 	SetCode(_state);
-	m_PatrolCount = 0;
+	
 	switch (_state)
 	{
 	case eSTATE::ATTACK:
@@ -217,6 +224,7 @@ void Zombie::ChangeState(eSTATE _state)
 		m_pstate = AI_State_Move::Instance();
 		return;
 	case eSTATE::STAY:
+		m_PatrolCount = 0;
 		ChangeImage(ImageManager::Instance()->BZ_Stay());
 		m_pstate = AI_State_Stay::Instance();
 		return;
@@ -313,7 +321,7 @@ bool Zombie::GetIsAtk() const
 
 bool Zombie::Targeting()
 {
-	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetImage(), GetTraceCollsionBox()))
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetImage(), this->GetTraceCollsionBox()))
 		return true;
 	else
 		return false;

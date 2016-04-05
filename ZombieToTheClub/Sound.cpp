@@ -15,9 +15,14 @@ Sound::~Sound()
 {
 	ShutdownDirectSound();
 	ShutdownWaveFile(&m_hiphop1);
-	ShutdownWaveFile(&m_hiphop2);
+	ShutdownWaveFile(&m_hiphop2); 
 	ShutdownWaveFile(&m_scratch);
 	ShutdownWaveFile(&m_letsPatty);
+
+	//SAFE_DELETE(m_hiphop1);
+	//SAFE_DELETE(m_hiphop2);
+	//SAFE_DELETE(m_scratch);
+	//SAFE_DELETE(m_letsPatty);
 }
 
 Sound * Sound::Instance()
@@ -88,7 +93,6 @@ void Sound::ShutdownWaveFile(IDirectSoundBuffer8** secondaryBuffer)
 		(*secondaryBuffer)->Release();
 		*secondaryBuffer = 0;
 	}
-
 	return;
 }
 
@@ -407,7 +411,7 @@ bool Sound::PlayLetsPatty()
 	}
 
 	// Play the contents of the secondary sound buffer.
-	result = m_letsPatty->Play(0, 0, DSBPLAY_LOOPING);
+	result = m_letsPatty->Play(0, 0, 0);
 	if (FAILED(result))
 	{
 		return false;

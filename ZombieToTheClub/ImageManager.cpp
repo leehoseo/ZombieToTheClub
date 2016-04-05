@@ -20,41 +20,7 @@ ImageManager* ImageManager::Instance()
 
 void ImageManager::initialize(Graphics * g)
 {
-	// Logo 이미지
-	//m_teamlogo.initialize(g, 0, 0, GAME_WIDTH/2 -150 , GAME_HEIGHT/2 - 100 , 0, "Resource\\TeamLogo.png");
-
-
-	//m_title.initialize(g,800,240,218, 50 ,2, "Resource\\Title.png");
-
-	//m_attackCollisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Attack_CollisionBox.png");
-	//m_hitCollisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Hit_CollisionBox.png");
-	//m_traceCollisionBox.initialize(g, 0, 0, 0, 0, 0, "Resource\\Trace_CollisionBox.png");
-	//
-
-	//// Main 이미지
-	//m_main.initialize(g,0,0, 0, 0, 0,"Resource\\main.png");
-	//m_ui_main_start.initialize(g,408,95 ,1160, 610, 0,"Resource\\Start.png");
-	//m_ui_main_save.initialize(g,408,95, 1160, 730, 0, "Resource\\Save.png");
-	//m_ui_main_option.initialize(g, 408,95,1160, 850, 0, "Resource\\Option.png");
-	//m_ui_main_exit.initialize(g,408,95, 1160, 970, 0, "Resource\\Exit.png");
-
-
-	////Player
-	//m_player_move.initialize(g,128,128,0, 0, 10,  "Resource\\Player_Move.png");
-	//m_player_stay.initialize(g, 128, 128, 0, 0, 2,  "Resource\\Player_Stay.png");
-	//m_player_attack.initialize(g, 128, 128, 0, 0, 3,  "Resource\\Player_Attack.png");
-	//m_player_hit.initialize(g, 128, 128, 0, 0, 3, "Resource\\Player_Down.png");
-
-	//m_bz_stay.initialize(g, 128, 128, 0, 0, 6, "Resource\\bz1_stand.png");
-	//m_bz_move.initialize(g, 128, 128, 0, 0, 4, "Resource\\BZ_Move.png");
-	//m_bz_hit.initialize(g, 128, 128, 0, 0, 3, "Resource\\BZ_Hit.png");
-	//m_bz_attack.initialize(g, 128, 128, 0, 0, 4, "Resource\\BZ_Attack.png");
-
-	//m_scone_score.initialize(g, 0, 0, 0, 0, 0, "Resource\\Score.png");
-
-	//m_gold.initialize(g, 0, 0, 0, 0, 0, "Resource\\Gold.png");
 	m_teamlogo.initialize(g, 0, 0, GAME_WIDTH / 2 - 150, GAME_HEIGHT / 2 - 100, 0, "../ZombieToTheClub\\Resource\\TeamLogo.png");
-
 
 	m_title.initialize(g, 800, 240, 218, 50, 2, "../ZombieToTheClub\\Resource\\Title.png");
 
@@ -62,14 +28,12 @@ void ImageManager::initialize(Graphics * g)
 	m_hitCollisionBox.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Hit_CollisionBox.png");
 	m_traceCollisionBox.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Trace_CollisionBox.png");
 
-
 	// Main 이미지
-	m_main.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\main.png");
-	m_ui_main_start.initialize(g, 408, 95, 1160, 610, 0, "../ZombieToTheClub\\Resource\\Start.png");
-	m_ui_main_save.initialize(g, 408, 95, 1160, 730, 0, "../ZombieToTheClub\\Resource\\Save.png");
-	m_ui_main_option.initialize(g, 408, 95, 1160, 850, 0, "../ZombieToTheClub\\Resource\\Option.png");
-	m_ui_main_exit.initialize(g, 408, 95, 1160, 970, 0, "../ZombieToTheClub\\Resource\\Exit.png");
-
+	m_main.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Main.png");
+	m_ui_main_start.initialize(g, 408, 95, 1160, 450, 0, "../ZombieToTheClub\\Resource\\Start.png");
+	m_ui_main_save.initialize(g, 408, 95, 1160, 550, 0, "../ZombieToTheClub\\Resource\\Save.png");
+	m_ui_main_option.initialize(g, 408, 95, 1160, 650, 0, "../ZombieToTheClub\\Resource\\Option.png");
+	m_ui_main_exit.initialize(g, 408, 95, 1160, 750, 0, "../ZombieToTheClub\\Resource\\Exit.png");
 
 	//Player
 	m_player_move.initialize(g, 128, 128, 0, 0, 10, "../ZombieToTheClub\\Resource\\Player_Move.png");
@@ -117,12 +81,10 @@ Image ImageManager::Gold() const
 	return m_gold;
 }
 
-
 Image ImageManager::TeamLogo() const 
 {
 	return m_teamlogo;
 }
-
 
 // Main 이미지 UI
 Image ImageManager::Main() const

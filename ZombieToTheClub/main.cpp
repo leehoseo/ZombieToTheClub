@@ -7,6 +7,7 @@
 #include "mouse.h"
 #include <stdio.h>
 #include "Input.h"
+#include "Sound.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int);
 bool CreateMainWindow(HWND &, HINSTANCE, int);
@@ -33,7 +34,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	game->initialize(hwnd);
 	CInput::Instance()->Initialize(hInstance, hwnd);
-
+	Sound::Instance()->Initialize(hwnd);
 	int done = 0;
 	while (!done)
 	{

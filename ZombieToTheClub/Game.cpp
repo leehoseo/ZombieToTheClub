@@ -78,7 +78,6 @@ void Game::renderGame()
 	{
 		m_pscene->Update(this);
 		m_pscene->Render();									// 함수 오버라이딩되어있다
-
 		m_pgraphics->endScene();					// Scene을종료시킨다
 	}
 

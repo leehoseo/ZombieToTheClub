@@ -47,8 +47,6 @@ void ImageManager::initialize(Graphics * g)
 	m_bz_attack.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\BZ_Attack.png");
 
 	m_scone_score.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Score.png");
-
-	m_gold.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Gold.png");
 }
 
 Image ImageManager::BZ_Stay() const
@@ -74,11 +72,6 @@ Image ImageManager::BZ_Attack() const
 Image ImageManager::Scone_Score() const
 {
 	return m_scone_score;
-}
-
-Image ImageManager::Gold() const
-{
-	return m_gold;
 }
 
 Image ImageManager::TeamLogo() const 

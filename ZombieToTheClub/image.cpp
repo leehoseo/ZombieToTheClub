@@ -29,8 +29,6 @@ Image::Image()
 	colorFilter = graphicsNS::WHITE;
 
 	m_time.SetStartTime();
-
-
 }
 
 
@@ -90,7 +88,6 @@ void Image::update(int _deley)		// 애니메이션 관련 함수
 { 
 	if (m_frame != 0)// 애니메이션이 있으면
 	{
-
 		m_time.SetTime();
 
 		if (m_time.GetTime() > _deley)	// 시간이 지나면

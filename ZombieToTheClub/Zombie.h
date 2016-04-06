@@ -4,12 +4,6 @@
 #include "AI_State.h"
 #include "Time.h"
 
-struct ZombieCoordinate
-{
-	int x;
-	int y;
-};
-
 class Zombie
 {
 protected:
@@ -17,7 +11,6 @@ protected:
 	Image m_attackCollisionBox;
 	Image m_hitCollisionBox;
 	Image m_traceCollisionBox;
-	Image m_gold;
 	Time m_time;
 
 	int m_directionX;
@@ -50,42 +43,41 @@ public:
 	virtual void Update();
 	virtual void MoveX(float _x);
 	virtual void MoveY(float _y);
-	virtual int GetX();
-	virtual int GetY();
 	virtual void Move();
-	virtual void SetDirection(int _x = 0 , int _y = 0 );
+
+	virtual void SetDirection(int _x=0, int _y=0 );
+
+
 	virtual bool IsDie();
 	virtual bool Hit();
-
-	virtual float GetRadius() const;
-
-	float GetCenterX() const;
-	float GetCenterY() const;
-
-	int GetCode() const;
-
-	void SetCode(eSTATE _code);
+	virtual bool Attack();
+	virtual void SetCoordinate(int _x , int _y);
+	bool Attackable();
+	bool Targeting();
 
 	void ChangeState(eSTATE _state);
 	void ChangeImage(Image _image);
 
-	int GetCurrentFrame() const;
-	int GetFrame() const;
-
-	int GetType() const;
+	void SetCode(eSTATE _code);
 	void SetAniSpeed(int _speed);
-	int GetAtk() const;
 	void SetHp(int _atk);
+	void SetIsAtk(bool _isAtk);
+
 	Image GetImage() const;
 	Image GetAttackCollisionBox() const;
 	Image GetHitCollisionBox() const;
 	Image GetTraceCollsionBox() const;
-	bool IsAtk();
-
-	void SetIsAtk(bool _isAtk);
+	int GetCurrentFrame() const;
+	int GetFrame() const;
+	int GetType() const;
+	int GetAtk() const;
 	bool GetIsAtk() const;
-	bool Targeting();
 	int GetPatrolCount() const;
-	
+	virtual int GetX() const;
+	virtual int GetY() const;
+	virtual float GetRadius() const;
+	float GetCenterX() const;
+	float GetCenterY() const;
+	int GetCode() const;
 };
 

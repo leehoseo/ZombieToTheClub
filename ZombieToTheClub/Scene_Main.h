@@ -8,7 +8,7 @@
 class Scene_Main	:	public Scene
 {
 private:
-
+	Zombie * m_pzombie[3];
 	Image m_main;
 	Image m_title;
 	UI m_start;
@@ -16,7 +16,6 @@ private:
 	UI m_option;
 	UI m_exit;
 
-	bool m_bpatrol;
 public:
 	Scene_Main();
 	~Scene_Main();

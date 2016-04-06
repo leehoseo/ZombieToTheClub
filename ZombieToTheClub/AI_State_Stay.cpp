@@ -35,6 +35,12 @@ void AI_State_Stay::Update(Zombie * _zombie)
 		_zombie->ChangeState(eSTATE::ATTACK);
 	}
 
+	if (_zombie->Targeting() == true)
+	{
+		_zombie->ChangeState(eSTATE::MOVE);
+		//_zombie->SetDirection(Player::Instance()->GetX() + 50, Player::Instance()->GetY() + 50);
+	}
+
 }
 
 bool AI_State_Stay::StayCheck(Zombie * _zombie)

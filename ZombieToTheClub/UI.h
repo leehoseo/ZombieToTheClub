@@ -14,5 +14,7 @@ public:
 	void Render() ;
 	void Update() ;
 	bool CollisionCheck();
+
+	Image GetImage();
 };
 

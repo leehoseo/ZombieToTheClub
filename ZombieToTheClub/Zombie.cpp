@@ -27,7 +27,7 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
 	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 	m_traceCollisionBox = ImageManager::Instance()->TraceCollsionBox();
-	m_gold = ImageManager::Instance()->Gold();
+
 	m_image.setX(_x);
 	m_image.setY(_y);
 
@@ -43,6 +43,7 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_directionX = 0;
 	m_directionY = 0;
 	m_bAtk = false;
+	m_isarrive = true;
 	m_time.SetStartTime();
 }
 
@@ -63,22 +64,23 @@ void Zombie::Update()
 	
 	m_attackCollisionBox.setY(m_image.getCenterY() - 40);
 	
-	if (Hit())
+	
+
+	if ( this->Hit() == true )
 	{
 		ChangeState(eSTATE::HIT);
 	}
 
-	if (Targeting() == true && m_isarrive == true)
-		SetDirection(Player::Instance()->GetCenterX() - 50, Player::Instance()->GetCenterY() - 50);
-
-	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), this->GetAttackCollisionBox()) && this->GetCode() != eSTATE::ATTACK)
+	if ( this->Attack() == true )
 	{
 		this->SetCode(eSTATE::ATTACK);
 	}
 
+	
+
 	m_pstate->Update(this);
 	m_image.update(200);
-	IsAtk();
+	Attackable();
 }
 
 void Zombie::MoveX(float _x)
@@ -104,18 +106,13 @@ void Zombie::MoveY(float _y)
 	m_image.setY(m_image.getY() + _y);
 }
 
-int Zombie::GetX()
-{
-	return m_image.getX();
-}
-
-int Zombie::GetY()
-{
-	return m_image.getY();
-}
-
 void Zombie::Move()
 {
+	if (this->Targeting() == true)
+	{
+		this->SetDirection(Player::Instance()->GetX() + 40, Player::Instance()->GetY() + 40);
+	}
+
 	if (m_isarrive == false)
 	{
 		if (GetX() > m_directionX)	//	목적지가 왼쪽에있다면
@@ -128,8 +125,8 @@ void Zombie::Move()
 		else
 			MoveY(2);
 
-		if (m_directionX - 3 < GetX() && GetX() < m_directionX + 3
-			|| m_directionY - 3 < GetY() && GetX() < m_directionY + 3)
+		if (m_directionX - 5 < GetX() && GetX() < m_directionX + 5
+			|| m_directionY - 5 < GetY() && GetX() < m_directionY + 5)
 		{
 			m_isarrive = true;
 		}
@@ -140,20 +137,17 @@ void Zombie::Move()
 	}
 }
 
-void Zombie::SetDirection(int _x  , int _y )
+void Zombie::SetDirection(int _x, int _y)
 {
-	m_directionX = (GetCenterX() - 200) + (rand() % 500);
-	m_directionY = (GetCenterY() - 200) + (rand() % 500);
-
-	if( 10 > m_directionX || m_directionX > GAME_WIDTH - 138 || 
-		10 > m_directionY || m_directionY > GAME_HEIGHT - 138 )
-		SetDirection();
+	m_directionX = rand() % (GAME_WIDTH - 148) + 10;
+	m_directionY = rand() % (GAME_HEIGHT - 148) + 10;
 
 	if (_x != 0 && _y != 0)
 	{
 		m_directionX = _x;
 		m_directionY = _y;
 	}
+
 	m_isarrive = false;
 	++m_PatrolCount;
 }
@@ -178,35 +172,25 @@ bool Zombie::Hit()
 		return false;
 }
 
-float Zombie::GetRadius() const
+bool Zombie::Attack()
 {
-	return m_image.getRadius();
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), this->GetAttackCollisionBox()) && this->GetCode() != eSTATE::ATTACK)
+		return true;
+	else
+		return false;
 }
 
-float Zombie::GetCenterX() const
+void Zombie::SetCoordinate(int _x, int _y)
 {
-	return m_image.getCenterX();
-}
-
-float Zombie::GetCenterY() const
-{
-	return m_image.getCenterY();
-}
-
-int Zombie::GetCode() const
-{
-	return m_code;
-}
-
-void Zombie::SetCode(eSTATE _code)
-{
-	m_code = _code;
+	m_image.setX(_x);
+	m_image.setY(_y);
 }
 
 void Zombie::ChangeState(eSTATE _state)
 {
 	SetCode(_state);
-	
+
+	m_PatrolCount = 0;
 	switch (_state)
 	{
 	case eSTATE::ATTACK:
@@ -224,7 +208,6 @@ void Zombie::ChangeState(eSTATE _state)
 		m_pstate = AI_State_Move::Instance();
 		return;
 	case eSTATE::STAY:
-		m_PatrolCount = 0;
 		ChangeImage(ImageManager::Instance()->BZ_Stay());
 		m_pstate = AI_State_Stay::Instance();
 		return;
@@ -244,34 +227,51 @@ void Zombie::ChangeImage(Image _image)
 	m_image.flipHorizontal(tempH);
 }
 
-int Zombie::GetCurrentFrame() const
+bool Zombie::Targeting()
 {
-	return m_image.GetCurrentFrame();
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), this->GetTraceCollsionBox()))
+	{
+		return true;
+	}
+	else
+		return false;
 }
 
-int Zombie::GetFrame() const
-{
-	return m_image.GetFrame();
-}
-
-int Zombie::GetType() const
-{
-	return m_type;
-}
 
 void Zombie::SetAniSpeed(int _speed)
 {
 	m_aniSpeed = _speed;
 }
 
-int Zombie::GetAtk() const
-{
-	return m_atk;
-}
-
 void Zombie::SetHp(int _atk)
 {
 	m_hp += _atk;
+}
+
+bool Zombie::Attackable()
+{
+	if (m_bAtk == false)
+	{
+		m_time.SetTime();
+
+		if (m_time.GetTime() > 2000)
+		{
+			m_bAtk = true;
+			m_time.SetStartTime();
+		}
+	}
+	return true;
+}
+
+void Zombie::SetIsAtk(bool _isAtk)
+{
+	m_bAtk = _isAtk;
+}
+
+
+void Zombie::SetCode(eSTATE _code)
+{
+	m_code = _code;
 }
 
 Image Zombie::GetImage() const
@@ -294,24 +294,10 @@ Image Zombie::GetTraceCollsionBox() const
 	return m_traceCollisionBox;
 }
 
-bool Zombie::IsAtk()
-{
-	if (m_bAtk == false)
-	{
-		m_time.SetTime();
 
-		if (m_time.GetTime() > 2000)
-		{
-			m_bAtk = true;
-			m_time.SetStartTime();
-		}
-	}
-	return true;
-}
-
-void Zombie::SetIsAtk(bool _isAtk)
+int Zombie::GetAtk() const
 {
-	m_bAtk = _isAtk;
+	return m_atk;
 }
 
 bool Zombie::GetIsAtk() const
@@ -319,15 +305,53 @@ bool Zombie::GetIsAtk() const
 	return m_bAtk;
 }
 
-bool Zombie::Targeting()
-{
-	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetImage(), this->GetTraceCollsionBox()))
-		return true;
-	else
-		return false;
-}
-
 int Zombie::GetPatrolCount() const
 {
 	return m_PatrolCount;
+}
+
+float Zombie::GetRadius() const
+{
+	return m_image.getRadius();
+}
+
+float Zombie::GetCenterX() const
+{
+	return m_image.getCenterX();
+}
+
+float Zombie::GetCenterY() const
+{
+	return m_image.getCenterY();
+}
+
+int Zombie::GetCurrentFrame() const
+{
+	return m_image.GetCurrentFrame();
+}
+
+int Zombie::GetFrame() const
+{
+	return m_image.GetFrame();
+}
+
+int Zombie::GetType() const
+{
+	return m_type;
+}
+
+
+int Zombie::GetCode() const
+{
+	return m_code;
+}
+
+int Zombie::GetX() const
+{
+	return m_image.getX();
+}
+
+int Zombie::GetY() const
+{
+	return m_image.getY();
 }

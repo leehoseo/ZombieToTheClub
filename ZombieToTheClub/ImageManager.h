@@ -36,8 +36,6 @@ private:
 	
 	Image m_scone_score;
 
-	Image m_gold;
-
 public:
 	static ImageManager* Instance();
 
@@ -70,7 +68,5 @@ public:
 	Image BZ_Attack() const;
 
 	Image Scone_Score() const;
-
-	Image Gold() const;
 };
 

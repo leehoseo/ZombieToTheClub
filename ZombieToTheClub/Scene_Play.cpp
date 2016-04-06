@@ -81,6 +81,21 @@ void Scene_Play::Initialize()
 	m_stage[6].createPerSecond = 5;
 	m_stage[6].createZombie = 0;
 	m_stage[6].bstageCheck = false;
+
+
+	for (int index = 0; index < MAX_ZOMBIE; ++index)
+	{
+		m_pzombie[index] = new Boy_Zombie();
+		
+		if (rand() % 2)
+		{
+			m_pzombie[index]->initialize(-500, -500, ImageManager::Instance()->BZ_Stay(), AI_State_Stay::Instance());
+		}
+		else
+		{
+			m_pzombie[index]->initialize(-500, -500, ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
+		}
+	}
 }
 
 void Scene_Play::PrintStageInfo(Game* _game)
@@ -106,6 +121,7 @@ void Scene_Play::PrintStageInfo(Game* _game)
 	Text::Instaance()->Print(Lhp, GAME_WIDTH - 200, 60);
 }
 
+
 void Scene_Play::Update(Game* _game)
 {	
 	m_stageTime.SetTime();
@@ -118,15 +134,11 @@ void Scene_Play::Update(Game* _game)
 	{
 		for (int index = 0; index < m_stage[m_currentStage].createZombie; ++index)		// 초기 좀비들 생성
 		{
-			m_pzombie[m_currentZombie] = new Boy_Zombie();
-
-			if (rand() % 2)
-				m_pzombie[m_currentZombie]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % (GAME_HEIGHT - 148) + 10, ImageManager::Instance()->BZ_Stay(), AI_State_Stay::Instance());
-			else
-				m_pzombie[m_currentZombie]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % (GAME_HEIGHT - 148) + 10, ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
+			m_pzombie[m_currentZombie]->SetCoordinate(rand() % (GAME_WIDTH - 148) + 10, rand() % (GAME_HEIGHT - 148) + 10);
 
 			++m_currentZombie;
 		}
+
 		m_stage[m_currentStage].bstageCheck = true;
 		++m_currentStage;
 		m_bgameStart = true;
@@ -139,13 +151,7 @@ void Scene_Play::Update(Game* _game)
 		m_currentZombie < m_stage[m_currentStage].maxZombie &&
 		m_createTime.GetTime() > 1000 / m_stage[m_currentStage].createPerSecond)
 	{
-		m_pzombie[m_currentZombie] = new Boy_Zombie();
-
-		if (rand() % 2)
-			m_pzombie[m_currentZombie]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % (GAME_HEIGHT - 148) + 10, ImageManager::Instance()->BZ_Stay(), AI_State_Stay::Instance());
-		else
-			m_pzombie[m_currentZombie]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % (GAME_HEIGHT - 148) + 10, ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
-
+		m_pzombie[m_currentZombie]->SetCoordinate(rand() % (GAME_WIDTH - 148) + 10, rand() % (GAME_HEIGHT - 148) + 10);
 		++m_currentZombie;
 
 		m_createTime.SetStartTime();
@@ -153,7 +159,7 @@ void Scene_Play::Update(Game* _game)
 	
 	for (int index = 0; index < m_currentZombie ; ++index)
 	{
-		if (m_pzombie[index] == NULL)
+		if (m_pzombie[index]->GetX() == - 500 || m_pzombie[index]->GetY() == - 500)
 			continue;
 
 		m_pzombie[index]->Update();
@@ -161,7 +167,7 @@ void Scene_Play::Update(Game* _game)
 		if (m_pzombie[index]->IsDie())
 		{
 			_game->SetScore(+100);
-			m_pzombie[index] = NULL;
+			m_pzombie[index]->SetCoordinate(-500,-500);
 			--m_currentZombie;
 		}
 	}
@@ -174,8 +180,7 @@ void Scene_Play::Render()
 {
 	for (int index = 0; index < m_currentZombie; ++index)
 	{
-		if (m_pzombie[index] != NULL)
-			m_pzombie[index]->Render();
+		m_pzombie[index]->Render();
 	}
 	Player::Instance()->Render();
 }

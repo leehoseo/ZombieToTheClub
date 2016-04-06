@@ -70,6 +70,5 @@ void Text::Print(LPCSTR _string, int _x, int _y, D3DXCOLOR ARGB)
 	m_pFont->DrawText(0, _string, -1, &rect, DT_TOP | DT_LEFT, ARGB);
 
 	m_pDevice->EndScene();
-	m_pDevice->Present(0, 0, 0, 0);
 	return;
 }

@@ -166,6 +166,7 @@
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Main_Zombie.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Main_Zombie.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />

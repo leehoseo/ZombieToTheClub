@@ -12,6 +12,5 @@ public:
 
 	virtual void Update();
 
-	void Attack();
-	bool AttackCheck();
+	bool AttackEnd();
 };

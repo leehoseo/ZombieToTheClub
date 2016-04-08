@@ -166,12 +166,12 @@ void Scene_Play::Update(Game* _game)
 
 		if (m_pzombie[index]->IsDie())
 		{
-			_game->SetScore(+100);
+			_game->SetScore(m_pzombie[index]->GetScore());
 			m_pzombie[index]->SetCoordinate(-500,-500);
 			--m_currentZombie;
 		}
 	}
-	_game->SetScore(+1);
+	_game->SetScore(m_currentStage);
 	if (Player::Instance()->IsDie())
 		_game->ChangeScene(new Scene_Score());
 }

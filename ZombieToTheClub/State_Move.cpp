@@ -18,21 +18,16 @@ State_Move::~State_Move()
 
 void State_Move::Update()
 {
-	Move();
+	Player::Instance()->Move();
 	if (!MoveCheck())
 	{
 		Player::Instance()->ChangeState(eSTATE::STAY);
 	}
 
-	if (CInput::Instance()->KetPressedCheck(DIK_A))
+	if (Player::Instance()->IsAttack())
 	{
 		Player::Instance()->ChangeState(eSTATE::ATTACK);
 	}
-}
-
-void State_Move::Move()
-{
-	Player::Instance()->Move();
 }
 
 bool State_Move::MoveCheck()

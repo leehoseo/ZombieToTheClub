@@ -32,10 +32,6 @@ void AI_State_Attack::Update(Zombie * _zombie)
 	}
 }
 
-void AI_State_Attack::Attack(Zombie * _zombie)
-{
-}
-
 bool AI_State_Attack::AttackCheck(Zombie * _zombie)
 {
 	if (_zombie->GetCurrentFrame() == _zombie->GetFrame())

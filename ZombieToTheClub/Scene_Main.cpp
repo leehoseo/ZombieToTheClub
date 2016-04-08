@@ -2,7 +2,7 @@
 #include "Time.h"
 #include "Game.h"
 #include "Scene_Play.h"
-#include "Boy_Zombie.h"
+#include "Main_Zombie.h"
 #include "AI_State_Move.h"
 #include <stdlib.h>
 #include <time.h>
@@ -32,9 +32,9 @@ void Scene_Main::Initialize()
 	m_title = ImageManager::Instance()->Title();
 	for (int index = 0; index < 3 ; ++index)		// 초기 좀비들 생성
 	{
-		m_pzombie[index] = new Boy_Zombie();
+		m_pzombie[index] = new Main_Zombie();
 
-		m_pzombie[index]->initialize( (rand() % GAME_WIDTH - 148) + 10 , (rand() % 120 + 640) + 10 , ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
+		m_pzombie[index]->initialize( (rand() % GAME_WIDTH - 148) + 10 , rand() % 300 + 470, ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
 	}
 }
 
@@ -70,7 +70,6 @@ void Scene_Main::Update(Game * _game)
 		m_pzombie[index]->Update();
 	}
 
-
 	m_start.Update();
 	m_save.Update();
 	m_option.Update();
@@ -93,6 +92,4 @@ void Scene_Main::Render()
 	m_save.Render();
 	m_option.Render();
 	m_exit.Render();
-	
-
 }

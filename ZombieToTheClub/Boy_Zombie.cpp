@@ -7,7 +7,6 @@ Boy_Zombie::Boy_Zombie()
 {
 }
 
-
 Boy_Zombie::~Boy_Zombie()
 {
 }
@@ -28,6 +27,9 @@ void Boy_Zombie::initialize(float _x, float _y, Image _image, AI_State * _state)
 	m_traceCollisionBox.setY(m_image.getY() - 100);
 
 	m_attackCollisionBox.setY(m_image.getCenterY() - 40);
+
+	m_directionX = rand() % (GAME_WIDTH - 148) + 10;
+	m_directionY = rand() % (GAME_HEIGHT - 148) + 10;
 
 	m_hp = 35;
 	m_atk = 8;

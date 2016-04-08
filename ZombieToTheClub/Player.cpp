@@ -156,7 +156,6 @@ void Player::Move()
 			MoveX(+5);
 			return;
 		}
-
 		MoveX(+5);
 		MoveY(+5);
 		return;
@@ -220,6 +219,78 @@ void Player::Render()
 	//m_attackCollisionBox.draw();
 	//m_hitCollisionBox.draw();
 	m_image.draw();
+}
+
+void Player::AttackMove()
+{
+	if (GetAttackDirection().m_direction[eDIRECTION::LEFT])
+	{
+		MoveX(-2);
+		return;
+	}
+
+	else if (GetAttackDirection().m_direction[eDIRECTION::RIGHT])
+	{
+		MoveX(+2);
+		return;
+	}
+
+	else if (GetAttackDirection().m_direction[eDIRECTION::UP])
+	{
+		MoveY(-2);
+		return;
+	}
+
+	else if (GetAttackDirection().m_direction[eDIRECTION::DOWN])
+	{
+		MoveY(+2);
+		return;
+	}
+
+	else if (GetAttackDirection().m_direction[eDIRECTION::LEFT_UP])
+	{
+		MoveX(-2);
+		MoveY(-2);
+		return;
+	}
+
+	else if (GetAttackDirection().m_direction[eDIRECTION::LEFT_DOWN])
+	{
+		MoveX(-2);
+		MoveY(+2);
+		return;
+	}
+
+	else if (GetAttackDirection().m_direction[eDIRECTION::RIGHT_UP])
+	{
+		MoveX(+2);
+		MoveY(-2);
+		return;
+	}
+
+	else if (GetAttackDirection().m_direction[eDIRECTION::RIGHT_DOWN])
+	{
+		MoveX(+2);
+		MoveY(+2);
+		return;
+	}
+
+	if (GetImage().GetHorizontal())
+	{
+		MoveX(-2);
+	}
+	else
+	{
+		MoveX(+2);
+	}
+}
+
+bool Player::IsAttack()
+{
+	if (CInput::Instance()->KetPressedCheck(DIK_A))
+		return true;
+	else
+		return false;
 }
 
 void Player::ChangeState(eSTATE _state)

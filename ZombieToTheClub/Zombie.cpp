@@ -28,6 +28,9 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 	m_traceCollisionBox = ImageManager::Instance()->TraceCollsionBox();
 
+	m_directionX = rand() % (GAME_WIDTH - 148) + 10;
+	m_directionY = rand() % (GAME_HEIGHT - 148) + 10;
+
 	m_image.setX(_x);
 	m_image.setY(_y);
 
@@ -36,7 +39,7 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_moveSpeed = 0.5;
 	atdSpeed = 2;
 	m_experience = 5;
-	m_score = 1;
+	m_score = 100;
 	m_type = eTYPE::BZ;
 	m_pstate = _state;
 	m_aniSpeed = 200;
@@ -64,8 +67,6 @@ void Zombie::Update()
 	
 	m_attackCollisionBox.setY(m_image.getCenterY() - 40);
 	
-	
-
 	if ( this->Hit() == true )
 	{
 		ChangeState(eSTATE::HIT);
@@ -76,10 +77,8 @@ void Zombie::Update()
 		this->SetCode(eSTATE::ATTACK);
 	}
 
-	
-
 	m_pstate->Update(this);
-	m_image.update(200);
+	m_image.update(m_aniSpeed);
 	Attackable();
 }
 
@@ -344,6 +343,11 @@ int Zombie::GetType() const
 int Zombie::GetCode() const
 {
 	return m_code;
+}
+
+int Zombie::GetScore() const
+{
+	return m_score;
 }
 
 int Zombie::GetX() const

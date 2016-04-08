@@ -10,6 +10,5 @@ public:
 
 	virtual void Update();
 
-	void Move();
 	bool MoveCheck();
 };

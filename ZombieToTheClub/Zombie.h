@@ -79,5 +79,6 @@ public:
 	float GetCenterX() const;
 	float GetCenterY() const;
 	int GetCode() const;
+	int GetScore() const;
 };
 

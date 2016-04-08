@@ -22,11 +22,10 @@ void State_Stay::Update()
 		Player::Instance()->ChangeState(eSTATE::MOVE);
 	}
 
-	if (CInput::Instance()->KetPressedCheck(DIK_A))
+	if (Player::Instance()->IsAttack())
 	{
 		Player::Instance()->ChangeState(eSTATE::ATTACK);
-	}
-}
+	}}
 
 bool State_Stay::MoveCheck()
 {

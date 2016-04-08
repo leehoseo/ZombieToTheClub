@@ -35,41 +35,37 @@ public:
 	~Player();
 
 	void Initialize();
-
-	void MoveX(float _x);
-	void MoveY(float _y);
-
-	void Move();
 	void Update();
 	void Render();
 
+	void MoveX(float _x);
+	void MoveY(float _y);
+	void Move();
+	void Hit(Zombie _zombie);
+	bool IsDie();
+
+	void AttackMove();
+	bool IsAttack();
 	void ChangeState(eSTATE _state);
 	void ChangeImage(Image _image);
+	void ResetDirection();
 
-	int GetX() const;
-	int GetY() const;
-
-	int GetCurrentFrame() const;
-	int GetFrame() const;
-
-	int GetCode() const;
-	void SetCode(eSTATE _code);
-	int GetType() const;
-
-	float GetRadius() const;
-
-	float GetCenterX() const;
-	float GetCenterY() const;
-
-	int GetAtk() const;
-	int GetHp() const;
 	Image GetImage() const;
 	Image GetAttackCollisionBox() const;
 	Image GetHitCollisionBox() const;
 	AttackDirection GetAttackDirection() const;
-	void ResetDirection();
-
-	void Hit(Zombie _zombie);
-
-	bool IsDie();
+	int GetX() const;
+	int GetY() const;
+	int GetCurrentFrame() const;
+	int GetFrame() const;
+	int GetCode() const;
+	int GetType() const;
+	float GetRadius() const;
+	float GetCenterX() const;
+	float GetCenterY() const;
+	int GetAtk() const;
+	int GetHp() const;
+	
+	void SetCode(eSTATE _code);
+	
 };

@@ -34,7 +34,7 @@ void Scene_Main::Initialize()
 	{
 		m_pzombie[index] = new Main_Zombie();
 
-		m_pzombie[index]->initialize( (rand() % GAME_WIDTH - 148) + 10 , rand() % 300 + 470, ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
+		m_pzombie[index]->initialize( (rand() % GAME_WIDTH - 148) + 10 , rand() % 242 + 520, ImageManager::Instance()->BZ1_Move(), AI_State_Move::Instance());
 	}
 }
 
@@ -78,7 +78,7 @@ void Scene_Main::Update(Game * _game)
 	m_title.update(200);
 }
 
-void Scene_Main::Render()
+void Scene_Main::Render(Game* _game)
 {
 	m_main.draw();
 	

@@ -32,8 +32,11 @@ private:
 	IDirectSoundBuffer* m_primaryBuffer;
 	IDirectSoundBuffer8* m_hiphop1;
 	IDirectSoundBuffer8* m_hiphop2;
+	IDirectSoundBuffer8* m_hiphop3;
 	IDirectSoundBuffer8* m_letsPatty;
 	IDirectSoundBuffer8* m_scratch;
+
+	IDirectSoundBuffer8* m_currentMusic;
 
 	bool InitializeDirectSound(HWND _hwnd);
 

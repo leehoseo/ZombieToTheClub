@@ -14,6 +14,6 @@ public:
 	~AI_State_Stay();
 
 	virtual void Update(Zombie * _zombie);
-	bool StayCheck(Zombie * _zombie);
+	bool AniEnd(Zombie * _zombie);
 };
 

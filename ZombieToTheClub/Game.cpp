@@ -76,7 +76,7 @@ void Game::renderGame()
 	if (SUCCEEDED(m_pgraphics->beginScene()))		// device의 백버퍼 비워주고 device3d->BeginScene(); -> sprite->Begin()순서로 실행
 	{
 		m_pscene->Update(this);
-		m_pscene->Render();									// 함수 오버라이딩되어있다
+		m_pscene->Render(this);									// 함수 오버라이딩되어있다
 		m_pgraphics->endScene();					// Scene을종료시킨다
 	}
 
@@ -96,7 +96,7 @@ int Game::GetScore() const
 }
 
 // 점수 
-void Game::SetScore(int _score)
+void Game::AddScore(int _score)
 {
 	m_score += _score;
 }

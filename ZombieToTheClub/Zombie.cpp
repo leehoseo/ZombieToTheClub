@@ -11,6 +11,7 @@
 #include "AI_State_Stay.h"
 #include "AI_State_Attack.h"
 #include "AI_State_Hit.h"
+#include "AI_State_Death.h"
 
 Zombie::Zombie()
 {
@@ -29,7 +30,7 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_traceCollisionBox = ImageManager::Instance()->TraceCollsionBox();
 
 	m_directionX = rand() % (GAME_WIDTH - 148) + 10;
-	m_directionY = rand() % (GAME_HEIGHT - 148) + 10;
+	m_directionY = rand() % 590;
 
 	m_image.setX(_x);
 	m_image.setY(_y);
@@ -45,8 +46,9 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_aniSpeed = 200;
 	m_directionX = 0;
 	m_directionY = 0;
-	m_bAtk = false;
+	m_batk = false;
 	m_isarrive = true;
+	m_bdeath = false;
 	m_time.SetStartTime();
 }
 
@@ -72,9 +74,9 @@ void Zombie::Update()
 		ChangeState(eSTATE::HIT);
 	}
 
-	if ( this->Attack() == true )
+	if (this->m_hp < 0	&& this->GetCode() != eSTATE::DEATH)
 	{
-		this->SetCode(eSTATE::ATTACK);
+		ChangeState(eSTATE::DEATH);
 	}
 
 	m_pstate->Update(this);
@@ -139,7 +141,7 @@ void Zombie::Move()
 void Zombie::SetDirection(int _x, int _y)
 {
 	m_directionX = rand() % (GAME_WIDTH - 148) + 10;
-	m_directionY = rand() % (GAME_HEIGHT - 148) + 10;
+	m_directionY = rand() % 590;
 
 	if (_x != 0 && _y != 0)
 	{
@@ -154,7 +156,9 @@ void Zombie::SetDirection(int _x, int _y)
 bool Zombie::IsDie()
 {
 	if (m_hp < 0)
+	{
 		return true;
+	}
 	else
 		return false;
 }
@@ -195,21 +199,24 @@ void Zombie::ChangeState(eSTATE _state)
 	case eSTATE::ATTACK:
 		if (GetIsAtk() == false)
 			return;
-		ChangeImage(ImageManager::Instance()->BZ_Attack());
+		ChangeImage(ImageManager::Instance()->BZ1_Attack());
 		m_pstate = AI_State_Attack::Instance();
 		return;
 	case eSTATE::HIT:
-		ChangeImage(ImageManager::Instance()->BZ_Hit());
+		ChangeImage(ImageManager::Instance()->BZ1_Hit());
 		m_pstate = AI_State_Hit::Instance();
 		return;
 	case eSTATE::MOVE:
-		ChangeImage(ImageManager::Instance()->BZ_Move());
+		ChangeImage(ImageManager::Instance()->BZ1_Move());
 		m_pstate = AI_State_Move::Instance();
 		return;
 	case eSTATE::STAY:
-		ChangeImage(ImageManager::Instance()->BZ_Stay());
+		ChangeImage(ImageManager::Instance()->BZ1_Stay());
 		m_pstate = AI_State_Stay::Instance();
 		return;
+	case eSTATE::DEATH:
+		ChangeImage(ImageManager::Instance()->BZ1_Death());
+		m_pstate = AI_State_Death::Instance();
 	}
 }
 
@@ -249,13 +256,13 @@ void Zombie::SetHp(int _atk)
 
 bool Zombie::Attackable()
 {
-	if (m_bAtk == false)
+	if (m_batk == false)
 	{
 		m_time.SetTime();
 
 		if (m_time.GetTime() > 2000)
 		{
-			m_bAtk = true;
+			m_batk = true;
 			m_time.SetStartTime();
 		}
 	}
@@ -264,7 +271,12 @@ bool Zombie::Attackable()
 
 void Zombie::SetIsAtk(bool _isAtk)
 {
-	m_bAtk = _isAtk;
+	m_batk = _isAtk;
+}
+
+void Zombie::SetDeath(bool _death)
+{
+	m_bdeath = _death;
 }
 
 
@@ -301,7 +313,7 @@ int Zombie::GetAtk() const
 
 bool Zombie::GetIsAtk() const
 {
-	return m_bAtk;
+	return m_batk;
 }
 
 int Zombie::GetPatrolCount() const
@@ -339,7 +351,6 @@ int Zombie::GetType() const
 	return m_type;
 }
 
-
 int Zombie::GetCode() const
 {
 	return m_code;
@@ -348,6 +359,11 @@ int Zombie::GetCode() const
 int Zombie::GetScore() const
 {
 	return m_score;
+}
+
+bool Zombie::GetDeath() const
+{
+	return m_bdeath;
 }
 
 int Zombie::GetX() const

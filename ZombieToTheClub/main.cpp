@@ -31,6 +31,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	if (game == NULL)
 		MessageBoxA(hwnd, "game Class ERROR", NULL, NULL);
 	
+	RECT clientRect;
+
+	GetClientRect(hwnd, &clientRect);
+	MoveWindow(hwnd, 0, 0, GAME_WIDTH + (GAME_WIDTH - clientRect.right), GAME_HEIGHT + (GAME_HEIGHT - clientRect.bottom), true);
 
 	game->initialize(hwnd);
 	CInput::Instance()->Initialize(hInstance, hwnd);

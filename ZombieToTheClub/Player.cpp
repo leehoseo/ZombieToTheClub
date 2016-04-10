@@ -39,7 +39,9 @@ void Player::Initialize()
 	m_atkSpeed = 0.5;
 	m_gold = 0;
 	m_experience = 0;
+	m_combo = 0;
 	ResetDirection();
+	m_comboTime.SetStartTime();
 }
 
 void Player::MoveX(float _x)
@@ -97,7 +99,7 @@ void Player::Move()
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::LEFT_DOWN] = true;
 
-		if (10 > this->GetX() && GAME_HEIGHT - 160 < this->GetY())
+		if (10 > this->GetX() && 590 < this->GetY())
 			return;
 
 		if (10 > this->GetX())
@@ -105,7 +107,7 @@ void Player::Move()
 			MoveY(+5);
 			return;
 		}
-		if (GAME_HEIGHT - 160 < this->GetY())
+		if (590 < this->GetY())
 		{
 			MoveX(-5);
 			return;
@@ -143,7 +145,7 @@ void Player::Move()
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::RIGHT_DOWN] = true;
 
-		if (GAME_WIDTH - 138 < this->GetX() && GAME_HEIGHT - 160 < this->GetY())
+		if (GAME_WIDTH - 138 < this->GetX() && 590 < this->GetY())
 			return;
 
 		if (GAME_WIDTH - 138 < this->GetX())
@@ -151,7 +153,7 @@ void Player::Move()
 			MoveY(+5);
 			return;
 		}
-		if (GAME_HEIGHT - 160 < this->GetY())
+		if (590 < this->GetY())
 		{
 			MoveX(+5);
 			return;
@@ -195,7 +197,7 @@ void Player::Move()
 		if (CInput::Instance()->KetPressedCheck(DIK_A))
 			m_attackDirection.m_direction[eDIRECTION::DOWN] = true;
 
-		if (GAME_HEIGHT - 160 < this->GetY())
+		if (590 < this->GetY())
 			return;
 
 		MoveY(+5);
@@ -205,6 +207,7 @@ void Player::Move()
 
 void Player::Update()
 {
+	m_comboTime.SetTime();
 	m_attackCollisionBox.setY(m_image.getCenterY()-40);
 
 	//m_hitCollisionBox.setX(m_image.getX()+20);
@@ -212,6 +215,12 @@ void Player::Update()
 
 	m_pstate->Update();
 	m_image.update(200);
+
+	if (m_comboTime.GetTime() > 3000)
+	{
+		m_combo = 0;
+		m_comboTime.SetStartTime();
+	}
 }
 
 void Player::Render()
@@ -225,30 +234,54 @@ void Player::AttackMove()
 {
 	if (GetAttackDirection().m_direction[eDIRECTION::LEFT])
 	{
+		if (10 > this->GetX())
+			return;
+
 		MoveX(-2);
 		return;
 	}
 
 	else if (GetAttackDirection().m_direction[eDIRECTION::RIGHT])
 	{
+		if (GAME_WIDTH - 138 < this->GetX())
+			return;
+
 		MoveX(+2);
 		return;
 	}
 
 	else if (GetAttackDirection().m_direction[eDIRECTION::UP])
 	{
+		if (10 > this->GetY())
+			return;
+
 		MoveY(-2);
 		return;
 	}
 
 	else if (GetAttackDirection().m_direction[eDIRECTION::DOWN])
 	{
+		if (590 < this->GetY())
+			return;
 		MoveY(+2);
 		return;
 	}
 
 	else if (GetAttackDirection().m_direction[eDIRECTION::LEFT_UP])
 	{
+		if (10 > this->GetX() && 10 > this->GetY())
+			return;
+
+		if (10 > this->GetX())
+		{
+			MoveY(-2);
+			return;
+		}
+		if (10 > this->GetY())
+		{
+			MoveX(-2);
+			return;
+		}
 		MoveX(-2);
 		MoveY(-2);
 		return;
@@ -256,6 +289,20 @@ void Player::AttackMove()
 
 	else if (GetAttackDirection().m_direction[eDIRECTION::LEFT_DOWN])
 	{
+		if (10 > this->GetX() && 590 < this->GetY())
+			return;
+
+		if (10 > this->GetX())
+		{
+			MoveY(+2);
+			return;
+		}
+		if (590 < this->GetY())
+		{
+			MoveX(-2);
+			return;
+		}
+
 		MoveX(-2);
 		MoveY(+2);
 		return;
@@ -263,6 +310,20 @@ void Player::AttackMove()
 
 	else if (GetAttackDirection().m_direction[eDIRECTION::RIGHT_UP])
 	{
+		if (GAME_WIDTH - 138 < this->GetX() && 10 > this->GetY())
+			return;
+
+		if (GAME_WIDTH - 138 < this->GetX())
+		{
+			MoveY(-2);
+			return;
+		}
+		if (10 > this->GetY())
+		{
+			MoveX(+2);
+			return;
+		}
+
 		MoveX(+2);
 		MoveY(-2);
 		return;
@@ -270,6 +331,20 @@ void Player::AttackMove()
 
 	else if (GetAttackDirection().m_direction[eDIRECTION::RIGHT_DOWN])
 	{
+		if (GAME_WIDTH - 138 < this->GetX() && 590 < this->GetY())
+			return;
+
+		if (GAME_WIDTH - 138 < this->GetX())
+		{
+			MoveY(+2);
+			return;
+		}
+		if (590 < this->GetY())
+		{
+			MoveX(+2);
+			return;
+		}
+
 		MoveX(+2);
 		MoveY(+2);
 		return;
@@ -370,6 +445,16 @@ void Player::SetCode(eSTATE _code)
 	m_code = _code;
 }
 
+void Player::SetComboTime()
+{
+	m_comboTime.SetStartTime();
+}
+
+void Player::AddCombo(int _combo)
+{
+	m_combo += _combo;
+}
+
 int Player::GetType() const
 {
 	return m_type;
@@ -398,6 +483,11 @@ int Player::GetAtk() const
 int Player::GetHp() const
 {
 	return m_hp;
+}
+
+int Player::GetCombo() const
+{
+	return m_combo;
 }
 
 Image Player::GetImage() const

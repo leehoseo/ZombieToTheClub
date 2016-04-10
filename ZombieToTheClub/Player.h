@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Zombie.h"
 #include "CrashCheck.h"
+#include "Time.h"
 
 struct AttackDirection
 {
@@ -12,7 +13,6 @@ struct AttackDirection
 class Player
 {
 private:
-
 	Player();
 	Image m_image;
 	Image m_attackCollisionBox;
@@ -28,9 +28,10 @@ private:
 	float m_atkSpeed;
 	int m_gold;
 	int m_experience;
+	int m_combo;
 
+	Time m_comboTime;
 public:
-
 	static Player * Instance();
 	~Player();
 
@@ -65,7 +66,9 @@ public:
 	float GetCenterY() const;
 	int GetAtk() const;
 	int GetHp() const;
-	
+	int GetCombo() const;
+
 	void SetCode(eSTATE _code);
-	
+	void SetComboTime();
+	void AddCombo(int _combo);
 };

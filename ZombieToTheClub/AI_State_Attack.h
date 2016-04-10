@@ -13,8 +13,7 @@ public:
 
 	virtual void Update(Zombie * _zombie);
 	
-	void Attack(Zombie * _zombie);
-	bool AttackCheck(Zombie * _zombie);
+	bool AniEnd(Zombie * _zombie);
 
 };
 

@@ -37,5 +37,5 @@ public:
 	void ChangeScene(Scene* _newScene);
 
 	int GetScore() const;
-	void SetScore(int _score);
+	void AddScore(int _score);
 };

@@ -9,7 +9,7 @@ public:
 	Scene();
 	~Scene();
 
-	virtual void Render() = 0;
+	virtual void Render(Game* _game) = 0;
 	virtual void Update(Game* _game = 0) = 0;
 	virtual void Initialize() = 0;
 

@@ -36,7 +36,7 @@ void Scene_TeamLogo::Update(Game* _game)
 	_game->ChangeScene(new Scene_Main());
 }
 
-void Scene_TeamLogo::Render()
+void Scene_TeamLogo::Render(Game* _game)
 {
 	m_logo.draw(D3DCOLOR_ARGB(m_ibrightness, 255, 255, 255));
 }

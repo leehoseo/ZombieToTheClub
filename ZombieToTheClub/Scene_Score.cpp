@@ -19,7 +19,7 @@ Scene_Score::~Scene_Score()
 {
 }
 
-void Scene_Score::Render()
+void Scene_Score::Render(Game* _game)
 {
 	//m_score.draw();
 }

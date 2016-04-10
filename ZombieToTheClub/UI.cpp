@@ -29,13 +29,12 @@ void UI::Update()
 bool UI::CollisionCheck()
 {
 	RECT temp = { 0, 0, 0, 0 };
-	//printf("%f  %f	%d	%d\n", m_image.getX(), m_image.getY() , Mouse::Instance()->GetX() , Mouse::Instance()->GetY());
 	if (m_image.getX() < Mouse::Instance()->GetX() && Mouse::Instance()->GetX() < m_image.getX() + m_image.getWidth()
 		&& m_image.getY() < Mouse::Instance()->GetY() && Mouse::Instance()->GetY() < m_image.getY() + m_image.getHeight())
 	{
-		temp.left = 408;
-		temp.right = 816;
-		temp.bottom = 95;
+		temp.left = m_image.getPixelX();
+		temp.right = m_image.getPixelX() * 2;
+		temp.bottom = m_image.getPixelY();
 		temp.top = 0;
 
 		m_image.setSpriteDataRect(temp);
@@ -44,8 +43,8 @@ bool UI::CollisionCheck()
 	else
 	{
 		temp.left = 0;
-		temp.right = 408;
-		temp.bottom = 95;
+		temp.right = m_image.getPixelX();
+		temp.bottom = m_image.getPixelY();
 		temp.top = 0;
 
 		m_image.setSpriteDataRect(temp);

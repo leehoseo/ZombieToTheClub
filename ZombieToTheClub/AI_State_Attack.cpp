@@ -20,7 +20,7 @@ AI_State_Attack * AI_State_Attack::Instance()
 
 void AI_State_Attack::Update(Zombie * _zombie)
 {
-	if (!AttackCheck(_zombie))
+	if (AniEnd(_zombie) == false )
 	{
 		if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), _zombie->GetAttackCollisionBox()) && Player::Instance()->GetCode() != eSTATE::HIT)
 		{
@@ -32,7 +32,7 @@ void AI_State_Attack::Update(Zombie * _zombie)
 	}
 }
 
-bool AI_State_Attack::AttackCheck(Zombie * _zombie)
+bool AI_State_Attack::AniEnd(Zombie * _zombie)
 {
 	if (_zombie->GetCurrentFrame() == _zombie->GetFrame())
 	{

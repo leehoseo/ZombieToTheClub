@@ -23,7 +23,7 @@ AI_State_Stay::~AI_State_Stay()
 
 void AI_State_Stay::Update(Zombie * _zombie)
 {
-	if (!StayCheck(_zombie))
+	if (AniEnd(_zombie) == false)
 	{
 		_zombie->ChangeState(eSTATE::MOVE);
 	}
@@ -38,12 +38,10 @@ void AI_State_Stay::Update(Zombie * _zombie)
 	if (_zombie->Targeting() == true)
 	{
 		_zombie->ChangeState(eSTATE::MOVE);
-		//_zombie->SetDirection(Player::Instance()->GetX() + 50, Player::Instance()->GetY() + 50);
 	}
-
 }
 
-bool AI_State_Stay::StayCheck(Zombie * _zombie)
+bool AI_State_Stay::AniEnd(Zombie * _zombie)
 {
 	if (_zombie->GetCurrentFrame() == _zombie->GetFrame())
 	{

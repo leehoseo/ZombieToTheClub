@@ -77,7 +77,9 @@ void Image::draw(COLOR_ARGB color)
 {
 	if (!visible || graphics == NULL)
 		return;
+
 	spriteData.texture = this->m_ptexture;
+	
 	if (color == graphicsNS::FILTER)
 		graphics->drawSprite(spriteData, colorFilter);
 	else

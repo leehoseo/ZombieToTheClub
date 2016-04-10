@@ -21,14 +21,16 @@ AI_State_Hit::~AI_State_Hit()
 
 void AI_State_Hit::Update(Zombie * _zombie)
 {
-	if ( !HitCheck(_zombie))
+	if (AniEnd(_zombie) == false )
 	{
+		Player::Instance()->AddCombo(+1);
+		Player::Instance()->SetComboTime();
 		_zombie->SetHp(-Player::Instance()->GetAtk());
 		_zombie->ChangeState(eSTATE::STAY);
 	}
 }
 
-bool AI_State_Hit::HitCheck(Zombie * _zombie)
+bool AI_State_Hit::AniEnd(Zombie * _zombie)
 {
 	if (_zombie->GetCurrentFrame() == _zombie->GetFrame())
 	{

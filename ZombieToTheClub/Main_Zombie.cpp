@@ -18,7 +18,7 @@ void Main_Zombie::initialize(float _x, float _y, Image _image, AI_State * _state
 	m_image.setY(_y);
 
 	m_directionX = rand() % (GAME_WIDTH - 148) + 10;
-	m_directionY = rand() % 300 + 470;
+	m_directionY = rand() % 242 + 520;
 
 	m_hp = 35;
 	m_atk = 8;
@@ -60,7 +60,7 @@ void Main_Zombie::Move()
 void Main_Zombie::SetDirection()
 {
 	m_directionX = rand() % (GAME_WIDTH - 148) + 10;
-	m_directionY = rand() % 350 + 420;
+	m_directionY = rand() % 242 + 520;
 
 	m_isarrive = false;
 	++m_PatrolCount;

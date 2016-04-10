@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="AI_State.cpp" />
     <ClCompile Include="AI_State_Attack.cpp" />
+    <ClCompile Include="AI_State_Death.cpp" />
     <ClCompile Include="AI_State_Hit.cpp" />
     <ClCompile Include="AI_State_Move.cpp" />
     <ClCompile Include="AI_State_Stay.cpp" />
@@ -189,6 +190,7 @@
   <ItemGroup>
     <ClInclude Include="AI_State.h" />
     <ClInclude Include="AI_State_Attack.h" />
+    <ClInclude Include="AI_State_Death.h" />
     <ClInclude Include="AI_State_Hit.h" />
     <ClInclude Include="AI_State_Move.h" />
     <ClInclude Include="AI_State_Stay.h" />

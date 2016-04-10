@@ -16,9 +16,11 @@ Sound::~Sound()
 	ShutdownDirectSound();
 	ShutdownWaveFile(&m_hiphop1);
 	ShutdownWaveFile(&m_hiphop2); 
+	
 	ShutdownWaveFile(&m_scratch);
 	ShutdownWaveFile(&m_letsPatty);
 
+	ShutdownWaveFile(&m_currentMusic);
 	//SAFE_DELETE(m_hiphop1);
 	//SAFE_DELETE(m_hiphop2);
 	//SAFE_DELETE(m_scratch);

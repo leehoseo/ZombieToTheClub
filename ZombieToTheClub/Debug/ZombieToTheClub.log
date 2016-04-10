@@ -1,32 +1,3 @@
-﻿  State_Stay.cpp
+﻿  ImageManager.cpp
 d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  c:\program files (x86)\microsoft directx sdk (february 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  State_Move.cpp
-d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  c:\program files (x86)\microsoft directx sdk (february 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  State_Attack.cpp
-d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Player.cpp
-d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  c:\program files (x86)\microsoft directx sdk (february 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-d:\programming\directx11\zombietotheclub\zombietotheclub\player.cpp(38): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\player.cpp(332): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\player.cpp(333): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\player.cpp(338): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\player.cpp(339): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\player.cpp(345): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\programming\directx11\zombietotheclub\zombietotheclub\player.cpp(350): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Main_Zombie.cpp
-d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  Zombie.cpp
-  State_Hit.cpp
-  Scene_Play.cpp
-  Input.cpp
-  Game.cpp
-  AI_State_Stay.cpp
-  AI_State_Move.cpp
-  AI_State_Hit.cpp
-  AI_State_Attack.cpp
   ZombieToTheClub.vcxproj -> D:\Programming\DirectX11\ZombieToTheClub\Debug\ZombieToTheClub.exe

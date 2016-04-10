@@ -71,7 +71,7 @@ void Graphics::initialize(HWND hw, int w, int h, bool full)
 		&d3dpp,
 		&device3d);
 
-	Text::Instaance()->Initialize(device3d);
+	
 
 	if (FAILED(result))
 		PostQuitMessage(0);
@@ -81,6 +81,7 @@ void Graphics::initialize(HWND hw, int w, int h, bool full)
 	if (FAILED(result))
 		PostQuitMessage(0);
 
+	Text::Instaance()->Initialize(device3d, sprite);
 }
 
 // 백버퍼 설정
@@ -151,6 +152,7 @@ HRESULT Graphics::showBackbuffer()
 	result = device3d->Present(NULL, NULL, NULL, NULL);		// 백버퍼를 표면으로 올려주는 함수
 	return result;
 }
+
 void Graphics::drawSprite(const SpriteData &spriteData, COLOR_ARGB color)
 {
 	if (spriteData.texture == NULL)      // if no texture
@@ -210,6 +212,9 @@ HRESULT Graphics::beginScene()
 
 	result = sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
+	result = Text::Instaance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
+
+
 	return result;
 }
 
@@ -219,7 +224,7 @@ HRESULT Graphics::endScene()
 	result = E_FAIL;
 
 	sprite->End();
-
+	Text::Instaance()->GetSprite()->End();
 	if (device3d)
 		result = device3d->EndScene();
 	return result;

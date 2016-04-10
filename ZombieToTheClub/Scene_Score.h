@@ -12,7 +12,7 @@ public:
 	Scene_Score();
 	~Scene_Score();
 
-	virtual void Render();
+	virtual void Render(Game* _game);
 	virtual void Update(Game* _game = 0);
 	virtual void Initialize();
 

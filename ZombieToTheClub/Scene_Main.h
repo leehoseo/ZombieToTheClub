@@ -22,6 +22,6 @@ public:
 
 	virtual void Initialize();
 	virtual void Update(Game* _game = 0);
-	virtual void Render();
+	virtual void Render(Game* _game);
 };
 

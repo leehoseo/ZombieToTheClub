@@ -33,7 +33,8 @@ protected:
 	int m_score;
 	int m_aniSpeed;
 
-	bool m_bAtk;
+	bool m_batk;
+	bool m_bdeath;
 public:
 	Zombie();
 	~Zombie();
@@ -62,6 +63,7 @@ public:
 	void SetAniSpeed(int _speed);
 	void SetHp(int _atk);
 	void SetIsAtk(bool _isAtk);
+	void SetDeath(bool _death);
 
 	Image GetImage() const;
 	Image GetAttackCollisionBox() const;
@@ -80,5 +82,6 @@ public:
 	float GetCenterY() const;
 	int GetCode() const;
 	int GetScore() const;
+	bool GetDeath() const;
 };
 

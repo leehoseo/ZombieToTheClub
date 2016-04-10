@@ -40,6 +40,18 @@ Scene_Play::~Scene_Play()
 
 void Scene_Play::Initialize()
 {
+
+	m_hiphop1.Initialize(ImageManager::Instance()->UI_Play_Hiphop1());
+	m_hiphop2.Initialize(ImageManager::Instance()->UI_Play_Hiphop2());
+	m_hiphop3.Initialize(ImageManager::Instance()->UI_Play_Hiphop3());
+	m_leftHandStay = ImageManager::Instance()->LeftHandStay();
+	m_rightHandStay= ImageManager::Instance()->RightHandStay();
+	m_turnTable = ImageManager::Instance()->Play_TurnTable();
+	m_interpace = ImageManager::Instance()->Play_Interpace();
+	m_player = ImageManager::Instance()->Play_Player();
+	m_floor = ImageManager::Instance()->Play_Floor();
+	m_hpGage = ImageManager::Instance()->Play_HpGage();
+
 	m_stage[0].time = 7000;
 	m_stage[0].maxZombie = 50;
 	m_stage[0].createPerSecond = 0;	 
@@ -83,7 +95,7 @@ void Scene_Play::Initialize()
 	m_stage[6].bstageCheck = false;
 
 
-	for (int index = 0; index < MAX_ZOMBIE; ++index)
+	/*for (int index = 0; index < MAX_ZOMBIE; ++index)
 	{
 		m_pzombie[index] = new Boy_Zombie();
 		
@@ -95,8 +107,32 @@ void Scene_Play::Initialize()
 		{
 			m_pzombie[index]->initialize(-500, -500, ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
 		}
+	}*/
+}
+
+
+void Scene_Play::UI_Music_Check()
+{
+	if(m_hiphop1.CollisionCheck() && Mouse::Instance()->GetButtonClick())
+	{
+		printf("1\n");
+		return;
+	}
+
+	if (m_hiphop2.CollisionCheck() && Mouse::Instance()->GetButtonClick())
+	{
+		printf("2\n");
+		return;
+	}
+
+	if (m_hiphop3.CollisionCheck() && Mouse::Instance()->GetButtonClick())
+	{
+		printf("3\n");
+		return;
 	}
 }
+
+
 
 void Scene_Play::PrintStageInfo(Game* _game)
 {
@@ -119,22 +155,56 @@ void Scene_Play::PrintStageInfo(Game* _game)
 	sprintf_s(hp, "HP : %d", Player::Instance()->GetHp());
 	LPCSTR Lhp = hp;
 	Text::Instaance()->Print(Lhp, GAME_WIDTH - 200, 60);
+
+	char combo[20];
+	sprintf_s(combo, "COMBO : %d", Player::Instance()->GetCombo());
+	LPCSTR Lcombo = combo;
+	Text::Instaance()->Print(Lcombo, GAME_WIDTH - 200, 80);
 }
 
-
-void Scene_Play::Update(Game* _game)
-{	
-	m_stageTime.SetTime();
+void Scene_Play::CreateZombie()
+{
 	m_createTime.SetTime();
 
-	PrintStageInfo(_game);
-	Player::Instance()->Update();
+	if (m_currentStage != 0 &&
+		m_currentZombie < m_stage[m_currentStage].maxZombie &&
+		m_createTime.GetTime() > 1000 / m_stage[m_currentStage].createPerSecond)
+	{
+		m_pzombie[m_currentZombie] = new Boy_Zombie();
+
+		if (rand() % 2)
+		{
+			m_pzombie[m_currentZombie]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % 590, ImageManager::Instance()->BZ1_Stay(), AI_State_Stay::Instance());
+		}
+		else
+		{
+			m_pzombie[m_currentZombie]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % 590, ImageManager::Instance()->BZ1_Move(), AI_State_Move::Instance());
+		}
+
+		++m_currentZombie;
+
+		m_createTime.SetStartTime();
+	}
+}
+
+void Scene_Play::StageStart()
+{
+	m_stageTime.SetTime();
 
 	if (m_stageTime.GetTime() > m_stage[m_currentStage].time)		// Stage 가 시작되면
 	{
 		for (int index = 0; index < m_stage[m_currentStage].createZombie; ++index)		// 초기 좀비들 생성
 		{
-			m_pzombie[m_currentZombie]->SetCoordinate(rand() % (GAME_WIDTH - 148) + 10, rand() % (GAME_HEIGHT - 148) + 10);
+			m_pzombie[m_currentZombie] = new Boy_Zombie();
+
+			if (rand() % 2)
+			{
+				m_pzombie[index]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % 590, ImageManager::Instance()->BZ1_Stay(), AI_State_Stay::Instance());
+			}
+			else
+			{
+				m_pzombie[index]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % 590, ImageManager::Instance()->BZ1_Move(), AI_State_Move::Instance());
+			}
 
 			++m_currentZombie;
 		}
@@ -143,44 +213,71 @@ void Scene_Play::Update(Game* _game)
 		++m_currentStage;
 		m_bgameStart = true;
 	}
+}
+
+void Scene_Play::Update(Game* _game)
+{	
+	Player::Instance()->Update();
+	m_hiphop1.Update();
+	m_hiphop2.Update();
+	m_hiphop3.Update();
+	UI_Music_Check();
+	m_leftHandStay.update(500);
+	m_rightHandStay.update(500);
+	
+	StageStart();
 
 	if (m_bgameStart == false)
 		return;
 
-	if( m_currentStage != 0 &&
-		m_currentZombie < m_stage[m_currentStage].maxZombie &&
-		m_createTime.GetTime() > 1000 / m_stage[m_currentStage].createPerSecond)
-	{
-		m_pzombie[m_currentZombie]->SetCoordinate(rand() % (GAME_WIDTH - 148) + 10, rand() % (GAME_HEIGHT - 148) + 10);
-		++m_currentZombie;
+	CreateZombie();
 
-		m_createTime.SetStartTime();
-	}
-	
-	for (int index = 0; index < m_currentZombie ; ++index)
+	for (int index = 0; index < m_currentZombie; ++index)
 	{
-		if (m_pzombie[index]->GetX() == - 500 || m_pzombie[index]->GetY() == - 500)
+		if (m_pzombie[index] == NULL)
 			continue;
 
 		m_pzombie[index]->Update();
 
-		if (m_pzombie[index]->IsDie())
+
+		if (m_pzombie[index]->GetDeath())
 		{
-			_game->SetScore(m_pzombie[index]->GetScore());
-			m_pzombie[index]->SetCoordinate(-500,-500);
+			_game->AddScore(m_pzombie[index]->GetScore());
+			SAFE_DELETE(m_pzombie[index]);
 			--m_currentZombie;
 		}
 	}
-	_game->SetScore(m_currentStage);
+
+	_game->AddScore(m_currentStage);
+
 	if (Player::Instance()->IsDie())
 		_game->ChangeScene(new Scene_Score());
+	
 }
 
-void Scene_Play::Render()
+void Scene_Play::Render(Game* _game)
 {
+	m_interpace.draw();
+	m_hiphop1.Render();
+	m_hiphop2.Render();
+	m_hiphop3.Render();
+	
+	m_turnTable.draw();
+	m_player.draw();
+	m_floor.draw();
+	m_hpGage.draw();
+	m_leftHandStay.draw();
+	m_rightHandStay.draw();
+
+	PrintStageInfo(_game);
+
 	for (int index = 0; index < m_currentZombie; ++index)
 	{
+		if (m_pzombie[index] == NULL)
+			continue;
+
 		m_pzombie[index]->Render();
 	}
+
 	Player::Instance()->Render();
 }

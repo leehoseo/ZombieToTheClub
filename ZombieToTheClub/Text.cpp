@@ -17,9 +17,10 @@ Text * Text::Instaance()
 	return &instance;
 }
 
-void Text::Initialize(LPDIRECT3DDEVICE9 _devive)
+void Text::Initialize(LPDIRECT3DDEVICE9 _devive, LPD3DXSPRITE _sprite)
 {
 	m_pDevice = _devive;
+	m_sprite = _sprite;
 
 	D3DXFONT_DESC DXFont_DESC;
 	ZeroMemory(&DXFont_DESC, sizeof(D3DXFONT_DESC));
@@ -43,12 +44,21 @@ void Text::Initialize(LPDIRECT3DDEVICE9 _devive)
 		DXFont_DESC.Weight,          // Weight
 		DXFont_DESC.MipLevels,            // MipLevels, 0 = autogen mipmaps
 		FALSE,          // Italic
-		DEFAULT_CHARSET,    // CharSet
+		DEFAULT_CHARSET,    // CharSet 
 		OUT_DEFAULT_PRECIS,    // OutputPrecision
 		DEFAULT_QUALITY,    // Quality
 		DEFAULT_PITCH | FF_DONTCARE, // PitchAndFamily
 		DXFont_DESC.FaceName,        // pFaceName
 		&m_pFont);        // ppFont
+
+
+	HRESULT result = D3DXCreateSprite(m_pDevice, &m_sprite);
+
+	if (FAILED(result))
+	{
+		//
+	}
+
 
 }
 
@@ -56,19 +66,19 @@ void Text::Print(LPCSTR _string, int _x, int _y, D3DXCOLOR ARGB)
 {
 	RECT rect = { _x, _y, m_nMax_X, m_nMax_Y };
 
-	m_pDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, ARGB, 1.0f, 0);
-	m_pDevice->BeginScene();
 
-	m_pFont->DrawText(0,
+	m_pFont->DrawText(m_sprite,
 		_string,
 		-1, // size of string or -1 indicates null terminating string
 		&rect,            // rectangle text is to be formatted to in windows coords
 		DT_TOP | DT_LEFT, // draw in the top left corner of the viewport
 		ARGB);      // black text
 
-
-	m_pFont->DrawText(0, _string, -1, &rect, DT_TOP | DT_LEFT, ARGB);
-
-	m_pDevice->EndScene();
+	//m_pDevice->EndScene();
 	return;
+}
+
+LPD3DXSPRITE Text::GetSprite() const
+{
+	return m_sprite;
 }

@@ -43,7 +43,7 @@ void ImageManager::initialize(Graphics * g)
 	m_play_interpace.initialize(g, 0, 0, 0, 740, 0, "../ZombieToTheClub\\Resource\\Interpace.png");
 	m_play_player.initialize(g, 0, 0, 41, 740, 0, "../ZombieToTheClub\\Resource\\Player.png");
 	m_play_floor.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Floor.png");
-	m_play_hpGage.initialize(g, 0, 0, 118, 790, 0, "../ZombieToTheClub\\Resource\\HpGage.png");
+	m_play_hpGage.initialize(g, 300, 20, 130, 790, 0, "../ZombieToTheClub\\Resource\\HpGage.png");
 	
 	m_leftHandStay.initialize(g, 280, 233, 464, 624, 2, "../ZombieToTheClub\\Resource\\LeftHand_Stay.png");
 	m_rightHandStay.initialize(g, 280, 233, 800, 624, 2, "../ZombieToTheClub\\Resource\\RightHand_Stay.png");
@@ -51,7 +51,10 @@ void ImageManager::initialize(Graphics * g)
 	//Player
 	m_player_move.initialize(g, 128, 128, 0, 0, 10, "../ZombieToTheClub\\Resource\\Player_Move.png");
 	m_player_stay.initialize(g, 128, 128, 0, 0, 2, "../ZombieToTheClub\\Resource\\Player_Stay.png");
-	m_player_attack.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Player_Attack.png");
+	m_player_attack1.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\attack_1.png");
+	m_player_attack2.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\attack_2.png");
+	m_player_attack3.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\attack_3.png");
+
 	m_player_hit.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Player_Down.png");
 
 	m_bz1_stay.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_stay.png");
@@ -59,6 +62,18 @@ void ImageManager::initialize(Graphics * g)
 	m_bz1_hit.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_hit.png");
 	m_bz1_attack.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_attack.png");
 	m_bz1_death.initialize(g, 128, 128, 0, 0, 10, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_death.png");
+
+	m_bz2_stay.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_stay.png");
+	m_bz2_move.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_move.png");
+	m_bz2_hit.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_hit.png");
+	m_bz2_attack.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_attack.png");
+	m_bz2_death.initialize(g, 128, 128, 0, 0, 10, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_death.png");
+
+	m_bz3_stay.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_stay.png");
+	m_bz3_move.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_move.png");
+	m_bz3_hit.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_hit.png");
+	m_bz3_attack.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_attack.png");
+	m_bz3_death.initialize(g, 128, 128, 0, 0, 10, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_death.png");
 
 	m_scone_score.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Score.png");
 }
@@ -234,11 +249,19 @@ Image ImageManager::Player_Stay() const
 	return m_player_stay;
 }
 
-Image ImageManager::Player_Attack() const
+Image ImageManager::Player_Attack1() const
 {
-	return m_player_attack;
+	return m_player_attack1;
 }
 
+Image ImageManager::Player_Attack2() const
+{
+	return m_player_attack2;
+}
+Image ImageManager::Player_Attack3() const
+{
+	return m_player_attack3;
+}
 Image ImageManager::Player_Hit() const
 {
 	return m_player_hit;

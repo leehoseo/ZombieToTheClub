@@ -2,11 +2,10 @@
 #include "Player.h"
 #include <stdlib.h>
 #include <time.h>
-#include "Boy_Zombie.h"
+#include "Boy_Zombie1.h"
 #include "AI_State_Move.h"
 #include "AI_State_Stay.h"
 #include "ImageManager.h"
-#include "Boy_Zombie.h"
 #include "CrashCheck.h"
 #include "AI_State_Attack.h"
 #include "Game.h"
@@ -21,8 +20,8 @@ Scene_Play::Scene_Play()
 
 	Player::Instance()->Initialize();
 	m_score = 0;
-	Sound::Instance()->PlayLetsPatty();
-	Sound::Instance()->PlayHiphop1();
+	//Sound::Instance()->PlayLetsPatty();
+	//Sound::Instance()->PlayHiphop1();
 	m_currentStage = 0;
 	m_currentZombie = 0;
 	m_bgameStart = false;
@@ -115,19 +114,19 @@ void Scene_Play::UI_Music_Check()
 {
 	if(m_hiphop1.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
-		printf("1\n");
+		Sound::Instance()->SetSound(1);
 		return;
 	}
 
 	if (m_hiphop2.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
-		printf("2\n");
+		Sound::Instance()->SetSound(2);
 		return;
 	}
 
 	if (m_hiphop3.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
-		printf("3\n");
+		Sound::Instance()->SetSound(3);
 		return;
 	}
 }
@@ -170,7 +169,7 @@ void Scene_Play::CreateZombie()
 		m_currentZombie < m_stage[m_currentStage].maxZombie &&
 		m_createTime.GetTime() > 1000 / m_stage[m_currentStage].createPerSecond)
 	{
-		m_pzombie[m_currentZombie] = new Boy_Zombie();
+		m_pzombie[m_currentZombie] = new Boy_Zombie1();
 
 		if (rand() % 2)
 		{
@@ -195,7 +194,7 @@ void Scene_Play::StageStart()
 	{
 		for (int index = 0; index < m_stage[m_currentStage].createZombie; ++index)		// 초기 좀비들 생성
 		{
-			m_pzombie[m_currentZombie] = new Boy_Zombie();
+			m_pzombie[m_currentZombie] = new Boy_Zombie1();
 
 			if (rand() % 2)
 			{
@@ -215,6 +214,16 @@ void Scene_Play::StageStart()
 	}
 }
 
+void Scene_Play::DecreaseHpGage()
+{
+	RECT temp = { 0, 0, 0, 0 };
+	temp.left = 0;
+	temp.right = Player::Instance()->GetHp() * 3;
+	temp.bottom = m_hpGage.getPixelY();
+	temp.top = 0;
+	m_hpGage.setSpriteDataRect(temp);
+}
+
 void Scene_Play::Update(Game* _game)
 {	
 	Player::Instance()->Update();
@@ -224,7 +233,7 @@ void Scene_Play::Update(Game* _game)
 	UI_Music_Check();
 	m_leftHandStay.update(500);
 	m_rightHandStay.update(500);
-	
+	DecreaseHpGage();
 	StageStart();
 
 	if (m_bgameStart == false)
@@ -238,7 +247,6 @@ void Scene_Play::Update(Game* _game)
 			continue;
 
 		m_pzombie[index]->Update();
-
 
 		if (m_pzombie[index]->GetDeath())
 		{

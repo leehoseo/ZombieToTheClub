@@ -4,8 +4,6 @@
 
 class State_Attack : public State
 {
-private:
-	Time m_time;
 public:
 	State_Attack();
 	~State_Attack();

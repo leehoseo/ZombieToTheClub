@@ -39,7 +39,9 @@ private:
 	// Player
 	Image m_player_move;
 	Image m_player_stay;
-	Image m_player_attack;
+	Image m_player_attack1;
+	Image m_player_attack2;
+	Image m_player_attack3;
 	Image m_player_hit;
 
 	Image m_bz1_stay;
@@ -96,7 +98,9 @@ public:
 	//Player
 	Image Player_Move() const;
 	Image Player_Stay() const;
-	Image Player_Attack() const;
+	Image Player_Attack1() const;
+	Image Player_Attack2() const;
+	Image Player_Attack3() const;
 	Image Player_Hit() const;
 
 	Image BZ1_Stay() const;

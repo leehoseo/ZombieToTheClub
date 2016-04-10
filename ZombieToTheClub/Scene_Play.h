@@ -44,6 +44,7 @@ private:
 
 	void CreateZombie();
 	void StageStart();
+	void DecreaseHpGage();
 	bool m_bgameStart;
 public:
 

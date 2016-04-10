@@ -17,7 +17,7 @@ const int GAME_HEIGHT = 900;
 const int MAX_ZOMBIE = 150;
 const double PI = 3.14159265;					// ø¯¡÷¿≤
 
-enum eSTATE { STAY = 1, MOVE = 2, ATTACK = 3 , HIT = 4 , DEATH = 5 };
+enum eSTATE { STAY = 1, MOVE = 2, ATTACK1 = 3 , ATTACK2 = 4, ATTACK3 = 5, HIT = 6 , DEATH = 7 };
 enum eDIRECTION { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, LEFT_UP = 4, LEFT_DOWN = 5, RIGHT_UP = 6, RIGHT_DOWN = 7 };
 enum eTYPE { PLAYER = 1 , BZ = 2 };
 

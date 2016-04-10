@@ -24,7 +24,7 @@ void State_Stay::Update()
 
 	if (Player::Instance()->IsAttack())
 	{
-		Player::Instance()->ChangeState(eSTATE::ATTACK);
+		Player::Instance()->ChangeState(eSTATE::ATTACK1);
 	}}
 
 bool State_Stay::MoveCheck()

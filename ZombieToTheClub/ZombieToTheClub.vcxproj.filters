@@ -55,9 +55,6 @@
     <Filter Include="소스 파일\Input">
       <UniqueIdentifier>{9fa3e56f-51e2-4510-89cd-791b6886c153}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Zombie\Boy_Zombie">
-      <UniqueIdentifier>{2678ddf8-aa0d-42cf-8252-4a20749a10ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Player\State">
       <UniqueIdentifier>{772d2507-361d-4aa5-bde8-49abe92fab2c}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,12 @@
     </Filter>
     <Filter Include="소스 파일\Sound">
       <UniqueIdentifier>{902dc652-bdff-433f-9c14-06cce31c3096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Zombie\AI_State\AI_Death">
+      <UniqueIdentifier>{7698cbe0-7c3a-432f-bcc2-391b2fc9df73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Zombie\Boy_Zombie1">
+      <UniqueIdentifier>{2678ddf8-aa0d-42cf-8252-4a20749a10ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,9 +156,6 @@
     <ClCompile Include="Input.cpp">
       <Filter>소스 파일\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Boy_Zombie.cpp">
-      <Filter>소스 파일\Zombie\Boy_Zombie</Filter>
-    </ClCompile>
     <ClCompile Include="Zombie.cpp">
       <Filter>소스 파일\Zombie</Filter>
     </ClCompile>
@@ -199,7 +199,16 @@
       <Filter>소스 파일\Sound</Filter>
     </ClCompile>
     <ClCompile Include="AI_State_Death.cpp">
+      <Filter>소스 파일\Zombie\AI_State\AI_Death</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Attack3.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Attack2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Boy_Zombie1.cpp">
+      <Filter>소스 파일\Zombie\Boy_Zombie1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,9 +263,6 @@
     <ClInclude Include="Input.h">
       <Filter>소스 파일\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Boy_Zombie.h">
-      <Filter>소스 파일\Zombie\Boy_Zombie</Filter>
-    </ClInclude>
     <ClInclude Include="Zombie.h">
       <Filter>소스 파일\Zombie</Filter>
     </ClInclude>
@@ -297,7 +303,16 @@
       <Filter>소스 파일\Sound</Filter>
     </ClInclude>
     <ClInclude Include="AI_State_Death.h">
+      <Filter>소스 파일\Zombie\AI_State\AI_Death</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Attack3.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Attack2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Boy_Zombie1.h">
+      <Filter>소스 파일\Zombie\Boy_Zombie1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

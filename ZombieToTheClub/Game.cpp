@@ -106,7 +106,7 @@ void Game::run()
 	if (m_pgraphics == NULL)
 		return;
 
-	printf("%d		%d\n", Mouse::Instance()->GetX(), Mouse::Instance()->GetY());
+	//printf("%d		%d\n", Mouse::Instance()->GetX(), Mouse::Instance()->GetY());
 	m_time.SetTime();
 	// 1/60초가 지나면 update()와 render 실행
 	if (m_time.GetTime() > 16)			// 1000 : 1 = x : 1/60 공식으로 1/60초는 16.6666 

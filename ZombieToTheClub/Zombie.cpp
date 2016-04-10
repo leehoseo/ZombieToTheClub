@@ -166,8 +166,11 @@ bool Zombie::IsDie()
 bool Zombie::Hit()
 {
 	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetAttackCollisionBox(), this->GetHitCollisionBox()) && 
-		Player::Instance()->GetCode() == eSTATE::ATTACK &&
-		this->GetCode() != eSTATE::HIT )
+		(Player::Instance()->GetCode() == eSTATE::ATTACK1 ||
+		 Player::Instance()->GetCode() == eSTATE::ATTACK2 ||
+		 Player::Instance()->GetCode() == eSTATE::ATTACK3 ) &&
+		this->GetCode() != eSTATE::HIT &&
+		this->GetCode() != eSTATE::DEATH)
 	{
 		return true;
 	}
@@ -177,7 +180,7 @@ bool Zombie::Hit()
 
 bool Zombie::Attack()
 {
-	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), this->GetAttackCollisionBox()) && this->GetCode() != eSTATE::ATTACK)
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), this->GetAttackCollisionBox()) && this->GetCode() != eSTATE::ATTACK1)
 		return true;
 	else
 		return false;
@@ -196,7 +199,7 @@ void Zombie::ChangeState(eSTATE _state)
 	m_PatrolCount = 0;
 	switch (_state)
 	{
-	case eSTATE::ATTACK:
+	case eSTATE::ATTACK1:
 		if (GetIsAtk() == false)
 			return;
 		ChangeImage(ImageManager::Instance()->BZ1_Attack());

@@ -3,14 +3,16 @@
 #include "Input.h"
 #include "State_Stay.h"
 #include "State_Attack.h"
+#include "State_Attack2.h"
+#include "State_Attack3.h"
 #include "State_Move.h"
 #include "State_Hit.h"
 #include <stdio.h>
 #include "Sound.h"
+
 Player::Player()
 {
 }
-
 
 Player * Player::Instance()
 {
@@ -352,10 +354,14 @@ void Player::AttackMove()
 
 	if (GetImage().GetHorizontal())
 	{
+		if (10 > this->GetX())
+			return;
 		MoveX(-2);
 	}
 	else
 	{
+		if (GAME_WIDTH - 138 < this->GetX())
+			return;
 		MoveX(+2);
 	}
 }
@@ -363,7 +369,10 @@ void Player::AttackMove()
 bool Player::IsAttack()
 {
 	if (CInput::Instance()->KetPressedCheck(DIK_A))
+	{
+		printf("d");
 		return true;
+	}
 	else
 		return false;
 }
@@ -373,14 +382,27 @@ void Player::ChangeState(eSTATE _state)
 	SetCode(_state);
 	switch (_state)
 	{
-	case eSTATE::ATTACK: 
-		Sound::Instance()->PlayScratch();
-		ChangeImage(ImageManager::Instance()->Player_Attack());
+	case eSTATE::ATTACK1: 
+		Sound::Instance()->PlayAttack1();
+		ChangeImage(ImageManager::Instance()->Player_Attack1());
 		delete m_pstate;
 		m_pstate = new State_Attack();
 		return;
-	case eSTATE::HIT:
+	case eSTATE::ATTACK2:
+		Sound::Instance()->PlayAttack1();
+		ChangeImage(ImageManager::Instance()->Player_Attack2());
+		delete m_pstate;
+		m_pstate = new State_Attack2();
+		return;
 
+	case eSTATE::ATTACK3:
+		Sound::Instance()->PlayAttack1();
+		ChangeImage(ImageManager::Instance()->Player_Attack3());
+		delete m_pstate;
+		m_pstate = new State_Attack3();
+		return;
+
+	case eSTATE::HIT:
 		ChangeImage(ImageManager::Instance()->Player_Hit());
 		ResetDirection();
 		delete m_pstate;

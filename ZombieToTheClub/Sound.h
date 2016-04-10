@@ -34,7 +34,7 @@ private:
 	IDirectSoundBuffer8* m_hiphop2;
 	IDirectSoundBuffer8* m_hiphop3;
 	IDirectSoundBuffer8* m_letsPatty;
-	IDirectSoundBuffer8* m_scratch;
+	IDirectSoundBuffer8* m_attack1;
 
 	IDirectSoundBuffer8* m_currentMusic;
 
@@ -54,7 +54,11 @@ public:
 	bool Initialize(HWND _hwnd);
 	bool PlayHiphop1();
 	bool PlayHiphop2();
-	bool PlayScratch();
+	bool PlayHiphop3();
+	bool PlayAttack1();
 	bool PlayLetsPatty();
+
+	IDirectSoundBuffer8* GetSound() const;
+	void SetSound(int _index);
 };
 

@@ -1,4 +1,9 @@
 #include "Main_Zombie.h"
+#include "AI_State_Move.h"
+#include "AI_State_Stay.h"
+#include "AI_State_Attack.h"
+#include "AI_State_Hit.h"
+#include "AI_State_Death.h"
 #include "ImageManager.h"
 
 
@@ -11,11 +16,19 @@ Main_Zombie::~Main_Zombie()
 {
 }
 
-void Main_Zombie::initialize(float _x, float _y, Image _image, AI_State * _state)
+void Main_Zombie::initialize()
 {
-	m_image = _image;
-	m_image.setX(_x);
-	m_image.setY(_y);
+	if (rand() % 2)
+	{
+		ChangeState(eSTATE::STAY);
+	}
+	else
+	{
+		ChangeState(eSTATE::MOVE);
+	}
+
+	m_image.setX(rand() % (GAME_WIDTH - 148) + 10);
+	m_image.setY(rand() % 242 + 520);
 
 	m_directionX = rand() % (GAME_WIDTH - 148) + 10;
 	m_directionY = rand() % 242 + 520;
@@ -27,7 +40,6 @@ void Main_Zombie::initialize(float _x, float _y, Image _image, AI_State * _state
 	m_experience = 5;
 	m_score = 1;
 	m_type = eTYPE::BZ;
-	m_pstate = _state;
 	m_aniSpeed = 200;
 }
 
@@ -69,10 +81,42 @@ void Main_Zombie::SetDirection()
 void Main_Zombie::Update()
 {
 	m_image.update(m_aniSpeed);
-	Move();
+	//Move();
+	m_pstate->Update(this);
 }
 
 void Main_Zombie::Render()
 {
 	m_image.draw();
+}
+
+void Main_Zombie::ChangeState(eSTATE _state)
+{
+	SetCode(_state);
+
+	m_PatrolCount = 0;
+	switch (_state)
+	{
+	case eSTATE::ATTACK1:
+		if (GetIsAtk() == false)
+			return;
+		ChangeImage(ImageManager::Instance()->BZ3_Attack());
+		m_pstate = AI_State_Attack::Instance();
+		return;
+	case eSTATE::HIT:
+		ChangeImage(ImageManager::Instance()->BZ3_Hit());
+		m_pstate = AI_State_Hit::Instance();
+		return;
+	case eSTATE::MOVE:
+		ChangeImage(ImageManager::Instance()->BZ3_Move());
+		m_pstate = AI_State_Move::Instance();
+		return;
+	case eSTATE::STAY:
+		ChangeImage(ImageManager::Instance()->BZ3_Stay());
+		m_pstate = AI_State_Stay::Instance();
+		return;
+	case eSTATE::DEATH:
+		ChangeImage(ImageManager::Instance()->BZ3_Death());
+		m_pstate = AI_State_Death::Instance();
+	}
 }

@@ -5,23 +5,25 @@ Sound::Sound()
 {
 	m_DirectSound = 0;
 	m_primaryBuffer = 0;
-	m_hiphop1 = 0;
-	m_hiphop2 = 0;
-	m_hiphop3 = 0;
-	m_letsPatty = 0;
-	m_attack1 = 0;
 }
 
 Sound::~Sound()
 {
 	ShutdownDirectSound();
-	ShutdownWaveFile(&m_hiphop1);
-	ShutdownWaveFile(&m_hiphop2); 
-	
-	ShutdownWaveFile(&m_hiphop3);
-	ShutdownWaveFile(&m_letsPatty);
-	ShutdownWaveFile(&m_attack1);
-	ShutdownWaveFile(&m_currentMusic);
+	ShutdownWaveFile(&m_main.m_music);
+	ShutdownWaveFile(&m_letsPatty.m_music);
+	ShutdownWaveFile(&m_attack1.m_music);
+	ShutdownWaveFile(&m_currentMusic.m_music);
+	ShutdownWaveFile(&m_curBufMusic.m_music);
+
+	ShutdownWaveFile(&m_buf1.m_music);
+	ShutdownWaveFile(&m_buf2.m_music);
+	ShutdownWaveFile(&m_buf3.m_music);
+
+	for (int index = 0; index < 10; ++index)
+	{
+		ShutdownWaveFile(&m_MusicList[index].m_music);
+	}
 }
 
 Sound * Sound::Instance()
@@ -40,48 +42,139 @@ bool Sound::Initialize(HWND _hwnd)
 		return false;
 	}
 
-	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Hiphop1.wav", &m_currentMusic);
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Main.wav", &m_currentMusic.m_music);
 	if (!result)
 	{
 		MESSAGEBOX("Erorr1");
 		return false;
 	}
 
-	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Hiphop1.wav", &m_hiphop1);
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Main.wav", &m_curBufMusic.m_music);
 	if (!result)
 	{
-		MESSAGEBOX("Erorr2");
+		MESSAGEBOX("Erorr1");
 		return false;
 	}
 
-	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Hiphop2.wav", &m_hiphop2);
-	if (!result)
-	{
-		MESSAGEBOX("Erorr3");
-		return false;
-	}
-
-	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\BangBangBang.wav", &m_hiphop3);
-	if (!result)
-	{
-		MESSAGEBOX("Erorr4");
-		return false;
-	}
-
-	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\LetsPatty.wav", &m_letsPatty);
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\LetsPatty.wav", &m_letsPatty.m_music);
 	if (!result)
 	{
 		MESSAGEBOX("Erorr5");
 		return false;
 	}
 
-	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Attack1.wav", &m_attack1);
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Attack1.wav", &m_attack1.m_music);
 	if (!result)
 	{
 		MESSAGEBOX("Erorr6");
 		return false;
 	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Main.wav", &m_main.m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Buf1.wav", &m_buf1.m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_buf1.m_nEndTime = 17000;
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Buf2.wav", &m_buf2.m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_buf2.m_nEndTime = 60000;
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Buf3.wav", &m_buf3.m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_buf3.m_nEndTime = 90000;
+
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music1.wav", &m_MusicList[0].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[0].m_nEndTime = 190000;
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music2.wav", &m_MusicList[1].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[1].m_nEndTime = 110000;
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music3.wav", &m_MusicList[2].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[2].m_nEndTime = 125000;
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music4.wav", &m_MusicList[3].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[3].m_nEndTime = 77000;
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music5.wav", &m_MusicList[4].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[4].m_nEndTime = 56000;
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music6.wav", &m_MusicList[5].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[5].m_nEndTime = 39000;
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music7.wav", &m_MusicList[6].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[6].m_nEndTime = 82000;
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music8.wav", &m_MusicList[7].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[7].m_nEndTime = 151000;
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music9.wav", &m_MusicList[8].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[8].m_nEndTime = 80000;
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music10.wav", &m_MusicList[9].m_music);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+	m_MusicList[9].m_nEndTime = 74000;
 }
+
 
 void Sound::ShutdownDirectSound()
 {
@@ -324,86 +417,77 @@ bool Sound::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuffer)
 	return true;
 }
 
-IDirectSoundBuffer8 * Sound::GetSound() const
+int Sound::GetMusicEndTime() const
 {
-	return m_currentMusic;
+	return m_currentMusic.m_nEndTime;
 }
 
-void Sound::SetSound(int _index)
+void Sound::ChangeMusic(int _index)
 {
-	m_currentMusic->Stop();
-	//_currentMusic->SetCurrentPosition(0);
-	//_currentMusic->Stop();
+	EndBufMusic();
+	EndMusic();
+	//10~12 : น๖วม
 	switch (_index)
 	{
+	case 0:
+		m_currentMusic = m_MusicList[0];
+		break;
 	case 1:
-		//PlayHiphop1();
-		m_currentMusic = m_hiphop1;
+		m_currentMusic = m_MusicList[1];
 		break;
 	case 2:
-		//PlayHiphop2();
-		m_currentMusic = m_hiphop2;
+		m_currentMusic = m_MusicList[2];
 		break;
 	case 3:
-		//PlayHiphop3();
-		m_currentMusic = m_hiphop3;
+		m_currentMusic = m_MusicList[3];
+		break;
+	case 4:
+		m_currentMusic = m_MusicList[4];
+		break;
+	case 5:
+		m_currentMusic = m_MusicList[5];
+		break;
+	case 6:
+		m_currentMusic = m_MusicList[6];
+		break;
+	case 7:
+		m_currentMusic = m_MusicList[7];
+		break;
+	case 8:
+		m_currentMusic = m_MusicList[8];
+		break;
+	case 9:
+		m_currentMusic = m_MusicList[9];
 		break;
 	}
-
-	m_currentMusic->SetCurrentPosition(0);
-
-	m_currentMusic->SetVolume(DSBVOLUME_MAX);
-
-	m_currentMusic->Play(0, 0, DSBPLAY_LOOPING);
+	PlayMusic();
 }
 
-bool Sound::PlayHiphop1()
+int Sound::GetBufMusicEndTime() const
+{
+	return m_curBufMusic.m_nEndTime;
+}
+
+bool Sound::PlayBufMusic()
 {
 	HRESULT result;
 
 	// Set position at the beginning of the sound buffer.
-	result = m_hiphop1->SetCurrentPosition(0);
+	result = m_curBufMusic.m_music->SetCurrentPosition(0);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
 	// Set volume of the buffer to 100%.
-	result = m_hiphop1->SetVolume(DSBVOLUME_MAX);
+	result = m_curBufMusic.m_music->SetVolume(DSBVOLUME_MAX);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
 	// Play the contents of the secondary sound buffer.
-	result = m_hiphop1->Play(0, 0, DSBPLAY_LOOPING);
-	if (FAILED(result))
-	{
-		return false;
-	}
-	return true;
-}
-
-bool Sound::PlayHiphop2()
-{
-	HRESULT result;
-
-	// Set position at the beginning of the sound buffer.
-	result = m_hiphop2->SetCurrentPosition(0);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	// Set volume of the buffer to 100%.
-	result = m_hiphop2->SetVolume(DSBVOLUME_MAX);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	// Play the contents of the secondary sound buffer.
-	result = m_hiphop2->Play(0, 0, DSBPLAY_LOOPING);
+	result = m_curBufMusic.m_music->Play(0, 0, 0);
 	if (FAILED(result))
 	{
 		return false;
@@ -412,54 +496,52 @@ bool Sound::PlayHiphop2()
 	return true;
 }
 
-bool Sound::PlayHiphop3()
+void Sound::EndBufMusic()
 {
-	HRESULT result;
-
-	// Set position at the beginning of the sound buffer.
-	result = m_hiphop3->SetCurrentPosition(0);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	// Set volume of the buffer to 100%.
-	result = m_hiphop3->SetVolume(DSBVOLUME_MAX);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	// Play the contents of the secondary sound buffer.
-	result = m_hiphop3->Play(0, 0, DSBPLAY_LOOPING);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	return true;
+	m_curBufMusic.m_music->Stop();
 }
+
+void Sound::ChangeBufMusic(int _index)
+{
+	EndBufMusic();
+	EndMusic();
+	
+	switch (_index)
+	{
+	case 0:
+		m_curBufMusic = m_buf1;
+		break;
+	case 1:
+		m_curBufMusic = m_buf2;
+		break;
+	case 2:
+		m_curBufMusic = m_buf3;
+		break;
+	}
+	PlayBufMusic();
+}
+
 
 bool Sound::PlayAttack1()
 {
 	HRESULT result;
 
 	// Set position at the beginning of the sound buffer.
-	result = m_attack1->SetCurrentPosition(0);
+	result = m_attack1.m_music->SetCurrentPosition(0);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
 	// Set volume of the buffer to 100%.
-	result = m_attack1->SetVolume(DSBVOLUME_MAX);
+	result = m_attack1.m_music->SetVolume(DSBVOLUME_MAX);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
 	// Play the contents of the secondary sound buffer.
-	result = m_attack1->Play(0, 0, 0);
+	result = m_attack1.m_music->Play(0, 0, 0);
 	if (FAILED(result))
 	{
 		return false;
@@ -473,24 +555,58 @@ bool Sound::PlayLetsPatty()
 	HRESULT result;
 
 	// Set position at the beginning of the sound buffer.
-	result = m_letsPatty->SetCurrentPosition(0);
+	result = m_letsPatty.m_music->SetCurrentPosition(0);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
 	// Set volume of the buffer to 100%.
-	result = m_letsPatty->SetVolume(DSBVOLUME_MAX);
+	result = m_letsPatty.m_music->SetVolume(DSBVOLUME_MAX);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
 	// Play the contents of the secondary sound buffer.
-	result = m_letsPatty->Play(0, 0, 0);
+	result = m_letsPatty.m_music->Play(0, 0, 0);
 	if (FAILED(result))
 	{
 		return false;
 	}
 	return true;
+}
+
+bool Sound::PlayMusic()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_currentMusic.m_music->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_currentMusic.m_music->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_currentMusic.m_music->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	
+	return true;
+	
+}
+
+void Sound::EndMusic()
+{
+	m_currentMusic.m_music->Stop();
 }

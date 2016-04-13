@@ -160,6 +160,9 @@
     <ClCompile Include="AI_State_Hit.cpp" />
     <ClCompile Include="AI_State_Move.cpp" />
     <ClCompile Include="AI_State_Stay.cpp" />
+    <ClCompile Include="Boy_Zombie1.cpp" />
+    <ClCompile Include="Boy_Zombie2.cpp" />
+    <ClCompile Include="Boy_Zombie3.cpp" />
     <ClCompile Include="CrashCheck.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="graphics.cpp" />
@@ -186,7 +189,6 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="UI.cpp" />
-    <ClCompile Include="Boy_Zombie1.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +198,9 @@
     <ClInclude Include="AI_State_Hit.h" />
     <ClInclude Include="AI_State_Move.h" />
     <ClInclude Include="AI_State_Stay.h" />
+    <ClInclude Include="Boy_Zombie1.h" />
+    <ClInclude Include="Boy_Zombie2.h" />
+    <ClInclude Include="Boy_Zombie3.h" />
     <ClInclude Include="CrashCheck.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="graphics.h" />
@@ -222,7 +227,6 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="UI.h" />
-    <ClInclude Include="Boy_Zombie1.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

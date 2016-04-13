@@ -106,6 +106,18 @@
     <Filter Include="소스 파일\Zombie\Boy_Zombie1">
       <UniqueIdentifier>{2678ddf8-aa0d-42cf-8252-4a20749a10ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Zombie\Boy_Zombie2">
+      <UniqueIdentifier>{7cbfc3e7-d582-4b8f-9a8f-db14572e564f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Zombie\Boy_Zombie3">
+      <UniqueIdentifier>{f37d114a-e405-40d5-b1fa-02c474f55caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Player\State\Attack2">
+      <UniqueIdentifier>{08ff7ac4-a7ab-4484-87b7-e7a6b95b42f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Player\State\Attack3">
+      <UniqueIdentifier>{14fc4abe-b425-480c-a907-b1ebca3fed7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -201,14 +213,20 @@
     <ClCompile Include="AI_State_Death.cpp">
       <Filter>소스 파일\Zombie\AI_State\AI_Death</Filter>
     </ClCompile>
-    <ClCompile Include="State_Attack3.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="State_Attack2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Boy_Zombie1.cpp">
       <Filter>소스 파일\Zombie\Boy_Zombie1</Filter>
+    </ClCompile>
+    <ClCompile Include="Boy_Zombie2.cpp">
+      <Filter>소스 파일\Zombie\Boy_Zombie2</Filter>
+    </ClCompile>
+    <ClCompile Include="Boy_Zombie3.cpp">
+      <Filter>소스 파일\Zombie\Boy_Zombie3</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Attack2.cpp">
+      <Filter>소스 파일\Player\State\Attack2</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Attack3.cpp">
+      <Filter>소스 파일\Player\State\Attack3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -305,14 +323,20 @@
     <ClInclude Include="AI_State_Death.h">
       <Filter>소스 파일\Zombie\AI_State\AI_Death</Filter>
     </ClInclude>
-    <ClInclude Include="State_Attack3.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="State_Attack2.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Boy_Zombie1.h">
       <Filter>소스 파일\Zombie\Boy_Zombie1</Filter>
+    </ClInclude>
+    <ClInclude Include="Boy_Zombie2.h">
+      <Filter>소스 파일\Zombie\Boy_Zombie2</Filter>
+    </ClInclude>
+    <ClInclude Include="Boy_Zombie3.h">
+      <Filter>소스 파일\Zombie\Boy_Zombie3</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Attack2.h">
+      <Filter>소스 파일\Player\State\Attack2</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Attack3.h">
+      <Filter>소스 파일\Player\State\Attack3</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

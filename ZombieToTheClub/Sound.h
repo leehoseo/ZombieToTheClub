@@ -4,8 +4,6 @@
 #include <dsound.h>
 #include <stdio.h>
 
-
-
 struct WaveHeaderType
 {
 	char chunkId[4];
@@ -23,6 +21,12 @@ struct WaveHeaderType
 	unsigned long dataSize;
 };
 
+struct Music
+{
+	IDirectSoundBuffer8* m_music;
+	int m_nEndTime;
+};
+
 class Sound
 {
 private:
@@ -30,18 +34,22 @@ private:
 
 	IDirectSound8* m_DirectSound;
 	IDirectSoundBuffer* m_primaryBuffer;
-	IDirectSoundBuffer8* m_hiphop1;
-	IDirectSoundBuffer8* m_hiphop2;
-	IDirectSoundBuffer8* m_hiphop3;
-	IDirectSoundBuffer8* m_letsPatty;
-	IDirectSoundBuffer8* m_attack1;
 
-	IDirectSoundBuffer8* m_currentMusic;
+	Music m_letsPatty;
+	Music m_attack1;
+	Music m_main;
+	Music m_currentMusic;
+	Music m_curBufMusic;
+
+	Music m_buf1;
+	Music m_buf2;
+	Music m_buf3;
+
+	Music m_MusicList[10];
 
 	bool InitializeDirectSound(HWND _hwnd);
 
 	bool LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuffer);
-
 
 public:
 	~Sound();
@@ -52,13 +60,20 @@ public:
 	void ShutdownWaveFile(IDirectSoundBuffer8** secondaryBuffer);
 
 	bool Initialize(HWND _hwnd);
-	bool PlayHiphop1();
-	bool PlayHiphop2();
-	bool PlayHiphop3();
 	bool PlayAttack1();
 	bool PlayLetsPatty();
 
-	IDirectSoundBuffer8* GetSound() const;
-	void SetSound(int _index);
+	bool PlayMusic();
+	void EndMusic();
+
+	int GetMusicEndTime() const;
+	void ChangeMusic(int _index);
+
+	int GetBufMusicEndTime() const;
+
+	bool PlayBufMusic();
+	void EndBufMusic();
+	void ChangeBufMusic(int _index);
+
 };
 

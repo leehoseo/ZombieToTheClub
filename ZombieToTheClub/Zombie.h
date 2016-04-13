@@ -39,7 +39,7 @@ public:
 	Zombie();
 	~Zombie();
 	
-	virtual void initialize(float _x , float _y , Image _image, AI_State *_state);
+	virtual void initialize();
 	virtual void Render();
 	virtual void Update();
 	virtual void MoveX(float _x);
@@ -56,7 +56,7 @@ public:
 	bool Attackable();
 	bool Targeting();
 
-	void ChangeState(eSTATE _state);
+	virtual void ChangeState(eSTATE _state);
 	void ChangeImage(Image _image);
 
 	void SetCode(eSTATE _code);

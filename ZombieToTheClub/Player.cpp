@@ -380,6 +380,7 @@ bool Player::IsAttack()
 void Player::ChangeState(eSTATE _state)
 {
 	SetCode(_state);
+
 	switch (_state)
 	{
 	case eSTATE::ATTACK1: 

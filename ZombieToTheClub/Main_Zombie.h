@@ -7,7 +7,7 @@ public:
 	Main_Zombie();
 	~Main_Zombie();
 
-	virtual void initialize(float _x, float _y, Image _image, AI_State *_state);
+	virtual void initialize();
 
 	virtual void Move();
 
@@ -15,5 +15,6 @@ public:
 
 	virtual void Update();
 	virtual void Render();
+	virtual void ChangeState(eSTATE _state);
 };
 

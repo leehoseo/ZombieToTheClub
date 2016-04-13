@@ -22,9 +22,17 @@ Zombie::~Zombie()
 {
 }
 
-void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
+void Zombie::initialize()
 {
-	m_image = _image;
+	if (rand() % 2)
+	{
+		ChangeState(eSTATE::STAY);
+	}
+	else
+	{
+		ChangeState(eSTATE::MOVE);
+	}
+
 	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
 	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 	m_traceCollisionBox = ImageManager::Instance()->TraceCollsionBox();
@@ -32,8 +40,8 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_directionX = rand() % (GAME_WIDTH - 148) + 10;
 	m_directionY = rand() % 590;
 
-	m_image.setX(_x);
-	m_image.setY(_y);
+	m_image.setX(rand() % (GAME_WIDTH - 148) + 10);
+	m_image.setY(rand() % 590);
 
 	m_hp = 35;
 	m_atk = 8;
@@ -42,7 +50,6 @@ void Zombie::initialize(float _x, float _y, Image _image, AI_State *_state)
 	m_experience = 5;
 	m_score = 100;
 	m_type = eTYPE::BZ;
-	m_pstate = _state;
 	m_aniSpeed = 200;
 	m_directionX = 0;
 	m_directionY = 0;
@@ -245,7 +252,6 @@ bool Zombie::Targeting()
 	else
 		return false;
 }
-
 
 void Zombie::SetAniSpeed(int _speed)
 {

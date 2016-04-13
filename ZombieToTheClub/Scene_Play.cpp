@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Boy_Zombie1.h"
+#include "Boy_Zombie2.h"
+#include "Boy_Zombie3.h"
 #include "AI_State_Move.h"
 #include "AI_State_Stay.h"
 #include "ImageManager.h"
@@ -20,13 +22,16 @@ Scene_Play::Scene_Play()
 
 	Player::Instance()->Initialize();
 	m_score = 0;
-	//Sound::Instance()->PlayLetsPatty();
-	//Sound::Instance()->PlayHiphop1();
+	Sound::Instance()->PlayLetsPatty();
+
+	//Sound::Instance()->ChangeMusic(m_nMusicList[m_nCurMusicList++]);
 	m_currentStage = 0;
 	m_currentZombie = 0;
 	m_bgameStart = false;
 	m_stageTime.SetStartTime();
 	m_createTime.SetStartTime();
+	m_musicTime.SetStartTime();
+	m_bufMusicTime.SetStartTime();
 }
 
 Scene_Play::~Scene_Play()
@@ -92,46 +97,61 @@ void Scene_Play::Initialize()
 	m_stage[6].createPerSecond = 5;
 	m_stage[6].createZombie = 0;
 	m_stage[6].bstageCheck = false;
-
-
-	/*for (int index = 0; index < MAX_ZOMBIE; ++index)
-	{
-		m_pzombie[index] = new Boy_Zombie();
-		
-		if (rand() % 2)
-		{
-			m_pzombie[index]->initialize(-500, -500, ImageManager::Instance()->BZ_Stay(), AI_State_Stay::Instance());
-		}
-		else
-		{
-			m_pzombie[index]->initialize(-500, -500, ImageManager::Instance()->BZ_Move(), AI_State_Move::Instance());
-		}
-	}*/
+	ShuffleMusic();
+	m_nCurMusicList = 0;
 }
 
 
 void Scene_Play::UI_Music_Check()
 {
+	m_bufMusicTime.SetTime();
+
 	if(m_hiphop1.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
-		Sound::Instance()->SetSound(1);
+		Sound::Instance()->ChangeBufMusic(0);
 		return;
 	}
 
 	if (m_hiphop2.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
-		Sound::Instance()->SetSound(2);
+		Sound::Instance()->ChangeBufMusic(1);
 		return;
 	}
 
 	if (m_hiphop3.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
-		Sound::Instance()->SetSound(3);
+		Sound::Instance()->ChangeBufMusic(2);
 		return;
+	}
+
+	if (m_bufMusicTime.GetTime() > Sound::Instance()->GetBufMusicEndTime())
+	{
+		Sound::Instance()->ChangeMusic(m_nMusicList[m_nCurMusicList++]);
+		m_bufMusicTime.SetStartTime();
 	}
 }
 
 
+
+void Scene_Play::ShuffleMusic()
+{
+	for (int index = 0; index < 10; ++index)
+		m_nMusicList[index] = index;
+
+	int num1 = 0;
+	int num2 = 0;
+	int temp = 0;
+
+	for (int index = 0; index < 30; ++index)
+	{
+		num1 = rand() % 10;
+		num2 = rand() % 10;
+
+		temp = m_nMusicList[num2];
+		m_nMusicList[num2] = m_nMusicList[num1];
+		m_nMusicList[num1] = temp;
+	}
+}
 
 void Scene_Play::PrintStageInfo(Game* _game)
 {
@@ -161,6 +181,22 @@ void Scene_Play::PrintStageInfo(Game* _game)
 	Text::Instaance()->Print(Lcombo, GAME_WIDTH - 200, 80);
 }
 
+void Scene_Play::ChangeMusic()
+{
+	m_musicTime.SetTime();
+
+	if (m_musicTime.GetTime() > Sound::Instance()->GetMusicEndTime())
+	{
+		Sound::Instance()->ChangeMusic(m_nMusicList[m_nCurMusicList++]);
+		m_musicTime.SetStartTime();
+	}
+
+	if (m_nCurMusicList == 10)
+	{
+		m_nCurMusicList = 0;
+	}
+}
+
 void Scene_Play::CreateZombie()
 {
 	m_createTime.SetTime();
@@ -169,17 +205,21 @@ void Scene_Play::CreateZombie()
 		m_currentZombie < m_stage[m_currentStage].maxZombie &&
 		m_createTime.GetTime() > 1000 / m_stage[m_currentStage].createPerSecond)
 	{
-		m_pzombie[m_currentZombie] = new Boy_Zombie1();
-
-		if (rand() % 2)
+		switch (rand() % 3)
 		{
-			m_pzombie[m_currentZombie]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % 590, ImageManager::Instance()->BZ1_Stay(), AI_State_Stay::Instance());
-		}
-		else
-		{
-			m_pzombie[m_currentZombie]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % 590, ImageManager::Instance()->BZ1_Move(), AI_State_Move::Instance());
+		case 0:
+			m_pzombie[m_currentZombie] = new Boy_Zombie1();
+			break;
+		case 1:
+			m_pzombie[m_currentZombie] = new Boy_Zombie2();
+			break;
+		case 2:
+			m_pzombie[m_currentZombie] = new Boy_Zombie3();
+			break;
 		}
 
+		m_pzombie[m_currentZombie]->initialize();
+		
 		++m_currentZombie;
 
 		m_createTime.SetStartTime();
@@ -194,17 +234,21 @@ void Scene_Play::StageStart()
 	{
 		for (int index = 0; index < m_stage[m_currentStage].createZombie; ++index)		// 초기 좀비들 생성
 		{
-			m_pzombie[m_currentZombie] = new Boy_Zombie1();
-
-			if (rand() % 2)
+			switch (rand() % 3)
 			{
-				m_pzombie[index]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % 590, ImageManager::Instance()->BZ1_Stay(), AI_State_Stay::Instance());
-			}
-			else
-			{
-				m_pzombie[index]->initialize(rand() % (GAME_WIDTH - 148) + 10, rand() % 590, ImageManager::Instance()->BZ1_Move(), AI_State_Move::Instance());
+			case 0:
+				m_pzombie[m_currentZombie] = new Boy_Zombie1();
+				break;
+			case 1:
+				m_pzombie[m_currentZombie] = new Boy_Zombie2();
+				break;
+			case 2:
+				m_pzombie[m_currentZombie] = new Boy_Zombie3();
+				break;
 			}
 
+			m_pzombie[index]->initialize();
+		
 			++m_currentZombie;
 		}
 
@@ -230,11 +274,13 @@ void Scene_Play::Update(Game* _game)
 	m_hiphop1.Update();
 	m_hiphop2.Update();
 	m_hiphop3.Update();
-	UI_Music_Check();
 	m_leftHandStay.update(500);
 	m_rightHandStay.update(500);
+
 	DecreaseHpGage();
 	StageStart();
+	ChangeMusic();
+	UI_Music_Check();
 
 	if (m_bgameStart == false)
 		return;

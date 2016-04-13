@@ -13,7 +13,7 @@ public:
 	Boy_Zombie1();
 	~Boy_Zombie1();
 
-	virtual void initialize(float _x, float _y, Image _image, AI_State *_state);
-
+	virtual void initialize();
+	virtual void ChangeState(eSTATE _state);
 };
 

@@ -21,11 +21,15 @@ class Scene_Play : public Scene
 {
 private:
 	Zombie * m_pzombie[MAX_ZOMBIE];
+	Stage m_stage[7];
 	Time m_stageTime;
 	Time m_createTime;
+	Time m_musicTime;
+	Time m_bufMusicTime;
 	int m_score;
 	int m_currentZombie;
-	Stage m_stage[7];
+	bool m_bgameStart;
+	
 	UI m_hiphop1;
 	UI m_hiphop2;
 	UI m_hiphop3;
@@ -40,12 +44,14 @@ private:
 	Image m_hpGage;
 
 	int m_currentStage;
-	void UI_Music_Check();
 
+	void UI_Music_Check();
 	void CreateZombie();
 	void StageStart();
 	void DecreaseHpGage();
-	bool m_bgameStart;
+
+	int m_nMusicList[10];
+	int m_nCurMusicList;
 public:
 
 	Scene_Play();
@@ -56,5 +62,7 @@ public:
 	virtual void Render(Game* _game);
 	virtual void Initialize();
 
+	void ShuffleMusic();
 	void PrintStageInfo(Game* _game);
+	void ChangeMusic();
 };

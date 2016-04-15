@@ -31,7 +31,8 @@ void Scene_Main::Initialize()
 	m_option.Initialize(ImageManager::Instance()->UI_Main_Option());
 	m_exit.Initialize(ImageManager::Instance()->UI_Main_Exit());
 	m_title = ImageManager::Instance()->Title();
-
+	m_speak = ImageManager::Instance()->Speaker();
+	m_clubEnterance = ImageManager::Instance()->ClubEnterance();
 	for (int index = 0; index < 3 ; ++index)		// 초기 좀비들 생성
 	{
 		m_pzombie[index] = new Main_Zombie();
@@ -44,6 +45,7 @@ void Scene_Main::Update(Game * _game)
 {
 	if (m_start.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
+		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->EndMusic();
 		_game->ChangeScene(new Scene_Play());
 		return;
@@ -51,6 +53,7 @@ void Scene_Main::Update(Game * _game)
 
 	if (m_save.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
+		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->EndMusic();
 		_game->ChangeScene(new Scene_Play());
 		return;
@@ -58,6 +61,7 @@ void Scene_Main::Update(Game * _game)
 
 	if (m_option.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
+		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->EndMusic();
 		_game->ChangeScene(new Scene_Play());
 		return;
@@ -80,12 +84,15 @@ void Scene_Main::Update(Game * _game)
 	m_exit.Update();
 
 	m_title.update(200);
+	m_speak.update(200);
+	m_clubEnterance.update(200);
 }
 
 void Scene_Main::Render(Game* _game)
 {
 	m_main.draw();
-	
+	m_speak.draw();
+	m_clubEnterance.draw();
 	for (int index = 0; index < 3; ++index)		// 초기 좀비들 생성
 	{
 		m_pzombie[index]->Render();

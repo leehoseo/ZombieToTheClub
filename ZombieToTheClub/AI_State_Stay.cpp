@@ -23,6 +23,11 @@ AI_State_Stay::~AI_State_Stay()
 
 void AI_State_Stay::Update(Zombie * _zombie)
 {
+	if (_zombie->Targeting() == true && _zombie->GetCode() != eSTATE::TRACE)
+	{
+		_zombie->ChangeState(eSTATE::TRACE);
+	}
+
 	if (AniEnd(_zombie) == false)
 	{
 		_zombie->ChangeState(eSTATE::MOVE);
@@ -30,7 +35,8 @@ void AI_State_Stay::Update(Zombie * _zombie)
 
 	if (_zombie->GetCode() != eSTATE::HIT &&
 		CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), _zombie->GetAttackCollisionBox()) &&
-		_zombie->GetIsAtk() == true)
+		_zombie->GetIsAtk() == true
+		)
 	{
 		_zombie->ChangeState(eSTATE::ATTACK1);
 	}

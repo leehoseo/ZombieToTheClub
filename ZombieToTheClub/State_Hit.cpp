@@ -14,18 +14,13 @@ State_Hit::~State_Hit()
 
 void State_Hit::Update()
 {
-	if (!HitCheck())
+	if (!HitEnd())
 	{
 		Player::Instance()->ChangeState(eSTATE::STAY);
 	}
 }
 
-void State_Hit::Hit()
-{
-
-}
-
-bool State_Hit::HitCheck()
+bool State_Hit::HitEnd()
 {
 	if (Player::Instance()->GetCurrentFrame() == Player::Instance()->GetFrame())
 	{

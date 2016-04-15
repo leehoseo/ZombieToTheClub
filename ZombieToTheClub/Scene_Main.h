@@ -11,6 +11,8 @@ private:
 	Zombie * m_pzombie[3];
 	Image m_main;
 	Image m_title;
+	Image m_speak;
+	Image m_clubEnterance;
 	UI m_start;
 	UI m_save;
 	UI m_option;

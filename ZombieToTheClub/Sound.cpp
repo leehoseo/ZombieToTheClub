@@ -15,10 +15,19 @@ Sound::~Sound()
 	ShutdownWaveFile(&m_attack1.m_music);
 	ShutdownWaveFile(&m_currentMusic.m_music);
 	ShutdownWaveFile(&m_curBufMusic.m_music);
-
+	ShutdownWaveFile(&m_pEffect_ZombieHit);
+	ShutdownWaveFile(&m_pEffect_ZombieDeath);
 	ShutdownWaveFile(&m_buf1.m_music);
 	ShutdownWaveFile(&m_buf2.m_music);
 	ShutdownWaveFile(&m_buf3.m_music);
+	ShutdownWaveFile(&m_pEffect_PlayerDeath);
+	ShutdownWaveFile(&m_pEffect_20Combo);
+	ShutdownWaveFile(&m_pEffect_50Combo);
+	ShutdownWaveFile(&m_pEffect_100Combo);
+	ShutdownWaveFile(&m_pEffect_150Combo);
+	ShutdownWaveFile(&m_pEffect_GreatCombo);
+	ShutdownWaveFile(&m_pEffect_100Kill);
+	ShutdownWaveFile(&m_pEffect_PlayerDown);
 
 	for (int index = 0; index < 10; ++index)
 	{
@@ -39,20 +48,6 @@ bool Sound::Initialize(HWND _hwnd)
 	result = InitializeDirectSound(_hwnd);
 	if (!result)
 	{
-		return false;
-	}
-
-	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Main.wav", &m_currentMusic.m_music);
-	if (!result)
-	{
-		MESSAGEBOX("Erorr1");
-		return false;
-	}
-
-	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Main.wav", &m_curBufMusic.m_music);
-	if (!result)
-	{
-		MESSAGEBOX("Erorr1");
 		return false;
 	}
 
@@ -100,7 +95,6 @@ bool Sound::Initialize(HWND _hwnd)
 		return false;
 	}
 	m_buf3.m_nEndTime = 90000;
-
 
 	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\Music1.wav", &m_MusicList[0].m_music);
 	if (!result)
@@ -173,6 +167,86 @@ bool Sound::Initialize(HWND _hwnd)
 		return false;
 	}
 	m_MusicList[9].m_nEndTime = 74000;
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\ZombieHit.wav", &m_pEffect_ZombieHit);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\ButtonClick.wav", &m_pEffect_ButtonClick);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr6");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\ZombieDeath.wav", &m_pEffect_ZombieDeath);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr8");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\PlayerDeath.wav", &m_pEffect_PlayerDeath);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr8");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\100kill.wav", &m_pEffect_100Kill);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr8");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\20Combo.wav", &m_pEffect_20Combo);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr8");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\50Combo.wav", &m_pEffect_50Combo);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr8");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\100Combo.wav", &m_pEffect_100Combo);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr8");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\150Combo.wav", &m_pEffect_150Combo);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr8");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\GreatCombo.wav", &m_pEffect_GreatCombo);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr8");
+		return false;
+	}
+
+	result = LoadWaveFile("../\\ZombieToTheClub\\Resource\\Sound\\PlayerDown.wav", &m_pEffect_PlayerDown);
+	if (!result)
+	{
+		MESSAGEBOX("Erorr8");
+		return false;
+	}
+
+	m_currentMusic = m_main;
+	m_curBufMusic = m_buf1;
 }
 
 
@@ -570,6 +644,304 @@ bool Sound::PlayLetsPatty()
 
 	// Play the contents of the secondary sound buffer.
 	result = m_letsPatty.m_music->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::PlayZombieHit()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_ZombieHit->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_ZombieHit->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_ZombieHit->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool Sound::PlayZombieDeath()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_ZombieDeath->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_ZombieDeath->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_ZombieDeath->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::PlayButtonClick()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_ButtonClick->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_ButtonClick->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_ButtonClick->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::PlayPlayerDeath()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_PlayerDeath->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_PlayerDeath->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_PlayerDeath->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::PlayPlayerDown()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_PlayerDown->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_PlayerDown->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_PlayerDown->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::Play20Combo()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_20Combo->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_20Combo->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_20Combo->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::Play50Combo()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_50Combo->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_50Combo->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_50Combo->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::Play100Combo()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_100Combo->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_100Combo->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_100Combo->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::Play150Combo()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_150Combo->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_150Combo->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_150Combo->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::PlayGreatCombo()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_GreatCombo->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_GreatCombo->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_GreatCombo->Play(0, 0, 0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Sound::Play100Kill()
+{
+	HRESULT result;
+
+	// Set position at the beginning of the sound buffer.
+	result = m_pEffect_100Kill->SetCurrentPosition(0);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Set volume of the buffer to 100%.
+	result = m_pEffect_100Kill->SetVolume(DSBVOLUME_MAX);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	// Play the contents of the secondary sound buffer.
+	result = m_pEffect_100Kill->Play(0, 0, 0);
 	if (FAILED(result))
 	{
 		return false;

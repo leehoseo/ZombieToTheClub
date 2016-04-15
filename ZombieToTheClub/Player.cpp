@@ -7,8 +7,10 @@
 #include "State_Attack3.h"
 #include "State_Move.h"
 #include "State_Hit.h"
+#include "State_Down.h"
 #include <stdio.h>
 #include "Sound.h"
+#include "State_Death.h"
 
 Player::Player()
 {
@@ -33,6 +35,8 @@ void Player::Initialize()
 	m_image.setY(GAME_HEIGHT/2 - 60);
 	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
 	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
+	m_hitCollisionBox.setX(m_image.getX() + 50);
+	m_attackCollisionBox.setX(m_image.getCenterX() - 70);
 	m_code = eSTATE::STAY;
 	m_type = eTYPE::PLAYER;
 	m_atk = 10;
@@ -44,6 +48,9 @@ void Player::Initialize()
 	m_combo = 0;
 	ResetDirection();
 	m_comboTime.SetStartTime();
+	m_hitTIme.SetStartTime();
+	m_isHitAble = true;
+	m_isDeath = false;
 }
 
 void Player::MoveX(float _x)
@@ -211,12 +218,17 @@ void Player::Update()
 {
 	m_comboTime.SetTime();
 	m_attackCollisionBox.setY(m_image.getCenterY()-40);
-
 	//m_hitCollisionBox.setX(m_image.getX()+20);
 	m_hitCollisionBox.setY(m_image.getY());
 
+	HitAble();
 	m_pstate->Update();
 	m_image.update(200);
+
+	if (m_hp < 0 && GetCode() != eSTATE::DEATH)
+	{
+		ChangeState(eSTATE::DEATH);
+	}
 
 	if (m_comboTime.GetTime() > 3000)
 	{
@@ -370,7 +382,6 @@ bool Player::IsAttack()
 {
 	if (CInput::Instance()->KetPressedCheck(DIK_A))
 	{
-		printf("d");
 		return true;
 	}
 	else
@@ -388,39 +399,53 @@ void Player::ChangeState(eSTATE _state)
 		ChangeImage(ImageManager::Instance()->Player_Attack1());
 		delete m_pstate;
 		m_pstate = new State_Attack();
-		return;
+		break;
 	case eSTATE::ATTACK2:
 		Sound::Instance()->PlayAttack1();
 		ChangeImage(ImageManager::Instance()->Player_Attack2());
 		delete m_pstate;
 		m_pstate = new State_Attack2();
-		return;
+		break;
 
 	case eSTATE::ATTACK3:
 		Sound::Instance()->PlayAttack1();
 		ChangeImage(ImageManager::Instance()->Player_Attack3());
 		delete m_pstate;
 		m_pstate = new State_Attack3();
-		return;
-
+		break;
 	case eSTATE::HIT:
 		ChangeImage(ImageManager::Instance()->Player_Hit());
 		ResetDirection();
 		delete m_pstate;
 		m_pstate = new State_Hit();
-		return;
+		break;
 	case eSTATE::MOVE:
 		ChangeImage(ImageManager::Instance()->Player_Move());
 		ResetDirection();
 		delete m_pstate;
 		m_pstate = new State_Move();
-		return;
+		break;
 	case eSTATE::STAY:
 		ChangeImage(ImageManager::Instance()->Player_Stay());
 		ResetDirection();
 		delete m_pstate;
 		m_pstate = new State_Stay();
-		return;
+		break;
+	case eSTATE::HIT_DOWN:
+		Sound::Instance()->PlayPlayerDown();
+		ChangeImage(ImageManager::Instance()->Player_Down());
+		ResetDirection();
+		delete m_pstate;
+		m_pstate = new State_Down();
+		break;
+	case eSTATE::DEATH:
+		Sound::Instance()->EndMusic();
+		Sound::Instance()->PlayPlayerDeath();
+		ChangeImage(ImageManager::Instance()->Player_Death());
+		ResetDirection();
+		delete m_pstate;
+		m_pstate = new State_Death();
+		break;
 	}
 	
 }
@@ -463,6 +488,21 @@ int Player::GetCode() const
 	return m_code;
 }
 
+void Player::HitAble()
+{
+	if (GetCode() == eSTATE::HIT)
+		m_isHitAble = false;
+
+	if (false == m_isHitAble)
+	{
+		if (true == m_hitTIme.Timer(1000))
+		{
+			printf("hkhkhk");
+			m_isHitAble = true;
+		}
+	}
+}
+
 void Player::SetCode(eSTATE _code)
 {
 	m_code = _code;
@@ -476,6 +516,11 @@ void Player::SetComboTime()
 void Player::AddCombo(int _combo)
 {
 	m_combo += _combo;
+}
+
+void Player::ResetHitCount()
+{
+	m_nHitCount += 1;
 }
 
 int Player::GetType() const
@@ -513,6 +558,16 @@ int Player::GetCombo() const
 	return m_combo;
 }
 
+int Player::GetHitCount() const
+{
+	return m_nHitCount;
+}
+
+bool Player::GetHitAble() const
+{
+	return m_isHitAble;
+}
+
 Image Player::GetImage() const
 {
 	return m_image;
@@ -541,13 +596,21 @@ void Player::ResetDirection()
 
 void Player::Hit(Zombie _zombie)
 {
+	m_nHitCount += 1;
 	m_hp -= _zombie.GetAtk();
+	if (m_nHitCount == 3)
+	{
+		ChangeState(eSTATE::HIT_DOWN);
+		m_nHitCount = 0;
+	}
 }
 
-bool Player::IsDie()
+void Player::IsDie()
 {
-	if (m_hp < 0)
-		return true;
-	else
-		return false;
+	 m_isDeath = true;
+}
+
+bool Player::GetDeath() const
+{
+	return m_isDeath;
 }

@@ -23,10 +23,11 @@ Scene_Play::Scene_Play()
 	Player::Instance()->Initialize();
 	m_score = 0;
 	Sound::Instance()->PlayLetsPatty();
+	Sound::Instance()->ChangeMusic(m_nMusicList[m_nCurMusicList++]);
 
-	//Sound::Instance()->ChangeMusic(m_nMusicList[m_nCurMusicList++]);
 	m_currentStage = 0;
 	m_currentZombie = 0;
+	m_nKillZombie = 0;
 	m_bgameStart = false;
 	m_stageTime.SetStartTime();
 	m_createTime.SetStartTime();
@@ -44,12 +45,10 @@ Scene_Play::~Scene_Play()
 
 void Scene_Play::Initialize()
 {
-
 	m_hiphop1.Initialize(ImageManager::Instance()->UI_Play_Hiphop1());
 	m_hiphop2.Initialize(ImageManager::Instance()->UI_Play_Hiphop2());
 	m_hiphop3.Initialize(ImageManager::Instance()->UI_Play_Hiphop3());
-	m_leftHandStay = ImageManager::Instance()->LeftHandStay();
-	m_rightHandStay= ImageManager::Instance()->RightHandStay();
+	
 	m_turnTable = ImageManager::Instance()->Play_TurnTable();
 	m_interpace = ImageManager::Instance()->Play_Interpace();
 	m_player = ImageManager::Instance()->Play_Player();
@@ -99,6 +98,8 @@ void Scene_Play::Initialize()
 	m_stage[6].bstageCheck = false;
 	ShuffleMusic();
 	m_nCurMusicList = 0;
+	m_isbufMusic = false;
+	m_isMusicHalf = false;
 }
 
 
@@ -108,30 +109,38 @@ void Scene_Play::UI_Music_Check()
 
 	if(m_hiphop1.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
+		m_isbufMusic = true;
+		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->ChangeBufMusic(0);
 		return;
 	}
 
 	if (m_hiphop2.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
+		m_isbufMusic = true;
+		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->ChangeBufMusic(1);
 		return;
 	}
 
 	if (m_hiphop3.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
+		m_isbufMusic = true;
+		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->ChangeBufMusic(2);
 		return;
 	}
 
+	if (m_isbufMusic == false)
+		return;
+
 	if (m_bufMusicTime.GetTime() > Sound::Instance()->GetBufMusicEndTime())
 	{
+		m_isbufMusic = false;
 		Sound::Instance()->ChangeMusic(m_nMusicList[m_nCurMusicList++]);
 		m_bufMusicTime.SetStartTime();
 	}
 }
-
-
 
 void Scene_Play::ShuffleMusic()
 {
@@ -150,6 +159,30 @@ void Scene_Play::ShuffleMusic()
 		temp = m_nMusicList[num2];
 		m_nMusicList[num2] = m_nMusicList[num1];
 		m_nMusicList[num1] = temp;
+	}
+}
+
+void Scene_Play::ChangeMusic()
+{
+	m_musicTime.SetTime();
+
+	if (m_musicTime.GetTime() > Sound::Instance()->GetMusicEndTime() / 2 && m_isMusicHalf == false)
+	{
+		m_rightHand.ChangeAni(ImageManager::Instance()->RightHandHalfMusic());
+		m_isMusicHalf = true;
+	}
+
+	if (m_musicTime.GetTime() > Sound::Instance()->GetMusicEndTime())
+	{
+		m_rightHand.ChangeAni(ImageManager::Instance()->RightHandMusicChange());
+		Sound::Instance()->ChangeMusic(m_nMusicList[m_nCurMusicList++]);
+		m_musicTime.SetStartTime();
+		m_isMusicHalf = false;
+	}
+
+	if (m_nCurMusicList == 10)
+	{
+		m_nCurMusicList = 0;
 	}
 }
 
@@ -181,21 +214,6 @@ void Scene_Play::PrintStageInfo(Game* _game)
 	Text::Instaance()->Print(Lcombo, GAME_WIDTH - 200, 80);
 }
 
-void Scene_Play::ChangeMusic()
-{
-	m_musicTime.SetTime();
-
-	if (m_musicTime.GetTime() > Sound::Instance()->GetMusicEndTime())
-	{
-		Sound::Instance()->ChangeMusic(m_nMusicList[m_nCurMusicList++]);
-		m_musicTime.SetStartTime();
-	}
-
-	if (m_nCurMusicList == 10)
-	{
-		m_nCurMusicList = 0;
-	}
-}
 
 void Scene_Play::CreateZombie()
 {
@@ -268,19 +286,56 @@ void Scene_Play::DecreaseHpGage()
 	m_hpGage.setSpriteDataRect(temp);
 }
 
+void Scene_Play::Effect()
+{
+	if (Player::Instance()->GetCombo() == 20 )
+	{
+		m_leftHand.ChangeAni(ImageManager::Instance()->LeftHandCombo());
+
+		Sound::Instance()->Play20Combo();
+	}
+
+	if (Player::Instance()->GetCombo() == 50)
+	{
+		Sound::Instance()->Play50Combo();
+	}
+
+	if (Player::Instance()->GetCombo() == 100)
+	{
+		Sound::Instance()->Play100Combo();
+	}
+
+	if (Player::Instance()->GetCombo() == 150)
+	{
+		Sound::Instance()->Play150Combo();
+	}
+
+	if (Player::Instance()->GetCombo() != 0 && Player::Instance()->GetCombo() % 100 == 0)
+	{
+		Sound::Instance()->PlayGreatCombo();
+	}
+
+	if (m_nKillZombie != 0 && m_nKillZombie % 100 == 0 )
+	{
+		Sound::Instance()->Play100Kill();
+	}
+}
+
 void Scene_Play::Update(Game* _game)
 {	
 	Player::Instance()->Update();
 	m_hiphop1.Update();
 	m_hiphop2.Update();
 	m_hiphop3.Update();
-	m_leftHandStay.update(500);
-	m_rightHandStay.update(500);
+
+	m_leftHand.Update();
+	m_rightHand.Update();
 
 	DecreaseHpGage();
 	StageStart();
 	ChangeMusic();
 	UI_Music_Check();
+	Effect();
 
 	if (m_bgameStart == false)
 		return;
@@ -294,17 +349,18 @@ void Scene_Play::Update(Game* _game)
 
 		m_pzombie[index]->Update();
 
-		if (m_pzombie[index]->GetDeath())
+		if (m_pzombie[index]->IsDeath())
 		{
 			_game->AddScore(m_pzombie[index]->GetScore());
 			SAFE_DELETE(m_pzombie[index]);
 			--m_currentZombie;
+			++m_nKillZombie;
 		}
 	}
 
 	_game->AddScore(m_currentStage);
 
-	if (Player::Instance()->IsDie())
+	if (Player::Instance()->GetDeath())
 		_game->ChangeScene(new Scene_Score());
 	
 }
@@ -320,8 +376,9 @@ void Scene_Play::Render(Game* _game)
 	m_player.draw();
 	m_floor.draw();
 	m_hpGage.draw();
-	m_leftHandStay.draw();
-	m_rightHandStay.draw();
+
+	m_leftHand.Render();
+	m_rightHand.Render();
 
 	PrintStageInfo(_game);
 

@@ -7,7 +7,6 @@ public:
 	~State_Hit();
 
 	virtual void Update();
-	void Hit();
-	bool HitCheck();
+	bool HitEnd();
 };
 

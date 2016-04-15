@@ -16,7 +16,8 @@ private:
 	// Main 배경
 	Image m_main;
 	Image m_title;
-
+	Image m_speaker;
+	Image m_clubEntrance;
 	// Main UI 모음
 	Image m_ui_main_start;
 	Image m_ui_main_save;
@@ -24,7 +25,12 @@ private:
 	Image m_ui_main_exit;
 
 	Image m_leftHandStay;
+	Image m_leftHandCombo;
+
 	Image m_rightHandStay;
+	Image m_rigthHandHalfMusic;
+	Image m_rightHandMusicChange;
+
 	Image m_play_turnTable;
 	Image m_play_interpace;
 	Image m_play_player;
@@ -43,24 +49,29 @@ private:
 	Image m_player_attack2;
 	Image m_player_attack3;
 	Image m_player_hit;
+	Image m_player_down;
+	Image m_player_death;
 
 	Image m_bz1_stay;
 	Image m_bz1_move;
 	Image m_bz1_hit;
 	Image m_bz1_attack;
 	Image m_bz1_death;
+	Image m_bz1_trace;
 
 	Image m_bz2_stay;
 	Image m_bz2_move;
 	Image m_bz2_hit;
 	Image m_bz2_attack;
 	Image m_bz2_death;
+	Image m_bz2_trace;
 
 	Image m_bz3_stay;
 	Image m_bz3_move;
 	Image m_bz3_hit;
 	Image m_bz3_attack;
 	Image m_bz3_death;
+	Image m_bz3_trace;
 
 	Image m_scone_score;
 
@@ -75,10 +86,11 @@ public:
 	Image HitCollisionBox() const;
 	Image TraceCollsionBox() const;
 	Image TeamLogo() const;
+
 	Image Main() const;
-
 	Image Title() const;
-
+	Image Speaker() const;
+	Image ClubEnterance() const;
 	Image UI_Main_Start() const;
 	Image UI_Main_Save() const;
 	Image UI_Main_Option() const;
@@ -94,7 +106,10 @@ public:
 	Image Play_HpGage() const;
 
 	Image LeftHandStay() const;
+	Image LeftHandCombo() const;
 	Image RightHandStay() const;
+	Image RightHandHalfMusic() const;
+	Image RightHandMusicChange() const;
 	//Player
 	Image Player_Move() const;
 	Image Player_Stay() const;
@@ -102,24 +117,30 @@ public:
 	Image Player_Attack2() const;
 	Image Player_Attack3() const;
 	Image Player_Hit() const;
+	Image Player_Down() const;
+	Image Player_Death() const;
 
 	Image BZ1_Stay() const;
 	Image BZ1_Move() const;
 	Image BZ1_Hit() const;
 	Image BZ1_Attack() const;
 	Image BZ1_Death() const;
+	Image BZ1_Trace() const;
 
 	Image BZ2_Stay() const;
 	Image BZ2_Move() const;
 	Image BZ2_Hit() const;
 	Image BZ2_Attack() const;
 	Image BZ2_Death() const;
+	Image BZ2_Trace() const;
 
 	Image BZ3_Stay() const;
 	Image BZ3_Move() const;
 	Image BZ3_Hit() const;
 	Image BZ3_Attack() const;
 	Image BZ3_Death() const;
+	Image BZ3_Trace() const;
+	
 	Image Scone_Score() const;
 };
 

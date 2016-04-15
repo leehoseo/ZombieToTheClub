@@ -14,5 +14,6 @@ public:
 	void SetTime();
 	void SetStartTime();
 	int GetTime() const;
+	bool Timer(int _time);
 };
 

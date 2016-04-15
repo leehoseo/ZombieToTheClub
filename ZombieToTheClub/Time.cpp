@@ -24,3 +24,15 @@ int Time::GetTime() const
 {
 	return m_time;
 }
+
+bool Time::Timer(int _time)
+{
+	SetTime();
+
+	if (GetTime() > _time)
+	{
+		SetStartTime();
+		return true;
+	}
+	return false;
+}

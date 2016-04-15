@@ -3,6 +3,7 @@
 #include "Zombie.h"
 #include "ImageManager.h"
 #include "Player.h"
+#include <stdio.h>
 AI_State_Attack::AI_State_Attack()
 {
 }
@@ -22,10 +23,11 @@ void AI_State_Attack::Update(Zombie * _zombie)
 {
 	if (AniEnd(_zombie) == false )
 	{
-		if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), _zombie->GetAttackCollisionBox()) && Player::Instance()->GetCode() != eSTATE::HIT)
+		if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), _zombie->GetAttackCollisionBox()) && Player::Instance()->GetCode() != eSTATE::HIT &&  Player::Instance()->GetCode() != eSTATE::HIT_DOWN
+			&& Player::Instance()->GetCode() != eSTATE::DEATH && true == Player::Instance()->GetHitAble())
 		{
-			Player::Instance()->Hit(*_zombie);
 			Player::Instance()->ChangeState(eSTATE::HIT);
+			Player::Instance()->Hit(*_zombie);
 		}
 		_zombie->SetIsAtk(false);
 		_zombie->ChangeState(eSTATE::STAY);

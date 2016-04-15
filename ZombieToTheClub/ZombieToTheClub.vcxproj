@@ -160,6 +160,7 @@
     <ClCompile Include="AI_State_Hit.cpp" />
     <ClCompile Include="AI_State_Move.cpp" />
     <ClCompile Include="AI_State_Stay.cpp" />
+    <ClCompile Include="AI_State_Trace.cpp" />
     <ClCompile Include="Boy_Zombie1.cpp" />
     <ClCompile Include="Boy_Zombie2.cpp" />
     <ClCompile Include="Boy_Zombie3.cpp" />
@@ -169,10 +170,12 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LeftHand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Main_Zombie.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RightHand.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Scene_Main.cpp" />
     <ClCompile Include="Scene_Play.cpp" />
@@ -183,6 +186,8 @@
     <ClCompile Include="State_Attack.cpp" />
     <ClCompile Include="State_Attack3.cpp" />
     <ClCompile Include="State_Attack2.cpp" />
+    <ClCompile Include="State_Death.cpp" />
+    <ClCompile Include="State_Down.cpp" />
     <ClCompile Include="State_Hit.cpp" />
     <ClCompile Include="State_Move.cpp" />
     <ClCompile Include="State_Stay.cpp" />
@@ -198,6 +203,7 @@
     <ClInclude Include="AI_State_Hit.h" />
     <ClInclude Include="AI_State_Move.h" />
     <ClInclude Include="AI_State_Stay.h" />
+    <ClInclude Include="AI_State_Trace.h" />
     <ClInclude Include="Boy_Zombie1.h" />
     <ClInclude Include="Boy_Zombie2.h" />
     <ClInclude Include="Boy_Zombie3.h" />
@@ -207,10 +213,12 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="LeftHand.h" />
     <ClInclude Include="Main_Zombie.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="RightHand.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scene_Main.h" />
     <ClInclude Include="Scene_Play.h" />
@@ -221,6 +229,8 @@
     <ClInclude Include="State_Attack.h" />
     <ClInclude Include="State_Attack3.h" />
     <ClInclude Include="State_Attack2.h" />
+    <ClInclude Include="State_Death.h" />
+    <ClInclude Include="State_Down.h" />
     <ClInclude Include="State_Hit.h" />
     <ClInclude Include="State_Move.h" />
     <ClInclude Include="State_Stay.h" />

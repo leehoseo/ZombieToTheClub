@@ -7,7 +7,9 @@
 #include "AI_State_Attack.h"
 #include "AI_State_Hit.h"
 #include "AI_State_Death.h"
+#include "AI_State_Trace.h"
 #include "ImageManager.h"
+#include "Sound.h"
 
 Boy_Zombie1::Boy_Zombie1()
 {
@@ -64,24 +66,31 @@ void Boy_Zombie1::ChangeState(eSTATE _state)
 	{
 	case eSTATE::ATTACK1:
 		if (GetIsAtk() == false)
-			return;
+			break;
 		ChangeImage(ImageManager::Instance()->BZ1_Attack());
 		m_pstate = AI_State_Attack::Instance();
-		return;
+		break;
 	case eSTATE::HIT:
+		Sound::Instance()->PlayZombieHit();
 		ChangeImage(ImageManager::Instance()->BZ1_Hit());
 		m_pstate = AI_State_Hit::Instance();
-		return;
+		break;
 	case eSTATE::MOVE:
 		ChangeImage(ImageManager::Instance()->BZ1_Move());
 		m_pstate = AI_State_Move::Instance();
-		return;
+		break;
 	case eSTATE::STAY:
 		ChangeImage(ImageManager::Instance()->BZ1_Stay());
 		m_pstate = AI_State_Stay::Instance();
-		return;
+		break;
 	case eSTATE::DEATH:
+		Sound::Instance()->PlayZombieDeath();
 		ChangeImage(ImageManager::Instance()->BZ1_Death());
 		m_pstate = AI_State_Death::Instance();
+		break;
+	case eSTATE::TRACE:
+		ChangeImage(ImageManager::Instance()->BZ1_Trace());
+		m_pstate = AI_State_Trace::Instance();
+		break;
 	}
 }

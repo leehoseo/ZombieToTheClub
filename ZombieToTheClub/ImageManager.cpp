@@ -30,6 +30,9 @@ void ImageManager::initialize(Graphics * g)
 
 	// Main ¿ÃπÃ¡ˆ
 	m_main.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Main.png");
+	m_speaker.initialize(g, 900, 180, 0, 0, 5, "../ZombieToTheClub\\Resource\\Speaker.png");
+	m_clubEntrance.initialize(g, 535, 221, 500, 200, 2, "../ZombieToTheClub\\Resource\\ClubEnterance.png");
+
 	m_ui_main_start.initialize(g, 408, 95, 1160, 450, 0, "../ZombieToTheClub\\Resource\\Start.png");
 	m_ui_main_save.initialize(g, 408, 95, 1160, 550, 0, "../ZombieToTheClub\\Resource\\Save.png");
 	m_ui_main_option.initialize(g, 408, 95, 1160, 650, 0, "../ZombieToTheClub\\Resource\\Option.png");
@@ -46,7 +49,11 @@ void ImageManager::initialize(Graphics * g)
 	m_play_hpGage.initialize(g, 300, 20, 130, 790, 0, "../ZombieToTheClub\\Resource\\HpGage.png");
 	
 	m_leftHandStay.initialize(g, 280, 233, 464, 624, 2, "../ZombieToTheClub\\Resource\\LeftHand_Stay.png");
+	m_leftHandCombo.initialize(g, 280, 233, 464, 624, 3 ,"../ZombieToTheClub\\Resource\\LeftHandCombo.png");
+
 	m_rightHandStay.initialize(g, 280, 233, 800, 624, 2, "../ZombieToTheClub\\Resource\\RightHand_Stay.png");
+	m_rigthHandHalfMusic.initialize(g, 280, 233, 800, 624, 9, "../ZombieToTheClub\\Resource\\RightHandHalfMusic.png");;
+	m_rightHandMusicChange.initialize(g, 280, 233, 800, 624, 4, "../ZombieToTheClub\\Resource\\RightHandMusicChange.png");;
 
 	//Player
 	m_player_move.initialize(g, 128, 128, 0, 0, 10, "../ZombieToTheClub\\Resource\\Player_Move.png");
@@ -54,27 +61,31 @@ void ImageManager::initialize(Graphics * g)
 	m_player_attack1.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\attack_1.png");
 	m_player_attack2.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\attack_2.png");
 	m_player_attack3.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\attack_3.png");
-
-	m_player_hit.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Player_Down.png");
+	m_player_hit.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Player_Hit.png");
+	m_player_down.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Player_Down.png");
+	m_player_death.initialize(g, 128, 128, 0, 0, 11 , "../ZombieToTheClub\\Resource\\Player_Death.png");
 
 	m_bz1_stay.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_stay.png");
 	m_bz1_move.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_move.png");
 	m_bz1_hit.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_hit.png");
 	m_bz1_attack.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_attack.png");
 	m_bz1_death.initialize(g, 128, 128, 0, 0, 10, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_death.png");
+	m_bz1_trace.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie1\\bz1_trace.png");
 
 	m_bz2_stay.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_stay.png");
 	m_bz2_move.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_move.png");
 	m_bz2_hit.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_hit.png");
 	m_bz2_attack.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_attack.png");
 	m_bz2_death.initialize(g, 128, 128, 0, 0, 10, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_death.png");
+	m_bz2_trace.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie2\\bz2_trace.png");
 
 	m_bz3_stay.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_stay.png");
 	m_bz3_move.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_move.png");
 	m_bz3_hit.initialize(g, 128, 128, 0, 0, 3, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_hit.png");
 	m_bz3_attack.initialize(g, 128, 128, 0, 0, 4, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_attack.png");
 	m_bz3_death.initialize(g, 128, 128, 0, 0, 10, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_death.png");
-
+	m_bz3_trace.initialize(g, 128, 128, 0, 0, 6, "../ZombieToTheClub\\Resource\\Zombie\\Boy_Zombie3\\bz3_trace.png");
+	
 	m_scone_score.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Score.png");
 }
 
@@ -103,6 +114,11 @@ Image ImageManager::BZ1_Death() const
 	return m_bz1_death;
 }
 
+Image ImageManager::BZ1_Trace() const
+{
+	return m_bz1_trace;
+}
+
 Image ImageManager::BZ2_Stay() const
 {
 	return m_bz2_stay;
@@ -128,6 +144,11 @@ Image ImageManager::BZ2_Death() const
 	return m_bz2_death;
 }
 
+Image ImageManager::BZ2_Trace() const
+{
+	return m_bz2_trace;
+}
+
 Image ImageManager::BZ3_Stay() const
 {
 	return m_bz3_stay;
@@ -151,6 +172,11 @@ Image ImageManager::BZ3_Attack() const
 Image ImageManager::BZ3_Death() const
 {
 	return m_bz3_death;
+}
+
+Image ImageManager::BZ3_Trace() const
+{
+	return m_bz3_trace;
 }
 
 Image ImageManager::Scone_Score() const
@@ -234,9 +260,24 @@ Image ImageManager::LeftHandStay() const
 	return m_leftHandStay;
 }
 
+Image ImageManager::LeftHandCombo() const
+{
+	return m_leftHandCombo;
+}
+
 Image ImageManager::RightHandStay() const
 {
 	return m_rightHandStay;
+}
+
+Image ImageManager::RightHandHalfMusic() const
+{
+	return m_rigthHandHalfMusic;
+}
+
+Image ImageManager::RightHandMusicChange() const
+{
+	return m_rightHandMusicChange;
 }
 
 Image ImageManager::Player_Move() const
@@ -267,6 +308,16 @@ Image ImageManager::Player_Hit() const
 	return m_player_hit;
 }
 
+Image ImageManager::Player_Down() const
+{
+	return m_player_down;
+}
+
+Image ImageManager::Player_Death() const
+{
+	return m_player_death;
+}
+
 Image ImageManager::AttackCollisionBox() const
 {
 	return m_attackCollisionBox;
@@ -285,4 +336,14 @@ Image ImageManager::TraceCollsionBox() const
 Image ImageManager::Title() const
 {
 	return m_title;
+}
+
+Image ImageManager::Speaker() const
+{
+	return m_speaker;
+}
+
+Image ImageManager::ClubEnterance() const
+{
+	return m_clubEntrance;
 }

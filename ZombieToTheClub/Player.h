@@ -30,6 +30,11 @@ private:
 	int m_experience;
 	int m_combo;
 	Time m_comboTime;
+	Time m_hitTIme;
+	int m_nHitCount;
+	bool m_isHitAble;
+	bool m_isDeath;
+
 public:
 	static Player * Instance();
 	~Player();
@@ -42,8 +47,8 @@ public:
 	void MoveY(float _y);
 	void Move();
 	void Hit(Zombie _zombie);
-	bool IsDie();
-
+	void IsDie();
+	bool GetDeath() const;
 	void AttackMove();
 	bool IsAttack();
 	void ChangeState(eSTATE _state);
@@ -66,8 +71,11 @@ public:
 	int GetAtk() const;
 	int GetHp() const;
 	int GetCombo() const;
-
+	int GetHitCount() const;
+	bool GetHitAble() const;
+	void HitAble();
 	void SetCode(eSTATE _code);
 	void SetComboTime();
 	void AddCombo(int _combo);
+	void ResetHitCount();
 };

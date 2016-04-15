@@ -12,6 +12,7 @@ protected:
 	Image m_hitCollisionBox;
 	Image m_traceCollisionBox;
 	Time m_time;
+	Time m_traceTime;
 
 	int m_directionX;
 	int m_directionY;
@@ -24,6 +25,7 @@ protected:
 
 	
 	bool m_isarrive;
+	bool m_isTrace;
 
 	int m_hp;
 	int m_atk;
@@ -34,7 +36,7 @@ protected:
 	int m_aniSpeed;
 
 	bool m_batk;
-	bool m_bdeath;
+	bool m_isdeath;
 public:
 	Zombie();
 	~Zombie();
@@ -47,7 +49,7 @@ public:
 	virtual void Move();
 
 	virtual void SetDirection(int _x=0, int _y=0 );
-
+	virtual bool Tracing();
 
 	virtual bool IsDie();
 	virtual bool Hit();
@@ -82,6 +84,6 @@ public:
 	float GetCenterY() const;
 	int GetCode() const;
 	int GetScore() const;
-	bool GetDeath() const;
+	bool IsDeath() const;
 };
 

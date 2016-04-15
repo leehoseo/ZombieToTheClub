@@ -7,7 +7,8 @@
 #include "Zombie.h"
 #include "Time.h"
 #include "UI.h"
-
+#include "LeftHand.h"
+#include "RightHand.h"
 struct Stage
 {
 	int time;
@@ -28,14 +29,14 @@ private:
 	Time m_bufMusicTime;
 	int m_score;
 	int m_currentZombie;
+	int m_nKillZombie;
 	bool m_bgameStart;
 	
 	UI m_hiphop1;
 	UI m_hiphop2;
 	UI m_hiphop3;
-
-	Image m_leftHandStay;
-	Image m_rightHandStay;
+	LeftHand m_leftHand;
+	RightHand m_rightHand;
 
 	Image m_turnTable;
 	Image m_interpace;
@@ -49,9 +50,13 @@ private:
 	void CreateZombie();
 	void StageStart();
 	void DecreaseHpGage();
+	void Effect();
 
 	int m_nMusicList[10];
 	int m_nCurMusicList;
+
+	bool m_isMusicHalf;
+	bool m_isbufMusic;
 public:
 
 	Scene_Play();

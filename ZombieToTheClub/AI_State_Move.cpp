@@ -30,6 +30,12 @@ void AI_State_Move::Update(Zombie * _zombie)
 {
 	_zombie->Move();
 
+	if (_zombie->Targeting() == true && _zombie->GetCode() != eSTATE::TRACE)
+	{
+		_zombie->ChangeState(eSTATE::TRACE);
+
+	}
+
 	if (_zombie->GetPatrolCount() == 3)
 	{
 		_zombie->ChangeState(eSTATE::STAY);

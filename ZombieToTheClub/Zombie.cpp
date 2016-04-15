@@ -55,8 +55,10 @@ void Zombie::initialize()
 	m_directionY = 0;
 	m_batk = false;
 	m_isarrive = true;
-	m_bdeath = false;
+	m_isdeath = false;
+	m_isTrace = false;
 	m_time.SetStartTime();
+	m_traceTime.SetStartTime();
 }
 
 void Zombie::Render()
@@ -81,7 +83,7 @@ void Zombie::Update()
 		ChangeState(eSTATE::HIT);
 	}
 
-	if (this->m_hp < 0	&& this->GetCode() != eSTATE::DEATH)
+	if (true == this->IsDie() && this->GetCode() != eSTATE::DEATH)
 	{
 		ChangeState(eSTATE::DEATH);
 	}
@@ -116,11 +118,11 @@ void Zombie::MoveY(float _y)
 
 void Zombie::Move()
 {
-	if (this->Targeting() == true)
+	/*if (this->Targeting() == true)
 	{
 		this->SetDirection(Player::Instance()->GetX() + 40, Player::Instance()->GetY() + 40);
 	}
-
+*/
 	if (m_isarrive == false)
 	{
 		if (GetX() > m_directionX)	//	목적지가 왼쪽에있다면
@@ -160,6 +162,22 @@ void Zombie::SetDirection(int _x, int _y)
 	++m_PatrolCount;
 }
 
+bool Zombie::Tracing()
+{
+	if (true == m_isTrace)
+	{
+		m_traceTime.SetTime();
+
+		if (m_traceTime.GetTime() > 3000)
+		{
+			m_isTrace = false;
+			return false;
+		}
+		else
+			return true;
+	}
+}
+
 bool Zombie::IsDie()
 {
 	if (m_hp < 0)
@@ -187,7 +205,7 @@ bool Zombie::Hit()
 
 bool Zombie::Attack()
 {
-	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), this->GetAttackCollisionBox()) && this->GetCode() != eSTATE::ATTACK1)
+	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), this->GetAttackCollisionBox()) && this->GetCode() != eSTATE::ATTACK1 )
 		return true;
 	else
 		return false;
@@ -201,7 +219,7 @@ void Zombie::SetCoordinate(int _x, int _y)
 
 void Zombie::ChangeState(eSTATE _state)
 {
-	SetCode(_state);
+	/*SetCode(_state);
 
 	m_PatrolCount = 0;
 	switch (_state)
@@ -227,7 +245,7 @@ void Zombie::ChangeState(eSTATE _state)
 	case eSTATE::DEATH:
 		ChangeImage(ImageManager::Instance()->BZ1_Death());
 		m_pstate = AI_State_Death::Instance();
-	}
+	}*/
 }
 
 void Zombie::ChangeImage(Image _image)
@@ -247,10 +265,14 @@ bool Zombie::Targeting()
 {
 	if (CrashCheck::Instance()->Rect_Rect(Player::Instance()->GetHitCollisionBox(), this->GetTraceCollsionBox()))
 	{
+		m_traceTime.SetStartTime();
+		m_isTrace = true;
 		return true;
 	}
 	else
+	{
 		return false;
+	}
 }
 
 void Zombie::SetAniSpeed(int _speed)
@@ -285,7 +307,7 @@ void Zombie::SetIsAtk(bool _isAtk)
 
 void Zombie::SetDeath(bool _death)
 {
-	m_bdeath = _death;
+	m_isdeath = _death;
 }
 
 
@@ -370,9 +392,9 @@ int Zombie::GetScore() const
 	return m_score;
 }
 
-bool Zombie::GetDeath() const
+bool Zombie::IsDeath() const
 {
-	return m_bdeath;
+	return m_isdeath;
 }
 
 int Zombie::GetX() const

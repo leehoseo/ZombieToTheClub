@@ -45,7 +45,6 @@ void Scene_Main::Update(Game * _game)
 {
 	if (m_start.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
-		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->EndMusic();
 		_game->ChangeScene(new Scene_Play());
 		return;
@@ -53,7 +52,7 @@ void Scene_Main::Update(Game * _game)
 
 	if (m_save.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
-		Sound::Instance()->PlayButtonClick();
+		
 		Sound::Instance()->EndMusic();
 		_game->ChangeScene(new Scene_Play());
 		return;
@@ -61,7 +60,6 @@ void Scene_Main::Update(Game * _game)
 
 	if (m_option.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
-		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->EndMusic();
 		_game->ChangeScene(new Scene_Play());
 		return;
@@ -84,7 +82,7 @@ void Scene_Main::Update(Game * _game)
 	m_exit.Update();
 
 	m_title.update(200);
-	m_speak.update(200);
+	m_speak.update(120);
 	m_clubEnterance.update(200);
 }
 

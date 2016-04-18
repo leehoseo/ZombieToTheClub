@@ -2,6 +2,7 @@
 #include "ImageManager.h"
 #include "mouse.h"
 #include <stdio.h>
+#include "Sound.h"
 UI::UI()
 {
 }
@@ -36,7 +37,7 @@ bool UI::CollisionCheck()
 		temp.right = m_image.getPixelX() * 2;
 		temp.bottom = m_image.getPixelY();
 		temp.top = 0;
-
+		Sound::Instance()->PlayButtonClick();
 		m_image.setSpriteDataRect(temp);
 		return true;
 	}

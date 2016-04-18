@@ -36,6 +36,8 @@ private:
 	Image m_play_player;
 	Image m_play_floor;
 	Image m_play_hpGage;
+	Image m_play_razer;
+	Image m_play_screenDoor;
 	// Play UI ¸ðÀ½
 	Image m_ui_play_hiphop1;
 	Image m_ui_play_hiphop2;
@@ -99,11 +101,13 @@ public:
 	Image UI_Play_Hiphop1() const;
 	Image UI_Play_Hiphop2() const;
 	Image UI_Play_Hiphop3() const;
+	Image Play_Razer() const;
 	Image Play_TurnTable() const;
 	Image Play_Interpace() const;
 	Image Play_Player() const;
 	Image Play_Floor() const;
 	Image Play_HpGage() const;
+	Image Play_ScreenDoor() const;
 
 	Image LeftHandStay() const;
 	Image LeftHandCombo() const;

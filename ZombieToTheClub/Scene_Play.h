@@ -31,7 +31,6 @@ private:
 	int m_currentZombie;
 	int m_nKillZombie;
 	bool m_bgameStart;
-	
 	UI m_hiphop1;
 	UI m_hiphop2;
 	UI m_hiphop3;
@@ -40,10 +39,11 @@ private:
 
 	Image m_turnTable;
 	Image m_interpace;
-	Image m_player;
 	Image m_floor;
 	Image m_hpGage;
-
+	Image m_razer;
+	Image m_screenDoor;
+	Image m_player;
 	int m_currentStage;
 
 	void UI_Music_Check();

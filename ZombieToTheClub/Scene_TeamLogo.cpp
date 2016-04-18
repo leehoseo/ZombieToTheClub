@@ -20,7 +20,7 @@ void Scene_TeamLogo::Initialize()
 
 void Scene_TeamLogo::Update(Game* _game)
 {
-	/*if (m_bfadeIn == true)
+	if (m_bfadeIn == true)
 		m_ibrightness += 2;
 	else
 	{
@@ -31,9 +31,7 @@ void Scene_TeamLogo::Update(Game* _game)
 	}
 
 	if (m_ibrightness > 255)
-		m_bfadeIn = false;*/
-
-	_game->ChangeScene(new Scene_Main());
+		m_bfadeIn = false;
 }
 
 void Scene_TeamLogo::Render(Game* _game)

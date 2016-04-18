@@ -30,8 +30,8 @@ void ImageManager::initialize(Graphics * g)
 
 	// Main ¿ÃπÃ¡ˆ
 	m_main.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Main.png");
-	m_speaker.initialize(g, 900, 180, 0, 0, 5, "../ZombieToTheClub\\Resource\\Speaker.png");
-	m_clubEntrance.initialize(g, 535, 221, 500, 200, 2, "../ZombieToTheClub\\Resource\\ClubEnterance.png");
+	m_speaker.initialize(g, 900, 180, 357, 472, 5, "../ZombieToTheClub\\Resource\\Speaker.png");
+	m_clubEntrance.initialize(g, 535, 221, 541, 404, 2, "../ZombieToTheClub\\Resource\\ClubEnterance.png");
 
 	m_ui_main_start.initialize(g, 408, 95, 1160, 450, 0, "../ZombieToTheClub\\Resource\\Start.png");
 	m_ui_main_save.initialize(g, 408, 95, 1160, 550, 0, "../ZombieToTheClub\\Resource\\Save.png");
@@ -42,12 +42,13 @@ void ImageManager::initialize(Graphics * g)
 	m_ui_play_hiphop2.initialize(g, 350 ,40 , 1208, 795, 0, "../ZombieToTheClub\\Resource\\MosicButton.png");
 	m_ui_play_hiphop3.initialize(g, 350 ,40 , 1208, 850, 0, "../ZombieToTheClub\\Resource\\MosicButton.png");
 
-	m_play_turnTable.initialize(g, 0, 0, 464, 740, 0, "../ZombieToTheClub\\Resource\\TurnTable.png");
+	m_play_turnTable.initialize(g, 0, 0, 464, 760, 0, "../ZombieToTheClub\\Resource\\TurnTable.png");
 	m_play_interpace.initialize(g, 0, 0, 0, 740, 0, "../ZombieToTheClub\\Resource\\Interpace.png");
-	m_play_player.initialize(g, 0, 0, 41, 740, 0, "../ZombieToTheClub\\Resource\\Player.png");
+	m_play_player.initialize(g, 0, 0, 41, 760, 0, "../ZombieToTheClub\\Resource\\Player.png");
 	m_play_floor.initialize(g, 0, 0, 0, 0, 0, "../ZombieToTheClub\\Resource\\Floor.png");
-	m_play_hpGage.initialize(g, 300, 20, 130, 790, 0, "../ZombieToTheClub\\Resource\\HpGage.png");
-	
+	m_play_hpGage.initialize(g, 300, 20, 130, 800, 0, "../ZombieToTheClub\\Resource\\HpGage.png");
+	m_play_razer.initialize(g, 1600, 728, 0, 0, 6, "../ZombieToTheClub\\Resource\\Razer.png");
+	m_play_screenDoor.initialize(g, 234, 135, 180, 0, 8, "../ZombieToTheClub\\Resource\\ScreenDoor.png");
 	m_leftHandStay.initialize(g, 280, 233, 464, 624, 2, "../ZombieToTheClub\\Resource\\LeftHand_Stay.png");
 	m_leftHandCombo.initialize(g, 280, 233, 464, 624, 3 ,"../ZombieToTheClub\\Resource\\LeftHandCombo.png");
 
@@ -230,6 +231,11 @@ Image ImageManager::UI_Play_Hiphop3() const
 	return m_ui_play_hiphop3;
 }
 
+Image ImageManager::Play_Razer() const
+{
+	return m_play_razer;
+}
+
 Image ImageManager::Play_TurnTable() const
 {
 	return m_play_turnTable;
@@ -253,6 +259,11 @@ Image ImageManager::Play_Floor() const
 Image ImageManager::Play_HpGage() const
 {
 	return m_play_hpGage;
+}
+
+Image ImageManager::Play_ScreenDoor() const
+{
+	return m_play_screenDoor;
 }
 
 Image ImageManager::LeftHandStay() const

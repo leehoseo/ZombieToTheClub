@@ -51,10 +51,12 @@ void Scene_Play::Initialize()
 	
 	m_turnTable = ImageManager::Instance()->Play_TurnTable();
 	m_interpace = ImageManager::Instance()->Play_Interpace();
-	m_player = ImageManager::Instance()->Play_Player();
+
 	m_floor = ImageManager::Instance()->Play_Floor();
 	m_hpGage = ImageManager::Instance()->Play_HpGage();
-
+	m_razer = ImageManager::Instance()->Play_Razer();
+	m_screenDoor = ImageManager::Instance()->Play_ScreenDoor();
+	m_player = ImageManager::Instance()->Play_Player();
 	m_stage[0].time = 7000;
 	m_stage[0].maxZombie = 50;
 	m_stage[0].createPerSecond = 0;	 
@@ -110,7 +112,6 @@ void Scene_Play::UI_Music_Check()
 	if(m_hiphop1.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
 		m_isbufMusic = true;
-		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->ChangeBufMusic(0);
 		return;
 	}
@@ -118,7 +119,6 @@ void Scene_Play::UI_Music_Check()
 	if (m_hiphop2.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
 		m_isbufMusic = true;
-		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->ChangeBufMusic(1);
 		return;
 	}
@@ -126,7 +126,6 @@ void Scene_Play::UI_Music_Check()
 	if (m_hiphop3.CollisionCheck() && Mouse::Instance()->GetButtonClick())
 	{
 		m_isbufMusic = true;
-		Sound::Instance()->PlayButtonClick();
 		Sound::Instance()->ChangeBufMusic(2);
 		return;
 	}
@@ -327,18 +326,20 @@ void Scene_Play::Update(Game* _game)
 	m_hiphop1.Update();
 	m_hiphop2.Update();
 	m_hiphop3.Update();
-
+	m_razer.update(500);
 	m_leftHand.Update();
 	m_rightHand.Update();
-
+	
 	DecreaseHpGage();
 	StageStart();
 	ChangeMusic();
 	UI_Music_Check();
 	Effect();
 
-	if (m_bgameStart == false)
-		return;
+	if (m_screenDoor.GetCurrentFrame() != m_screenDoor.GetFrame())
+	{
+		m_screenDoor.update(200);
+	}
 
 	CreateZombie();
 
@@ -373,13 +374,12 @@ void Scene_Play::Render(Game* _game)
 	m_hiphop3.Render();
 	
 	m_turnTable.draw();
-	m_player.draw();
 	m_floor.draw();
 	m_hpGage.draw();
-
+	m_screenDoor.draw();
 	m_leftHand.Render();
 	m_rightHand.Render();
-
+	m_player.draw();
 	PrintStageInfo(_game);
 
 	for (int index = 0; index < m_currentZombie; ++index)
@@ -389,6 +389,6 @@ void Scene_Play::Render(Game* _game)
 
 		m_pzombie[index]->Render();
 	}
-
 	Player::Instance()->Render();
+	m_razer.draw(D3DCOLOR_ARGB(150, 255, 255, 255));
 }

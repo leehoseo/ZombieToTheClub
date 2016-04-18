@@ -31,8 +31,9 @@ void Player::Initialize()
 {
 	m_pstate = new State_Stay();
 	m_image = ImageManager::Instance()->Player_Stay();
-	m_image.setX(GAME_WIDTH/2 - 60);
-	m_image.setY(GAME_HEIGHT/2 - 60);
+
+	m_image.setX(250);
+	m_image.setY(0);
 	m_attackCollisionBox = ImageManager::Instance()->AttackCollisionBox();
 	m_hitCollisionBox = ImageManager::Instance()->HitCollisionBox();
 	m_hitCollisionBox.setX(m_image.getX() + 50);

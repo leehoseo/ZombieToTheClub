@@ -5,7 +5,7 @@ class UI
 {
 protected:
 	Image m_image;
-
+	bool m_isMouseIn;
 public:
 	UI();
 	~UI();

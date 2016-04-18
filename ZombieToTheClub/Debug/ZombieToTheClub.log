@@ -1,6 +1,18 @@
-﻿  Scene_TeamLogo.cpp
+﻿  UI.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  main.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  c:\program files (x86)\microsoft directx sdk (february 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Scene_TeamLogo.cpp
 d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Scene_Play.cpp
 d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Scene_Main.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Game.cpp
+d:\programming\directx11\zombietotheclub\zombietotheclub\image.h(74): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\programming\directx11\zombietotheclub\zombietotheclub\game.cpp(17): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
   ZombieToTheClub.vcxproj -> D:\Programming\DirectX11\ZombieToTheClub\Debug\ZombieToTheClub.exe
